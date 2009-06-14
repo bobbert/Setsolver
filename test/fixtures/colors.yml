@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+red:
+  name: red
+  abbrev: red
+  id: 1
+
+grn:
+  name: green
+  abbrev: grn
+  id: 2
+
+prp:
+  name: purple
+  abbrev: prp
+  id: 3

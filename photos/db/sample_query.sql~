@@ -1,0 +1,5 @@
+select p.filename photo_name, c.name cat_name
+from photos p, photos_categories pc, categories c
+where p.id = pc.photo_id
+and pc.category_id = c.id;
+

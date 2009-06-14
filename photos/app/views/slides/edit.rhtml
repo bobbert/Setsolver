@@ -1,0 +1,9 @@
+<h1>Editing slide</h1>
+
+<% form_tag :action => 'update', :id => @slide do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @slide %> |
+<%= link_to 'Back', :action => 'list' %>

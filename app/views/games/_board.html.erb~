@@ -1,0 +1,41 @@
+<%= error_messages_for 'game' %>
+<!--[form:game]-->
+
+<!---
+--->
+<table border=0 width=<%= Game::BOARD_TABLE_WIDTH %> id="setboard">
+<tr height=<%= Game::BOARD_CELL_HEIGHT %>>
+<% @game.cards.each_with_index do |c,i| %>
+  <% card_nm = 'card' + i.to_s %>
+  <% if (i % Game::VIEW_COLS == 0) && (i > 0) %>
+    </tr><tr>
+  <% end %>
+  <td align=center valign=center id=cell<%= i.to_s %> class="unselected"
+      width=<%= Game::BOARD_CELL_WIDTH %> height=<%= Game::BOARD_CELL_HEIGHT %>>
+  <%= hidden_field_tag card_nm, i  %>
+  <%= image_tag ('cards/' + c.img_name), :alt => c.to_s,
+      :onclick => 'javascript:toggle_chk(\'' + card_nm + '\');'  %>
+  </td>
+<% end %>
+</tr>
+</table>
+
+
+<!---
+
+<div id="setboard">
+<ul>
+<% @game.cards.each_with_index do |c,i| %>
+  <% card_nm = 'card' + i.to_s %>
+  <% if (i % Game::VIEW_COLS == 0) && (i > 0) %>
+    </div><br /><div>
+  <% end %>
+  <li class="unselected">
+  <%= hidden_field_tag card_nm, i  %>
+  <%= image_tag ('cards/' + c.img_name), :alt => c.to_s,
+      :onclick => 'javascript:toggle_chk(\'' + card_nm + '\');'  %>
+  </li>
+  <% end %>
+</div>
+--->
+

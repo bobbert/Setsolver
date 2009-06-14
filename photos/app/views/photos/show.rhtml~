@@ -1,0 +1,9 @@
+<%= image_tag 'photos/' + @photo.filename %>
+<% for column in Photo.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @photo.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @photo %> |
+<%= link_to 'Back', :action => 'list' %>

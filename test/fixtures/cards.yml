@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+<% @numbers = { 1 => '1', 2 => '2', 3 => '3' } %>
+<% @shadings = { 1 => 'out', 2 => 'shd', 3 => 'fil' } %>
+<% @colors = { 1 => 'red', 2 => 'grn', 3 => 'prp' } %>
+<% @shapes = { 1 => 'ovl', 2 => 'dia', 3 => 'sqg' } %>
+<% @count = 0 %>
+
+<% @numbers.keys.each do |numid| %>
+  <% @shadings.keys.each do |shdid| %>
+    <% @colors.keys.each do |clrid| %>
+      <% @shapes.keys.each do |shpid| %>
+      <% @count += 1 %>
+
+<%= @numbers[numid] + @shadings[shdid] + @colors[clrid] + @shapes[shpid] %>:
+  id: <%= @count %>
+  number_id: <%= numid %>
+  shading_id: <%= shdid %>
+  color_id: <%= clrid %>
+  shape_id: <%= shpid %>
+
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+out:
+  name: outlined
+  abbrev: out
+  id: 1
+
+shd:
+  name: shaded
+  abbrev: shd
+  id: 2
+
+fil:
+  name: filled
+  abbrev: fil
+  id: 3
+

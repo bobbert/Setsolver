@@ -1,0 +1,27 @@
+<h1>Listing slideshows</h1>
+
+<table>
+  <tr>
+  <% for column in Slideshow.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for slideshow in @slideshows %>
+  <tr>
+  <% for column in Slideshow.content_columns %>
+    <td><%=h slideshow.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => slideshow %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => slideshow %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => slideshow }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @slideshow_pages.current.previous } if @slideshow_pages.current.previous %>
+<%= link_to 'Next page', { :page => @slideshow_pages.current.next } if @slideshow_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New slideshow', :action => 'new' %>

@@ -1,0 +1,14 @@
+require File.dirname(__FILE__) + '/../test_helper'
+
+class NumberTest < ActiveSupport::TestCase
+  # The Set game is dependent on 3x3x3x3 attributes.
+  def test_should_have_three_fields
+    vals = Number.find(:all)
+    assert (vals.length == 3), "The Number attribute does not have three possible values."
+    assert (vals.map{|n| n.name}.uniq == 3),
+      "The Number attribute does not have three distinct name values."
+    assert (vals.map{|n| n.abbrev}.uniq == 3),
+      "The Number attribute does not have three distinct abbreviation values."
+  end
+
+end

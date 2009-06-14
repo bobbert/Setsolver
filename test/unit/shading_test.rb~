@@ -1,0 +1,14 @@
+require File.dirname(__FILE__) + '/../test_helper'
+
+class ShadingTest < ActiveSupport::TestCase
+  # The Set game is dependent on 3x3x3x3 attributes.
+  def test_should_have_three_fields
+    vals = Shading.find(:all)
+    assert (vals.length == 3), "The Shading attribute does not have three possible values."
+    assert (vals.map{|s| s.name}.uniq == 3),
+      "The Shading attribute does not have three distinct name values."
+    assert (vals.map{|s| s.abbrev}.uniq == 3),
+      "The Shading attribute does not have three distinct abbreviation values."
+  end
+
+end

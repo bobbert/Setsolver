@@ -1,0 +1,53 @@
+class PlayersController < ApplicationController
+
+  def index
+    list
+    render :action => 'home'
+  end
+
+  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
+  verify :method => :post, :only => [ :destroy, :create, :update ],
+         :redirect_to => { :action => :list }
+
+  def show
+    @player = Player.find(params[:id])
+  end
+
+  def new
+    @player = Player.new
+  end
+
+  def create
+    @player = Player.new(params[:seeding])
+    if @player.save
+      flash[:notice] = 'Seeding was successfully created.'
+      redirect_to :action => 'home'
+    else
+      render :action => 'new'
+    end
+  end
+
+  def edit
+    @player = Player.find(params[:id])
+  end
+
+  def update
+    @player = Player.find(params[:id])
+    if @player.update_attributes(params[:seeding])
+      flash[:notice] = 'Seeding was successfully updated.'
+      redirect_to :action => 'show', :id => @player
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def destroy
+    Player.find(params[:id]).destroy
+    redirect_to :action => 'list'
+  end
+
+#------ my controller methods ----#
+
+
+
+end
