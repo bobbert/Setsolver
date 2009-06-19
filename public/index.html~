@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Setsolver v0.1</title>
+    <title>Setsolver v0.2</title>
     <style type="text/css" media="screen">
       body {
         margin: 0;
@@ -239,27 +239,32 @@
 
       <div id="content">
         <div id="header">
-          <h1>Setsolver v0.1</h1>
+          <h1>Setsolver v0.2</h1>
           <h2>Developed by Robert Phelps</h2>
         </div>
 
         <div id="getting-started">
-        <h1>This app ain't pretty, but it's functional.</h1>
+        <h1>This app ain't pretty (but a little prettier than the last version), but it's functional.</h1>
           <ol>
             <li>
               <h2>Getting Started:</h2>
               <p>Go <a href="/games">here</a> to create a game and get started.</p>
             </li>
             <li>
-              <h2>Future plans for application:</h2>
-              <p>0.2: create User model, link games to users, and add authentication.</p>
-              <p>0.3: add game profiling: which sets are getting selected and which aren't, and
-                 some sort of timer functionality (&quot;You found X set in 8.82 seconds&quot;).</p>
-              <p>0.4: pretty up site
-              <p>0.5: hook in Facebook API stuff, if I still plan on going that route.</p>
-              <p>1.0: finished product, or so I hope :) </p>
+              <h2>Done:</h2>
+              <p>0.1: basic functionality of set game</p>
+              <p>0.2: Ajax functionality when clicking three cards</p>
             </li>
-            
+            <li>
+              <h2>Future plans for application:</h2>
+              <p>0.21: refactor!</p>
+              <p>0.3: create User model, link games to users, and add authentication.</p>
+              <p>0.4: add Ajax listeners to make game multi-player.</p>
+              <p>0.5: add game profiling: which sets are getting selected and which aren't, and
+                 some sort of timer functionality (&quot;You found X set in 8.82 seconds&quot;).</p>
+              <p>0.9: hook in Facebook API stuff, if I still plan on going that route.</p>
+              <p>1.0: ready to play, or so I hope :) </p>
+            </li>
             <li>
               <h2>Set up a default route and remove or rename this file</h2>
               <p>Routes are set up in config/routes.rb.</p>
@@ -267,7 +272,6 @@
           </ol>
         </div>
       </div>
-      
       <div id="footer">&nbsp;</div>
     </div>
   </body>

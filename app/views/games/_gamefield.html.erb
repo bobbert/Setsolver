@@ -1,0 +1,24 @@
+<%= error_messages_for 'game' %>
+<!--[form:game]-->
+
+<% if @found_set %>
+  <center><div style="width:600;border:1px solid black;">Congratulations!
+  <%= render_threecard_set @found_set %>
+  is a valid three-card set.</div></center>
+<% end %>
+<h3>This is your <%= @game.deck_count.ordinalize %> deck, with
+   <%= @game.deck.length %> card<%= 's' if @game.deck.length != 1 %> remaining. </h3>
+<% if @sets.length == 1 %>
+  <h3>There is 1 set found below:</h3>
+<% else %>
+  <h3>There are <%= @sets.length %> sets found below:</h3>
+<% end %>
+
+<% if @tmp %>
+  <h3># Params: <%= @tmp %></h3>
+<% end %>
+
+</p>
+<%= render :partial => 'board' %>
+<br />
+

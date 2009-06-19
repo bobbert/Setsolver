@@ -19,3 +19,24 @@
 <% end %>
 </tr>
 </table>
+
+<%= render_board 1 %>
+
+<!---
+
+<div id="setboard">
+<ul>
+<% @game.cards.each_with_index do |c,i| %>
+  <% card_nm = 'card' + i.to_s %>
+  <% if (i % Game::VIEW_COLS == 0) && (i > 0) %>
+    </div><br /><div>
+  <% end %>
+  <li class="unselected">
+  <%= hidden_field_tag card_nm, i  %>
+  <%= image_tag ('cards/' + c.img_name), :alt => c.to_s,
+      :onclick => 'javascript:toggle_chk(\'' + card_nm + '\');'  %>
+  </li>
+  <% end %>
+</div>
+--->
+

@@ -9,8 +9,8 @@ class GamesController < ApplicationController
     @game_pages, @games = paginate :games, :per_page => 10
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  #verify :method => :post, :only => [ :destroy, :create, :play ],
+  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenT;new, oUseGet.html)
+  #verify :method => :post, :only => [ :destroy, :create, :play, :refresh_cards],
   #       :redirect_to => { :action => :list }
 
   def new
@@ -56,11 +56,13 @@ class GamesController < ApplicationController
           end
           @caption = 'The three cards you selected are not a set.' unless @found_set
         end
+      populate_field unless @caption
+      render :action => '_gamefield'
+      return
       end
     else # no deck
       new_deck
     end
-@tmp = params.length
     populate_field unless @caption
     render :action => 'play'
   end
@@ -122,6 +124,14 @@ class GamesController < ApplicationController
     end
     return nil if retval.length != 3
     retval
+  end
+
+  # get HTML table with all active set cards in the table cells
+  def refresh
+    render :action => '_board'
+
+    return render_board(params[:id]) if Game.find(params[:id])
+    return "<table></table>"
   end
 
 end
