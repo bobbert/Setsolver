@@ -1,9 +1,0 @@
-<h1>Editing slideshow</h1>
-
-<% form_tag :action => 'update', :id => @slideshow do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
-<% end %>
-
-<%= link_to 'Show', :action => 'show', :id => @slideshow %> |
-<%= link_to 'Back', :action => 'list' %>

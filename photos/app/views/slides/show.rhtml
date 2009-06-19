@@ -1,8 +1,0 @@
-<% for column in Slide.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @slide.send(column.name) %>
-</p>
-<% end %>
-
-<%= link_to 'Edit', :action => 'edit', :id => @slide %> |
-<%= link_to 'Back', :action => 'list' %>

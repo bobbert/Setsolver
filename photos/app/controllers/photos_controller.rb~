@@ -1,3 +1,0 @@
-class PhotosController < ApplicationController
-  scaffold :photo
-end
