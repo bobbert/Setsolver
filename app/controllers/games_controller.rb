@@ -39,32 +39,44 @@ class GamesController < ApplicationController
   # (valid set, invalid set, wrong # of cards selected, etc.)
   def play
     @game = Game.find(params[:id])
-    @sets = []
+    @sets = @game.find_sets
     @caption = nil
-    if @game.deck
-      @sets = @game.find_sets
-      if params[:commit]  # user made submission
-        selection = get_user_set_selection
-        if selection.nil?
-          @caption = 'You did not select three cards.'
-        else
-          @sets.each do |set|
-            if selection == set
-              @found_set = selection.map {|i| @game.cards[i] }
-              @found_set.each {|c| @game.cards.delete c }
-            end
+    # start with brand new first deck if not found
+    if !(@game.deck)
+      new_deck
+      populate_field
+      render :action => 'play'
+    # user did not submit (initial loading)
+    elsif !(params[:commit])
+      populate_field
+      render :action => 'play'
+    else
+      selection = get_card_numbers
+      if selection.length != 3
+        @caption = 'You did not select three cards.'
+      elsif !(@game.is_set? selection)
+        @caption = 'The three cards you selected are not a set.'
+      else
+        @sets.each do |set|
+          if selection === set
+            @found_set = selection.map {|i| @game.cards[i] }
+            @found_set.each {|c| @game.cards.delete c }
           end
-          @caption = 'The three cards you selected are not a set.' unless @found_set
         end
+      end
       populate_field unless @caption
       render :action => '_gamefield'
-      return
-      end
-    else # no deck
-      new_deck
     end
-    populate_field unless @caption
-    render :action => 'play'
+  end
+
+  # get card numbers from params hash that takes the following form:
+  # key = :card<number>, value = "SELECTED"
+  # The array of card numbers is always in numerical order.
+  def get_card_numbers
+    cards = params.clone.delete_if do |k,v|
+      (v.to_s != 'SELECTED') || (k.to_s !~ /^card[0-9]+$/)
+    end
+    nums = cards.map {|cs| cs.to_s.sub(/^card/,'').to_i }.sort
   end
 
   # populates the playing field with FIELD_SIZE number of cards, unless
@@ -85,6 +97,7 @@ class GamesController < ApplicationController
         end
       end
     end
+    @game.save
   end
 
   # deals num_cards number of cards from deck to game field, or deals
@@ -111,19 +124,6 @@ class GamesController < ApplicationController
     else
       return false
     end
-  end
-
-  # get user-submitted set as indices from params hash, from lowest to highest.
-  # returns array if 3 cards selected, or nil if more or less than 
-  # 3 cards selected.
-  def get_user_set_selection
-    retval = []
-    @game.cards.each_index do |i|
-      val = params[('card' + i.to_s)]
-      retval << i if val && (val == 'SELECTED')
-    end
-    return nil if retval.length != 3
-    retval
   end
 
   # get HTML table with all active set cards in the table cells

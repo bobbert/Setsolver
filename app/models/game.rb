@@ -31,7 +31,7 @@ class Game < ActiveRecord::Base
     retval
   end
 
-  # the set-finding algorithm: finds every statistical combination of 3 cards, 
+  # the set-finding algorithm: finds every statistical combination of 3 cards,
   # then iterates through array once for each attribute (color, shading, etc.) and
   # removes all instances where only a match of 2 exists.
   def find_sets
@@ -42,6 +42,13 @@ class Game < ActiveRecord::Base
       end
     end
     cmb3_arr
+  end
+
+
+  # returns true if the array of 3 numbers passed in is contained in
+  # the array of sets returned by find_sets
+  def is_set?( arr )
+    true if find_sets.find{|a| a === arr }
   end
 
   # given an array of cards and an attribute, finds out how many distinct
