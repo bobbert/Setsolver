@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenT;new, oUseGet.html)
-  #verify :method => :post, :only => [ :destroy, :create, :play, :refresh_cards],
+  #verify :method => :post, :only => [ :destroy, :create, :play, :refresh],
   #       :redirect_to => { :action => :list }
 
   def new
@@ -36,25 +36,22 @@ class GamesController < ApplicationController
 
   # the heart of the Setsolver game logic lies here.
   # This method handles new games, and all types of card submissions
-  # (valid set, invalid set, wrong # of cards selected, etc.)
+  # (valid set, invalid set, wrong # of cards selected, etc. )
   def play
     @game = Game.find(params[:id])
     @sets = @game.find_sets
     @caption = nil
-    # start with brand new first deck if not found
-    if !(@game.deck)
-      new_deck
-      populate_field
-      render :action => 'play'
-    # user did not submit (initial loading)
-    elsif !(params[:commit])
+    # start with brand new first deck if not found, or user
+    # did not submit (initial loading)
+    if !(@game.deck && params[:commit])
+      new_deck unless @game.deck
       populate_field
       render :action => 'play'
     else
       selection = get_card_numbers
       if selection.length != 3
         @caption = 'You did not select three cards.'
-      elsif !(@game.is_set? selection)
+      elsif !(@sets.include? selection)
         @caption = 'The three cards you selected are not a set.'
       else
         @sets.each do |set|
@@ -128,10 +125,8 @@ class GamesController < ApplicationController
 
   # get HTML table with all active set cards in the table cells
   def refresh
+    @game = Game.find(params[:id])
     render :action => '_board'
-
-    return render_board(params[:id]) if Game.find(params[:id])
-    return "<table></table>"
   end
 
 end
