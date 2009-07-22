@@ -2,19 +2,6 @@ class Deck < ActiveRecord::Base
   has_many :cards, :order => "facedown_position"
   belongs_to :game
 
-  # Returns an array of randomly selected Card objects, length "numcards".
-  # The Card objects returned by this method are not removed from the deck.
-  def get_random_cards( numcards = 1 )
-    dealt = []
-    return cards.to_a if numcards.to_i >= cards.length
-    id_list = cards.map {|c| c.id }
-    numcards.to_i.downto(1) do |num|
-      rnd = rand id_list.length
-      dealt << Card.find( id_list.slice!(rnd.floor) )
-    end
-    dealt
-  end
-
   # deals "number" number of cards from facedown to faceup list.
   # The cards are returned if successful.
   def deal(number = 1)
@@ -32,13 +19,6 @@ class Deck < ActiveRecord::Base
     save
   end
 
-  # fills in-play game field with passed in number of cards
-  def fill_game_field(number = Game::FIELD_SIZE)
-    num_in_play = in_play.length
-    return false if num_in_play > number
-    deal (number - num_in_play)
-  end
-
   # the deck length
   def length
     cards.length
@@ -54,7 +34,7 @@ class Deck < ActiveRecord::Base
     cards.find_all {|c| c.facedown? }.sort
   end
 
-  # get active deck
+  # gets all cards in game field
   def in_play
     cards.find_all {|c| c.in_play? }.sort
   end
@@ -76,6 +56,7 @@ class Deck < ActiveRecord::Base
       cards << c_new
       c_new.save
     end
+    return shuffle if autoshuffle
     save
   end
 

@@ -1,0 +1,7 @@
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000815)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mDeck Columns (0.004922)[0m   [0mSHOW FIELDS FROM `decks`[0m
+  [4;36;1mDeck Load (0.002495)[0m   [0;1mSELECT * FROM `decks` WHERE (`decks`.`id` = 1) [0m
+  [4;35;1mSQL (0.002336)[0m   [0mSHOW TABLES[0m
+  [4;36;1mGame Columns (0.005354)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mGame Load (0.004914)[0m   [0mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m

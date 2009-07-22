@@ -13,22 +13,23 @@ class Game < ActiveRecord::Base
   BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
   BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
 
-  # performs a ( len 3 ) statistical combination, where len is the length of the 
-  # in-play deck.  The combination is returned as an array-of-arrays, where the inner
-  # arrays are of length 3 and the outer array is length ( len 3 ) with distinct elements.
-  def each_cmb3
-    len = cards.length
-    retval = []
-    # outermost loop: i = iterate from 0 to (len-1), add i to end of all arrays
-    # middle loop: j = iterate from (i+1) to (len-1), add j to middle of arrays
-    # inner loop: create array with numbers (j+1) to (len-1), which may be empty.
-    0.upto(len-1) do |i|
-      (i+1).upto(len-1) do |j|
-        k_arr = ((j+1)..(len-1)).to_a
-        retval += k_arr.map {|k| [i,j,k] }
-      end
-    end
-    retval
+  def new_deck(autoshuffle = true)
+    ashuf = ('Y' if autoshuffle)
+    deck = Deck.new autoshuffle => ashuf
+    deck.save
+  end
+
+  # fills in-play game field with passed in number of cards
+  def fill_game_field(number = FIELD_SIZE)
+    num_in_play = deck.in_play.length
+    return false if num_in_play > number
+    deal (number - num_in_play)
+  end
+
+  # returns true if the array of 3 numbers passed in is contained in
+  # the array of sets returned by find_sets
+  def is_set?( arr )
+    true if find_sets.find{|a| a === arr }
   end
 
   # the set-finding algorithm: finds every statistical combination of 3 cards,
@@ -44,11 +45,24 @@ class Game < ActiveRecord::Base
     cmb3_arr
   end
 
+private
 
-  # returns true if the array of 3 numbers passed in is contained in
-  # the array of sets returned by find_sets
-  def is_set?( arr )
-    true if find_sets.find{|a| a === arr }
+  # performs a ( len 3 ) statistical combination, where len is the length of the
+  # in-play deck.  The combination is returned as an array-of-arrays, where the inner
+  # arrays are of length 3 and the outer array is length ( len 3 ) with distinct elements.
+  def each_cmb3
+    num_in_play = deck.in_play.length
+    retval = []
+    # outermost loop: i = iterate from 0 to (len-1), add i to end of all arrays
+    # middle loop: j = iterate from (i+1) to (len-1), add j to middle of arrays
+    # inner loop: create array with numbers (j+1) to (len-1), which may be empty.
+    0.upto(num_in_play - 1) do |i|
+      (i+1).upto(num_in_play - 1) do |j|
+        k_arr = ((j+1)..(num_in_play - 1)).to_a
+        retval += k_arr.map {|k| [i,j,k] }
+      end
+    end
+    retval
   end
 
   # given an array of cards and an attribute, finds out how many distinct
