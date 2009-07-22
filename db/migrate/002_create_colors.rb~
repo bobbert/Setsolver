@@ -7,10 +7,10 @@ class CreateColors < ActiveRecord::Migration
     end
     # assigning default values
     ATTRIB.keys.sort.each do |nm|
-      n = Number.new
-      n.name = nm
-      n.abbrev = ATTRIB[nm]
-      n.save
+      c = Color.new
+      c.name = nm
+      c.abbrev = ATTRIB[nm]
+      c.save
     end
   end
 

@@ -3,7 +3,7 @@
 # should in almost all cases be the highest numbered script.
 # (CHANGE NUMBERS WHEN ADDING NEW MODELS)
 class AddConstraints < ActiveRecord::Migration
-  # method to create SQL statement for adding or dropping foreign key constraint 
+  # method to create SQL statement for adding or dropping foreign key constraint
   # from table names in singular form.
   # THIS METHOD ONLY CREATES MYSQL-STYLE ADD AND DROP STATEMENTS.
   FK_SQL_FNC = lambda do |state, child, parent|
@@ -19,23 +19,19 @@ class AddConstraints < ActiveRecord::Migration
 
   def self.up
     ['number','shading','color','shape'].each do |tbl_nm|
-      execute FK_SQL_FNC.call( :up, 'card', tbl_nm )
+      execute FK_SQL_FNC.call( :up, 'cardface', tbl_nm )
     end
     # association table FK's
-    execute FK_SQL_FNC.call( :up, 'cards_deck', 'card' )
-    execute FK_SQL_FNC.call( :up, 'cards_deck', 'deck' )
-    execute FK_SQL_FNC.call( :up, 'cards_game', 'card' )
-    execute FK_SQL_FNC.call( :up, 'cards_game', 'game' )
+    execute FK_SQL_FNC.call( :up, 'games_players', 'game' )
+    execute FK_SQL_FNC.call( :up, 'games_players', 'player' )
   end
 
   def self.down
     ['number','shading','color','shape'].each do |tbl_nm|
-      execute FK_SQL_FNC.call( :down, 'card', tbl_nm )
+      execute FK_SQL_FNC.call( :down, 'cardface', tbl_nm )
     end
     # association table FK's
-    execute FK_SQL_FNC.call( :down, 'cards_deck', 'card' )
-    execute FK_SQL_FNC.call( :down, 'cards_deck', 'deck' )
-    execute FK_SQL_FNC.call( :down, 'cards_game', 'card' )
-    execute FK_SQL_FNC.call( :down, 'cards_game', 'game' )
+    execute FK_SQL_FNC.call( :down, 'games_players', 'game' )
+    execute FK_SQL_FNC.call( :down, 'games_players', 'player' )
   end
 end

@@ -1,4 +1,4 @@
 class Player < ActiveRecord::Base
-  has_one :game
+  has_and_belongs_to_many :game
 
 end

@@ -1,10 +1,11 @@
 class CreateCards < ActiveRecord::Migration
   def self.up
     create_table :cards do |t|
-      t.column "number_id", :integer
-      t.column "color_id", :integer
-      t.column "shading_id", :integer
-      t.column "shape_id", :integer
+      t.integer :cardface_id
+      t.integer :deck_id
+      t.integer :facedown_position
+      t.integer :faceup_position
+      t.integer :claimed_by
     end
   end
 

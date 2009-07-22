@@ -11,7 +11,7 @@ class GamesController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenT;new, oUseGet.html)
   #verify :method => :post, :only => [ :destroy, :create, :play, :refresh],
-  #       :redirect_to => { :action => :list }
+  # :redirect_to => { :action => :list }
 
   def new
     @game = Game.new
@@ -99,7 +99,7 @@ class GamesController < ApplicationController
 
   # deals num_cards number of cards from deck to game field, or deals
   # out the rest of the deck if num_cards exceeds the number of cards
-  # in the deck.
+  # in the deck
   def deal( num_cards = 1 )
     num_cards = @game.deck.length if (@game.deck.length < num_cards.to_i)
     dealt = @game.deck.get_random_cards num_cards

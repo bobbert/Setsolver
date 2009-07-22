@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   has_one :deck
-  belongs_to :player
-  has_and_belongs_to_many :cards
+  has_many :cards, :order => "active_position"
+  has_and_belongs_to_many :players
 
   FIELD_SIZE = 12
   VIEW_COLS = 6
@@ -43,6 +43,7 @@ class Game < ActiveRecord::Base
     end
     cmb3_arr
   end
+
 
   # returns true if the array of 3 numbers passed in is contained in
   # the array of sets returned by find_sets
