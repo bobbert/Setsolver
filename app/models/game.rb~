@@ -16,7 +16,7 @@ class Game < ActiveRecord::Base
   def new_deck(autoshuffle = true)
     ashuf = ('Y' if autoshuffle)
     deck = Deck.new autoshuffle => ashuf
-    deck.save
+    deck.reset
   end
 
   # fills in-play game field with passed in number of cards
