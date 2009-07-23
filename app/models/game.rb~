@@ -22,20 +22,32 @@ class Game < ActiveRecord::Base
   # fills in-play game field with passed in number of cards
   def fill_game_field(number = FIELD_SIZE)
     num_in_play = deck.in_play.length
-    return false if num_in_play > number
     deal (number - num_in_play)
+    return true if valid_game_field?
+  end
+
+  # is game field valid for playing? -- meaning that the game field must be
+  # fully dealt out and at least 1 set exists in the active field.
+  def valid_game_field?
+    num_cards_correct = (deck.number_in_play >= FIELD_SIZE) || deck.all_dealt?
+    return num_cards_correct && set_exists?
   end
 
   # returns true if the array of 3 numbers passed in is contained in
   # the array of sets returned by find_sets
   def is_set?( arr )
-    true if find_sets.find{|a| a === arr }
+    true if sets.find{|a| a === arr }
+  end
+
+  # does at least 1 set exist  in field?
+  def set_exists?
+    !(set_indices.empty?)
   end
 
   # the set-finding algorithm: finds every statistical combination of 3 cards,
   # then iterates through array once for each attribute (color, shading, etc.) and
   # removes all instances where only a match of 2 exists.
-  def find_sets
+  def set_indices
     cmb3_arr = each_cmb3
     Card::ATTR.each do |asp|
       cmb3_arr.delete_if do |arr3|
@@ -43,6 +55,11 @@ class Game < ActiveRecord::Base
       end
     end
     cmb3_arr
+  end
+
+  def sets
+    cards_in_play = deck.in_play
+    set_indices.map{|s_arr| s_arr.map {|s_idx| cards_in_play[s_idx] } }
   end
 
 private

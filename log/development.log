@@ -5,3 +5,18 @@ WARNING: You're using the Ruby-based MySQL library that ships with Rails. This l
   [4;35;1mSQL (0.002336)[0m   [0mSHOW TABLES[0m
   [4;36;1mGame Columns (0.005354)[0m   [0;1mSHOW FIELDS FROM `games`[0m
   [4;35;1mGame Load (0.004914)[0m   [0mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000672)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mDeck Columns (0.004938)[0m   [0mSHOW FIELDS FROM `decks`[0m
+  [4;36;1mDeck Load (0.002575)[0m   [0;1mSELECT * FROM `decks` WHERE (`decks`.`id` = 1) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000566)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mDeck Columns (0.004854)[0m   [0mSHOW FIELDS FROM `decks`[0m
+  [4;36;1mDeck Load (0.001834)[0m   [0;1mSELECT * FROM `decks` WHERE (`decks`.`id` = 1) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000563)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004835)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.002413)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.002429)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.006750)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.000000)[0m   [0mMysql::Error: #42S22Unknown column 'cards.deck_id' in 'where clause': SELECT * FROM `cards` WHERE (cards.deck_id = 2) ORDER BY facedown_position[0m

@@ -3,8 +3,8 @@ class Deck < ActiveRecord::Base
   belongs_to :game
 
   # the deck length
-  def length
-    cards.length
+  def all_dealt?
+    facedown.empty?
   end
 
   # true if deck is empty
@@ -20,6 +20,11 @@ class Deck < ActiveRecord::Base
   # gets all cards in game field
   def in_play
     cards.find_all {|c| c.in_play? }.sort
+  end
+
+  # gets number of cards in game field
+  def number_in_play
+    cards.find_all {|c| c.in_play? }.length
   end
 
   # get claimed deck; get only cards claimed by player_id if an integer is passed in
@@ -58,11 +63,13 @@ class Deck < ActiveRecord::Base
   end
 
   # deals "number" number of cards from facedown to faceup list.
-  # The cards are returned if successful.
+  # The cards are returned if saved successfuly, and number of
+  # cards returned matches number requested.
   def deal(number = 1)
     to_be_dealt = cards.find_all do |c|
       c.facedown_position && c.facedown_position <= number
     end
+    correct_num_dealt = (number == to_be_dealt.length)
     num_prev_in_play = in_play.length
     # removing from facedown to faceup list, one card per iteration
     to_be_dealt.sort.each_with_index do |tbd_c, tbd_i|
@@ -71,7 +78,7 @@ class Deck < ActiveRecord::Base
       tbd_c.faceup_position = num_prev_in_play + tbd_i + 1
       tbd_c.save
     end
-    save
+    save && correct_num_dealt
   end
 
 end
