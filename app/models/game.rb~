@@ -13,6 +13,7 @@ class Game < ActiveRecord::Base
   BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
   BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
 
+  # create new deck and shuffle if auto-shuffle parameter is set
   def new_deck(autoshuffle = true)
     ashuf = ('Y' if autoshuffle)
     deck = Deck.new autoshuffle => ashuf
@@ -20,10 +21,15 @@ class Game < ActiveRecord::Base
   end
 
   # fills in-play game field with passed in number of cards
+  # Returns True if field is playable.
   def fill_game_field(number = FIELD_SIZE)
     num_in_play = deck.in_play.length
-    deal (number - num_in_play)
-    return true if valid_game_field?
+    return false unless deal (number - num_in_play)
+    until valid_game_field?
+      return false if deck.all_dealt?
+      deck.deal 3
+    end
+    true
   end
 
   # is game field valid for playing? -- meaning that the game field must be
@@ -36,10 +42,10 @@ class Game < ActiveRecord::Base
   # returns true if the array of 3 numbers passed in is contained in
   # the array of sets returned by find_sets
   def is_set?( arr )
-    true if sets.find{|a| a === arr }
+    true if set_indices.find{|a| a === arr }
   end
 
-  # does at least 1 set exist  in field?
+  # does at least 1 set exist in field?
   def set_exists?
     !(set_indices.empty?)
   end
