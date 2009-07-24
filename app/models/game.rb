@@ -19,7 +19,8 @@ class Game < ActiveRecord::Base
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
   # in-play deck.  The combination is returned as an array-of-arrays, where the inner
-  # arrays are of length 3 and the outer array is length ( len 3 ) with distinct elements.
+  # arrays are composed of 3 SORTED integers and the outer array has
+  # (len)! / ((len-3)! * 3!) elements -- which gets big very quickly for large "len" values.
   def self.each_cmb3( cmb_len )
     retval = []
     # outermost loop: i = iterate from 0 to (len-1), add i to end of all arrays
@@ -63,12 +64,6 @@ class Game < ActiveRecord::Base
     return num_cards_correct && set_exists?
   end
 
-  # returns true if the array of 3 numbers passed in is contained in
-  # the array of sets returned by find_sets
-  def is_set?( arr )
-    true if set_indices.find{|a| a === arr }
-  end
-
   # does at least 1 set exist in field?
   def set_exists?
     !(set_indices.empty?)
@@ -95,10 +90,16 @@ class Game < ActiveRecord::Base
     set_indices.map{|s_arr| s_arr.map {|s_idx| cards_in_play[s_idx] } }
   end
 
-  def claim_set( set_i, plyr_id )
-    return false unless is_set?( set_i )
-    get_cards_in_play_from_index( *set_i ).each do |c|
+  # evaluates player submission, and if set is valid:
+  # set all three cards as claimed by player passed in, then
+  # return the three-card set.
+  def make_set_selection( plyr_id, card1_i, card2_i, card3_i )
+    si = set_indices
+    return false unless si.include? [card1_i, card2_i, card3_i].sort
+    # we have a valid set - get cards and set claimed_by, then return cards
+    get_cards_in_play_from_index( card1_i, card2_i, card3_i ).each do |c|
       c.claimed_by = plyr_id
+      c.save
     end
   end
 

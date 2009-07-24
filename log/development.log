@@ -5376,3 +5376,309 @@ WARNING: You're using the Ruby-based MySQL library that ships with Rails. This l
   [4;35;1mShape Load (0.001496)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
   [4;36;1mShape Load (0.001863)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
   [4;35;1mShape Load (0.001501)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000515)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004911)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.100015)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.006053)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.012285)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.021154)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Columns (0.005381)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+  [4;35;1mSQL (0.002459)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCardface Columns (0.005493)[0m   [0;1mSHOW FIELDS FROM `cardfaces`[0m
+  [4;35;1mCardface Load (0.002296)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 23) [0m
+  [4;36;1mCardface Load (0.002150)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 26) [0m
+  [4;35;1mCardface Load (0.002089)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 10) [0m
+  [4;36;1mNumber Columns (0.004618)[0m   [0;1mSHOW FIELDS FROM `numbers`[0m
+  [4;35;1mNumber Load (0.001584)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mNumber Load (0.001563)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;35;1mNumber Load (0.001572)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002129)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 39) [0m
+  [4;35;1mNumber Load (0.002004)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002100)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 12) [0m
+  [4;35;1mNumber Load (0.001563)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002093)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 67) [0m
+  [4;35;1mNumber Load (0.001568)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mCardface Load (0.002089)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 14) [0m
+  [4;35;1mNumber Load (0.001572)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002092)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 52) [0m
+  [4;35;1mNumber Load (0.001580)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002080)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 48) [0m
+  [4;35;1mNumber Load (0.001560)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002090)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 30) [0m
+  [4;35;1mNumber Load (0.001545)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002094)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 3) [0m
+  [4;35;1mNumber Load (0.001558)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002069)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 77) [0m
+  [4;35;1mNumber Load (0.001862)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mShading Columns (0.004523)[0m   [0;1mSHOW FIELDS FROM `shadings`[0m
+  [4;35;1mShading Load (0.001607)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001634)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001510)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001887)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001570)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001589)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001520)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001546)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;35;1mShading Load (0.001664)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001556)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001541)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001563)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mColor Columns (0.004814)[0m   [0mSHOW FIELDS FROM `colors`[0m
+  [4;36;1mColor Load (0.001551)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001554)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001484)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001521)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001561)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001885)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001561)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001500)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001543)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001549)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001677)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001553)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mShape Columns (0.004510)[0m   [0;1mSHOW FIELDS FROM `shapes`[0m
+  [4;35;1mShape Load (0.001541)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001492)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;35;1mShape Load (0.001525)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001545)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;35;1mShape Load (0.001862)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001551)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.002674)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001524)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001504)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000519)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004786)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.001925)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.002285)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.005508)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.015213)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Columns (0.005372)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+  [4;35;1mSQL (0.002425)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCardface Columns (0.005214)[0m   [0;1mSHOW FIELDS FROM `cardfaces`[0m
+  [4;35;1mCardface Load (0.002092)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 23) [0m
+  [4;36;1mCardface Load (0.002216)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 26) [0m
+  [4;35;1mCardface Load (0.002088)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 10) [0m
+  [4;36;1mNumber Columns (0.004773)[0m   [0;1mSHOW FIELDS FROM `numbers`[0m
+  [4;35;1mNumber Load (0.001553)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mNumber Load (0.001577)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;35;1mNumber Load (0.001519)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002085)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 39) [0m
+  [4;35;1mNumber Load (0.001705)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002103)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 12) [0m
+  [4;35;1mNumber Load (0.001582)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002083)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 67) [0m
+  [4;35;1mNumber Load (0.001556)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mCardface Load (0.002103)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 14) [0m
+  [4;35;1mNumber Load (0.001548)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002070)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 52) [0m
+  [4;35;1mNumber Load (0.001550)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002062)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 48) [0m
+  [4;35;1mNumber Load (0.001508)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002423)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 30) [0m
+  [4;35;1mNumber Load (0.001555)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002068)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 3) [0m
+  [4;35;1mNumber Load (0.001552)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002076)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 77) [0m
+  [4;35;1mNumber Load (0.001498)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mShading Columns (0.004494)[0m   [0;1mSHOW FIELDS FROM `shadings`[0m
+  [4;35;1mShading Load (0.001575)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001591)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001540)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001586)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001543)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001530)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001554)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001493)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;35;1mShading Load (0.001540)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001554)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001539)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001526)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mColor Columns (0.005494)[0m   [0mSHOW FIELDS FROM `colors`[0m
+  [4;36;1mColor Load (0.001840)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001592)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001539)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001578)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001550)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001539)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001553)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001519)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001541)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001532)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001561)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001557)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mShape Columns (0.004807)[0m   [0;1mSHOW FIELDS FROM `shapes`[0m
+  [4;35;1mShape Load (0.001538)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001516)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;35;1mShape Load (0.001680)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001534)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;35;1mShape Load (0.001887)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001554)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001532)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001863)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001543)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;36;1mSQL (0.000570)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001213)[0m   [0mUPDATE `cards` SET `claimed_by` = 1, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 26, `faceup_position` = 2 WHERE `id` = 26[0m
+  [4;36;1mSQL (0.238313)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000859)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001812)[0m   [0;1mUPDATE `cards` SET `claimed_by` = 1, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 67, `faceup_position` = 6 WHERE `id` = 67[0m
+  [4;35;1mSQL (0.002294)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000885)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001740)[0m   [0mUPDATE `cards` SET `claimed_by` = 1, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 30, `faceup_position` = 10 WHERE `id` = 30[0m
+  [4;36;1mSQL (0.003490)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.006254)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCard Load (0.006098)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 63) [0m
+  [4;35;1mCard Update (0.445317)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.001244)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001856)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 63, `faceup_position` = NULL WHERE `id` = 63[0m
+  [4;36;1mSQL (0.003718)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000966)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.002100)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 63, `faceup_position` = 10 WHERE `id` = 63[0m
+  [4;35;1mSQL (0.003836)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005177)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 4) [0m
+  [4;35;1mCard Update (0.017201)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000866)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.002114)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 4, `faceup_position` = NULL WHERE `id` = 4[0m
+  [4;36;1mSQL (0.007476)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000871)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001840)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 4, `faceup_position` = 11 WHERE `id` = 4[0m
+  [4;35;1mSQL (0.004519)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005238)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 16) [0m
+  [4;35;1mCard Update (0.017446)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000851)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.006958)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 16, `faceup_position` = NULL WHERE `id` = 16[0m
+  [4;36;1mSQL (0.006855)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000852)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001775)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 16, `faceup_position` = 12 WHERE `id` = 16[0m
+  [4;35;1mSQL (0.004507)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000903)[0m   [0;1mBEGIN[0m
+  [4;35;1mDeck Update (0.001885)[0m   [0mUPDATE `decks` SET `updated_at` = '2009-07-23 23:27:08', `created_at` = '2009-07-23 22:38:06', `autoshuffle` = 'Y', `game_id` = 1 WHERE `id` = 1[0m
+  [4;36;1mSQL (0.003508)[0m   [0;1mCOMMIT[0m
+  [4;35;1mCardface Load (0.005365)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 63) [0m
+  [4;36;1mNumber Load (0.002918)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;35;1mCardface Load (0.004640)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 4) [0m
+  [4;36;1mNumber Load (0.003176)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;35;1mCardface Load (0.004704)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 16) [0m
+  [4;36;1mNumber Load (0.002965)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001538)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001518)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001535)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001533)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001521)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;36;1mColor Load (0.001518)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mShape Load (0.001532)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001515)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001507)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;36;1mShape Load (0.001527)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;35;1mShape Load (0.001567)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;36;1mShape Load (0.001581)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000519)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004766)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.001770)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.002779)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.005482)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.017594)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Columns (0.005673)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+  [4;35;1mSQL (0.002465)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCardface Columns (0.005208)[0m   [0;1mSHOW FIELDS FROM `cardfaces`[0m
+  [4;35;1mCardface Load (0.002138)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 23) [0m
+  [4;36;1mCardface Load (0.002149)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 77) [0m
+  [4;35;1mCardface Load (0.002105)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 10) [0m
+  [4;36;1mNumber Columns (0.004585)[0m   [0;1mSHOW FIELDS FROM `numbers`[0m
+  [4;35;1mNumber Load (0.001577)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mNumber Load (0.001542)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;35;1mNumber Load (0.001582)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002295)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 39) [0m
+  [4;35;1mNumber Load (0.001577)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002110)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 12) [0m
+  [4;35;1mNumber Load (0.001525)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002127)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 3) [0m
+  [4;35;1mNumber Load (0.001843)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002124)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 14) [0m
+  [4;35;1mNumber Load (0.001579)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002123)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 52) [0m
+  [4;35;1mNumber Load (0.001563)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002339)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 48) [0m
+  [4;35;1mNumber Load (0.001544)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002087)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 63) [0m
+  [4;35;1mNumber Load (0.001557)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mCardface Load (0.002091)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 4) [0m
+  [4;35;1mNumber Load (0.001516)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002451)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 16) [0m
+  [4;35;1mNumber Load (0.001578)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mShading Columns (0.004508)[0m   [0;1mSHOW FIELDS FROM `shadings`[0m
+  [4;35;1mShading Load (0.001653)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001840)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;35;1mShading Load (0.001515)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001535)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001558)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001595)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001831)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001557)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001527)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001540)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;35;1mShading Load (0.001542)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;36;1mShading Load (0.001566)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mColor Columns (0.004468)[0m   [0mSHOW FIELDS FROM `colors`[0m
+  [4;36;1mColor Load (0.001506)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001552)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.002414)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001565)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001557)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001550)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001559)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001553)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001627)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001556)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001525)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001532)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mShape Columns (0.004459)[0m   [0;1mSHOW FIELDS FROM `shapes`[0m
+  [4;35;1mShape Load (0.001554)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001523)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001565)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001556)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001543)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;36;1mShape Load (0.001530)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;35;1mShape Load (0.001690)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;36;1mShape Load (0.001561)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;35;1mShape Load (0.001519)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001542)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001549)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;36;1mSQL (0.000628)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001225)[0m   [0mUPDATE `cards` SET `claimed_by` = 1, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 23, `faceup_position` = 1 WHERE `id` = 23[0m
+  [4;36;1mSQL (0.207921)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000863)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001805)[0m   [0;1mUPDATE `cards` SET `claimed_by` = 1, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 3, `faceup_position` = 6 WHERE `id` = 3[0m
+  [4;35;1mSQL (0.006889)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000895)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001871)[0m   [0mUPDATE `cards` SET `claimed_by` = 1, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 16, `faceup_position` = 12 WHERE `id` = 16[0m
+  [4;36;1mSQL (0.004509)[0m   [0;1mCOMMIT[0m
+  [4;35;1mCard Load (0.007648)[0m   [0mSELECT * FROM `cards` WHERE (`cards`.`id` = 59) [0m
+  [4;36;1mCard Update (0.474116)[0m   [0;1mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;35;1mSQL (0.000883)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.002152)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 59, `faceup_position` = NULL WHERE `id` = 59[0m
+  [4;35;1mSQL (0.002374)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000848)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001931)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 59, `faceup_position` = 1 WHERE `id` = 59[0m
+  [4;36;1mSQL (0.002509)[0m   [0;1mCOMMIT[0m
+  [4;35;1mCard Load (0.005267)[0m   [0mSELECT * FROM `cards` WHERE (`cards`.`id` = 35) [0m
+  [4;36;1mCard Update (0.014993)[0m   [0;1mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;35;1mSQL (0.000868)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001969)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 35, `faceup_position` = NULL WHERE `id` = 35[0m
+  [4;35;1mSQL (0.003612)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.001114)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001773)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 35, `faceup_position` = 6 WHERE `id` = 35[0m
+  [4;36;1mSQL (0.003804)[0m   [0;1mCOMMIT[0m
+  [4;35;1mCard Load (0.007770)[0m   [0mSELECT * FROM `cards` WHERE (`cards`.`id` = 71) [0m
+  [4;36;1mCard Update (0.016122)[0m   [0;1mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;35;1mSQL (0.000889)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001838)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 71, `faceup_position` = NULL WHERE `id` = 71[0m
+  [4;35;1mSQL (0.007030)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.001421)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001795)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 71, `faceup_position` = 12 WHERE `id` = 71[0m
+  [4;36;1mSQL (0.004831)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000868)[0m   [0mBEGIN[0m
+  [4;36;1mDeck Update (0.001768)[0m   [0;1mUPDATE `decks` SET `updated_at` = '2009-07-23 23:56:21', `created_at` = '2009-07-23 22:38:06', `autoshuffle` = 'Y', `game_id` = 1 WHERE `id` = 1[0m
+  [4;35;1mSQL (0.007221)[0m   [0mCOMMIT[0m

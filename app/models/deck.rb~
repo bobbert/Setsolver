@@ -22,6 +22,11 @@ class Deck < ActiveRecord::Base
     cards.find_all {|c| c.in_play? }.sort
   end
 
+  # gets number of cards in game field
+  def number_in_play
+    cards.find_all {|c| c.in_play? }.length
+  end
+
   # get claimed deck; get only cards claimed by player_id if an integer is passed in
   def claimed(plyr_id = nil)
     cards.find_all {|c| c.claimed? }.sort unless plyr_id
@@ -66,14 +71,30 @@ class Deck < ActiveRecord::Base
     end
     correct_num_dealt = (number == to_be_dealt.length)
     num_prev_in_play = in_play.length
+    faceup_nums = next_faceup_positions to_be_dealt.length
     # removing from facedown to faceup list, one card per iteration
     to_be_dealt.sort.each_with_index do |tbd_c, tbd_i|
       tbd_c.reload
       tbd_c.remove_from_list
-      tbd_c.faceup_position = num_prev_in_play + tbd_i + 1
+      tbd_c.faceup_position = faceup_nums[tbd_i]
       tbd_c.save
     end
     save && correct_num_dealt
+  end
+
+private
+
+  # getting next numbers for faceup position, as array, by finding
+  # unused numbers in faceup_position progression
+  def next_faceup_positions( number = 1 )
+    num_possible_ind = number_in_play + number
+    # get existing faceup position numbers
+    faceup_inds = in_play.map {|c| c.faceup_position }
+    remaining = (1..num_possible_ind).to_a.delete_if do |i|
+      faceup_inds.include? i
+    end
+    # return first <number> remaining numbers
+    return remaining.slice 0, number
   end
 
 end
