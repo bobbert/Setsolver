@@ -2,7 +2,7 @@ class CreateNumbers < ActiveRecord::Migration
   ATTRIB = { 'one' => '1', 'two' => '2', 'three' => '3' }
   def self.up
     create_table :numbers do |t|
-      t.text :name, :limit => 30
+      t.text :name,   :limit => 30
       t.text :abbrev, :limit => 3
     end
     # assigning default values, sorted by value instead of by key

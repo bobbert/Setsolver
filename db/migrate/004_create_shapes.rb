@@ -2,7 +2,7 @@ class CreateShapes < ActiveRecord::Migration
   ATTRIB = { 'oval' => 'ovl', 'diamond' => 'dia', 'squiggle' => 'sqg' }
   def self.up
     create_table :shapes do |t|
-      t.text :name, :limit => 30
+      t.text :name,   :limit => 30
       t.text :abbrev, :limit => 3
     end
     # assigning default values

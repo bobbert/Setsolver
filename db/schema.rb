@@ -31,6 +31,9 @@ ActiveRecord::Schema.define(:version => 9) do
     t.integer "claimed_by"
   end
 
+  add_index "cards", ["cardface_id"], :name => "cardface_card_id_fkey"
+  add_index "cards", ["deck_id"], :name => "deck_card_id_fkey"
+
   create_table "colors", :force => true do |t|
     t.text "name"
     t.text "abbrev"
@@ -42,6 +45,8 @@ ActiveRecord::Schema.define(:version => 9) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "decks", ["game_id"], :name => "game_deck_id_fkey"
 
   create_table "games", :force => true do |t|
     t.integer  "deck_count", :default => 0
