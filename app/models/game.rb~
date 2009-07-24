@@ -116,8 +116,8 @@ private
 
   # given an array of cardfaces and an attribute, finds out how many distinct
   # attribute types exist in the array for the attribute type passed in.
-  def num_different_attr(asp, cardface_arr)
-    res = cardface_arr.map {|c| c.send(asp) }
+  def num_different_attr( attr, cardface_arr )
+    res = cardface_arr.map {|c| c.send(attr) }
     res.uniq.length
   end
 

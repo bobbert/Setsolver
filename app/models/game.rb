@@ -15,7 +15,6 @@ class Game < ActiveRecord::Base
   BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
   BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
 
-private
 
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
@@ -34,8 +33,6 @@ private
     end
     retval
   end
-
-public
 
   # create new deck with full set of cards, and shuffle cards
   # if auto-shuffle parameter is set
