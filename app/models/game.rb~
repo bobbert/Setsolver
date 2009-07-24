@@ -20,7 +20,7 @@ class Game < ActiveRecord::Base
   # performs a ( len 3 ) statistical combination, where len is the length of the
   # in-play deck.  The combination is returned as an array-of-arrays, where the inner
   # arrays are composed of 3 SORTED integers and the outer array has
-  # (len)! / ((len-3)! * 3!) elements -- which gets big very quickly.
+  # (len)! / ((len-3)! * 3!) elements -- which gets big very quickly for large "len" values.
   def self.each_cmb3( cmb_len )
     retval = []
     # outermost loop: i = iterate from 0 to (len-1), add i to end of all arrays
@@ -61,12 +61,12 @@ class Game < ActiveRecord::Base
   # fully dealt out and at least 1 set exists in the active field.
   def valid_game_field?
     num_cards_correct = (deck.number_in_play >= FIELD_SIZE) || deck.all_dealt?
-    return num_cards_correct && set_exists?
+    return num_cards_correct && (set_count > 0)
   end
 
-  # does at least 1 set exist in field?
-  def set_exists?
-    !(set_indices.empty?)
+  # get number of sets in current game field
+  def set_count
+    set_indices.length
   end
 
   # the set-finding algorithm: finds every statistical combination of 3 cards
@@ -83,11 +83,6 @@ class Game < ActiveRecord::Base
       end
     end
     cmb3_arr
-  end
-
-  def sets
-    cards_in_play = deck.in_play
-    set_indices.map{|s_arr| s_arr.map {|s_idx| cards_in_play[s_idx] } }
   end
 
   # evaluates player submission, and if set is valid:
