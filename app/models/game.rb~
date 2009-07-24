@@ -37,12 +37,11 @@ class Game < ActiveRecord::Base
 
   # create new deck with full set of cards, and shuffle cards
   # if auto-shuffle parameter is set
-  def new_deck(autoshuf = true)
-    autoshuf = ('Y' if autoshuf)
+  def new_deck
     d = Deck.new
     d.game = self
-    d.autoshuffle = autoshuf
-    d.reset if d.save
+    d.save
+    initialize_deck d
   end
 
   # fills in-play game field with passed in number of cards
@@ -98,20 +97,28 @@ class Game < ActiveRecord::Base
     end
   end
 
-  # converts in-play indices (such as those passed in as HTML form params)
-  # into card objects based on position in list
-  def get_cards_in_play_from_index( *indices )
-    active_field = deck.in_play
-    indices.map {|i| active_field[i.to_i] }
-  end
-
 private
+
+  # initializing deck passed in with fresh cards, and shuffling if
+  # autoshuffle is set. Returns true if successful
+  def initialize_deck( d )
+    retval = d.reset
+    retval = d.shuffle if (autoshuffle && retval)
+    retval
+  end
 
   # given an array of cardfaces and an attribute, finds out how many distinct
   # attribute types exist in the array for the attribute type passed in.
   def num_different_attr( attr, cardface_arr )
     res = cardface_arr.map {|c| c.send(attr) }
     res.uniq.length
+  end
+
+  # converts in-play indices (such as those passed in as HTML form params)
+  # into card objects based on position in list
+  def get_cards_in_play_from_index( *indices )
+    active_field = deck.in_play
+    indices.map {|i| active_field[i.to_i] }
   end
 
 end

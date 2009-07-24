@@ -31,7 +31,7 @@ class GamesController < ApplicationController
   def play
     @game = Game.find(params[:id])
     @count = @game.set_count
-    # checking if initial request or user-submitted
+    # checking if initial page loading or user-submitted load
     if params[:commit]
       selection = get_card_numbers
       if selection.length != 3

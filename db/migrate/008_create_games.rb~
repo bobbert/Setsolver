@@ -10,7 +10,7 @@ class CreateGames < ActiveRecord::Migration
   end
 
   def self.down
-#    remove_index "decks", :name => "game_deck_id_fkey"
+    remove_index "decks", :name => "game_deck_id_fkey"
     drop_table :games
   end
 end

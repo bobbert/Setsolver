@@ -15,6 +15,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(params[:game])
+    @game.autoshuffle = 'Y' unless params[:noshuffle]
     if @game.save
       @caption = 'Game was successfully created.'
       redirect_to :action => 'list'

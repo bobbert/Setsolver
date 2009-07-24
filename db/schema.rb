@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "decks", :force => true do |t|
     t.integer  "game_id"
-    t.text     "autoshuffle"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,7 +48,8 @@ ActiveRecord::Schema.define(:version => 9) do
   add_index "decks", ["game_id"], :name => "game_deck_id_fkey"
 
   create_table "games", :force => true do |t|
-    t.integer  "deck_count", :default => 0
+    t.integer  "deck_count",  :default => 0
+    t.text     "autoshuffle"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

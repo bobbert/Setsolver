@@ -93,7 +93,7 @@ private
     remaining = (1..num_possible_ind).to_a.delete_if do |i|
       faceup_inds.include? i
     end
-    # return first <number> remaining numbers
+    # return first <number> remaining numbers.
     return remaining.slice 0, number
   end
 
