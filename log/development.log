@@ -4834,3 +4834,545 @@ Migrating to CreatePlayers (9)
   [4;35;1mSQL (0.100321)[0m   [0mSHOW FIELDS FROM `shapes`[0m
   [4;36;1mSQL (0.004542)[0m   [0;1mdescribe `shapes`[0m
   [4;35;1mSQL (0.004598)[0m   [0mSHOW KEYS FROM `shapes`[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000523)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004742)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mSQL (0.001132)[0m   [0;1mBEGIN[0m
+  [4;35;1mGame Create (0.001045)[0m   [0mINSERT INTO `games` (`created_at`, `deck_count`, `updated_at`) VALUES('2009-07-23 22:38:06', 0, '2009-07-23 22:38:06')[0m
+  [4;36;1mSQL (0.002503)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mDeck Columns (0.005010)[0m   [0mSHOW FIELDS FROM `decks`[0m
+  [4;36;1mDeck Create (0.000952)[0m   [0;1mINSERT INTO `decks` (`autoshuffle`, `created_at`, `updated_at`, `game_id`) VALUES('Y', '2009-07-23 22:38:06', '2009-07-23 22:38:06', 1)[0m
+  [4;35;1mCard Load (0.002915)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mDeck Load (0.002567)[0m   [0;1mSELECT * FROM `decks` WHERE (`decks`.`id` = 1) [0m
+  [4;35;1mSQL (0.002374)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCardface Load (0.015798)[0m   [0;1mSELECT * FROM `cardfaces` [0m
+  [4;35;1mCardface Columns (0.005301)[0m   [0mSHOW FIELDS FROM `cardfaces`[0m
+  [4;36;1mCard Columns (0.005324)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+  [4;35;1mCard Load (0.002983)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.001014)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(1, 1, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000981)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 1, `deck_id` = 1, `cardface_id` = 1, `faceup_position` = NULL WHERE `id` = 1[0m
+  [4;36;1mCard Load (0.003239)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000934)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(2, 2, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000968)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 2, `deck_id` = 1, `cardface_id` = 2, `faceup_position` = NULL WHERE `id` = 2[0m
+  [4;35;1mCard Load (0.003041)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000954)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(3, 3, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001173)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 3, `deck_id` = 1, `cardface_id` = 3, `faceup_position` = NULL WHERE `id` = 3[0m
+  [4;36;1mCard Load (0.003015)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000924)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(4, 4, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.001021)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 4, `deck_id` = 1, `cardface_id` = 4, `faceup_position` = NULL WHERE `id` = 4[0m
+  [4;35;1mCard Load (0.003389)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000935)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(5, 5, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000974)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 5, `deck_id` = 1, `cardface_id` = 5, `faceup_position` = NULL WHERE `id` = 5[0m
+  [4;36;1mCard Load (0.003054)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000933)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(6, 6, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.001016)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 6, `deck_id` = 1, `cardface_id` = 6, `faceup_position` = NULL WHERE `id` = 6[0m
+  [4;35;1mCard Load (0.003154)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000949)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(7, 7, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000967)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 7, `deck_id` = 1, `cardface_id` = 7, `faceup_position` = NULL WHERE `id` = 7[0m
+  [4;36;1mCard Load (0.003073)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000922)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(8, 8, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000965)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 8, `deck_id` = 1, `cardface_id` = 8, `faceup_position` = NULL WHERE `id` = 8[0m
+  [4;35;1mCard Load (0.003371)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000903)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(9, 9, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000936)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 9, `deck_id` = 1, `cardface_id` = 9, `faceup_position` = NULL WHERE `id` = 9[0m
+  [4;36;1mCard Load (0.003071)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000893)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(10, 10, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000936)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 10, `deck_id` = 1, `cardface_id` = 10, `faceup_position` = NULL WHERE `id` = 10[0m
+  [4;35;1mCard Load (0.003130)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000900)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(11, 11, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000938)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 11, `deck_id` = 1, `cardface_id` = 11, `faceup_position` = NULL WHERE `id` = 11[0m
+  [4;36;1mCard Load (0.003109)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000898)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(12, 12, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000932)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 12, `deck_id` = 1, `cardface_id` = 12, `faceup_position` = NULL WHERE `id` = 12[0m
+  [4;35;1mCard Load (0.003115)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000896)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(13, 13, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000970)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 13, `deck_id` = 1, `cardface_id` = 13, `faceup_position` = NULL WHERE `id` = 13[0m
+  [4;36;1mCard Load (0.003161)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000941)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(14, 14, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000930)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 14, `deck_id` = 1, `cardface_id` = 14, `faceup_position` = NULL WHERE `id` = 14[0m
+  [4;35;1mCard Load (0.003248)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000889)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(15, 15, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000941)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 15, `deck_id` = 1, `cardface_id` = 15, `faceup_position` = NULL WHERE `id` = 15[0m
+  [4;36;1mCard Load (0.003433)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.001007)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(16, 16, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000945)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 16, `deck_id` = 1, `cardface_id` = 16, `faceup_position` = NULL WHERE `id` = 16[0m
+  [4;35;1mCard Load (0.003195)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000890)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(17, 17, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000938)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 17, `deck_id` = 1, `cardface_id` = 17, `faceup_position` = NULL WHERE `id` = 17[0m
+  [4;36;1mCard Load (0.003230)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000898)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(18, 18, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000933)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 18, `deck_id` = 1, `cardface_id` = 18, `faceup_position` = NULL WHERE `id` = 18[0m
+  [4;35;1mCard Load (0.003300)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.001264)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(19, 19, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000986)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 19, `deck_id` = 1, `cardface_id` = 19, `faceup_position` = NULL WHERE `id` = 19[0m
+  [4;36;1mCard Load (0.003207)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000894)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(20, 20, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.001169)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 20, `deck_id` = 1, `cardface_id` = 20, `faceup_position` = NULL WHERE `id` = 20[0m
+  [4;35;1mCard Load (0.003237)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000892)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(21, 21, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000931)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 21, `deck_id` = 1, `cardface_id` = 21, `faceup_position` = NULL WHERE `id` = 21[0m
+  [4;36;1mCard Load (0.003652)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000895)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(22, 22, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000925)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 22, `deck_id` = 1, `cardface_id` = 22, `faceup_position` = NULL WHERE `id` = 22[0m
+  [4;35;1mCard Load (0.003373)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000925)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(23, 23, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000928)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 23, `deck_id` = 1, `cardface_id` = 23, `faceup_position` = NULL WHERE `id` = 23[0m
+  [4;36;1mCard Load (0.003317)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000897)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(24, 24, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000935)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 24, `deck_id` = 1, `cardface_id` = 24, `faceup_position` = NULL WHERE `id` = 24[0m
+  [4;35;1mCard Load (0.003388)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000900)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(25, 25, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000931)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 25, `deck_id` = 1, `cardface_id` = 25, `faceup_position` = NULL WHERE `id` = 25[0m
+  [4;36;1mCard Load (0.003581)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000937)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(26, 26, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000964)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 26, `deck_id` = 1, `cardface_id` = 26, `faceup_position` = NULL WHERE `id` = 26[0m
+  [4;35;1mCard Load (0.003334)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000921)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(27, 27, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000969)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 27, `deck_id` = 1, `cardface_id` = 27, `faceup_position` = NULL WHERE `id` = 27[0m
+  [4;36;1mCard Load (0.003365)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000937)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(28, 28, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.001007)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 28, `deck_id` = 1, `cardface_id` = 28, `faceup_position` = NULL WHERE `id` = 28[0m
+  [4;35;1mCard Load (0.003570)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000914)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(29, 29, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000977)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 29, `deck_id` = 1, `cardface_id` = 29, `faceup_position` = NULL WHERE `id` = 29[0m
+  [4;36;1mCard Load (0.003754)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000901)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(30, 30, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000931)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 30, `deck_id` = 1, `cardface_id` = 30, `faceup_position` = NULL WHERE `id` = 30[0m
+  [4;35;1mCard Load (0.003464)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000887)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(31, 31, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001026)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 31, `deck_id` = 1, `cardface_id` = 31, `faceup_position` = NULL WHERE `id` = 31[0m
+  [4;36;1mCard Load (0.003434)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000916)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(32, 32, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000934)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 32, `deck_id` = 1, `cardface_id` = 32, `faceup_position` = NULL WHERE `id` = 32[0m
+  [4;35;1mCard Load (0.003709)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000925)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(33, 33, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000973)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 33, `deck_id` = 1, `cardface_id` = 33, `faceup_position` = NULL WHERE `id` = 33[0m
+  [4;36;1mCard Load (0.003486)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000935)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(34, 34, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000952)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 34, `deck_id` = 1, `cardface_id` = 34, `faceup_position` = NULL WHERE `id` = 34[0m
+  [4;35;1mCard Load (0.003404)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000897)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(35, 35, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000952)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 35, `deck_id` = 1, `cardface_id` = 35, `faceup_position` = NULL WHERE `id` = 35[0m
+  [4;36;1mCard Load (0.003495)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000904)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(36, 36, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000927)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 36, `deck_id` = 1, `cardface_id` = 36, `faceup_position` = NULL WHERE `id` = 36[0m
+  [4;35;1mCard Load (0.003547)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000896)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(37, 37, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000926)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 37, `deck_id` = 1, `cardface_id` = 37, `faceup_position` = NULL WHERE `id` = 37[0m
+  [4;36;1mCard Load (0.003464)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000894)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(38, 38, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.001015)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 38, `deck_id` = 1, `cardface_id` = 38, `faceup_position` = NULL WHERE `id` = 38[0m
+  [4;35;1mCard Load (0.003496)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.001462)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(39, 39, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000972)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 39, `deck_id` = 1, `cardface_id` = 39, `faceup_position` = NULL WHERE `id` = 39[0m
+  [4;36;1mCard Load (0.003778)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000900)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(40, 40, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000940)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 40, `deck_id` = 1, `cardface_id` = 40, `faceup_position` = NULL WHERE `id` = 40[0m
+  [4;35;1mCard Load (0.003538)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000919)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(41, 41, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000943)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 41, `deck_id` = 1, `cardface_id` = 41, `faceup_position` = NULL WHERE `id` = 41[0m
+  [4;36;1mCard Load (0.003541)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000901)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(42, 42, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000927)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 42, `deck_id` = 1, `cardface_id` = 42, `faceup_position` = NULL WHERE `id` = 42[0m
+  [4;35;1mCard Load (0.003531)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.001161)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(43, 43, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000966)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 43, `deck_id` = 1, `cardface_id` = 43, `faceup_position` = NULL WHERE `id` = 43[0m
+  [4;36;1mCard Load (0.003564)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000907)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(44, 44, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000931)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 44, `deck_id` = 1, `cardface_id` = 44, `faceup_position` = NULL WHERE `id` = 44[0m
+  [4;35;1mCard Load (0.003587)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000890)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(45, 45, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001029)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 45, `deck_id` = 1, `cardface_id` = 45, `faceup_position` = NULL WHERE `id` = 45[0m
+  [4;36;1mCard Load (0.003609)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000921)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(46, 46, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000967)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 46, `deck_id` = 1, `cardface_id` = 46, `faceup_position` = NULL WHERE `id` = 46[0m
+  [4;35;1mCard Load (0.004369)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000897)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(47, 47, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000934)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 47, `deck_id` = 1, `cardface_id` = 47, `faceup_position` = NULL WHERE `id` = 47[0m
+  [4;36;1mCard Load (0.003632)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000903)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(48, 48, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000929)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 48, `deck_id` = 1, `cardface_id` = 48, `faceup_position` = NULL WHERE `id` = 48[0m
+  [4;35;1mCard Load (0.003627)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000889)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(49, 49, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001108)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 49, `deck_id` = 1, `cardface_id` = 49, `faceup_position` = NULL WHERE `id` = 49[0m
+  [4;36;1mCard Load (0.003625)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000927)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(50, 50, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000967)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 50, `deck_id` = 1, `cardface_id` = 50, `faceup_position` = NULL WHERE `id` = 50[0m
+  [4;35;1mCard Load (0.004763)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000891)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(51, 51, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000927)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 51, `deck_id` = 1, `cardface_id` = 51, `faceup_position` = NULL WHERE `id` = 51[0m
+  [4;36;1mCard Load (0.003665)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.001005)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(52, 52, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000969)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 52, `deck_id` = 1, `cardface_id` = 52, `faceup_position` = NULL WHERE `id` = 52[0m
+  [4;35;1mCard Load (0.003694)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000933)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(53, 53, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000959)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 53, `deck_id` = 1, `cardface_id` = 53, `faceup_position` = NULL WHERE `id` = 53[0m
+  [4;36;1mCard Load (0.003670)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000887)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(54, 54, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000959)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 54, `deck_id` = 1, `cardface_id` = 54, `faceup_position` = NULL WHERE `id` = 54[0m
+  [4;35;1mCard Load (0.003970)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000900)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(55, 55, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000934)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 55, `deck_id` = 1, `cardface_id` = 55, `faceup_position` = NULL WHERE `id` = 55[0m
+  [4;36;1mCard Load (0.003738)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000897)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(56, 56, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000954)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 56, `deck_id` = 1, `cardface_id` = 56, `faceup_position` = NULL WHERE `id` = 56[0m
+  [4;35;1mCard Load (0.003726)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000925)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(57, 57, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000972)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 57, `deck_id` = 1, `cardface_id` = 57, `faceup_position` = NULL WHERE `id` = 57[0m
+  [4;36;1mCard Load (0.004257)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.001119)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(58, 58, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000956)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 58, `deck_id` = 1, `cardface_id` = 58, `faceup_position` = NULL WHERE `id` = 58[0m
+  [4;35;1mCard Load (0.003786)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000921)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(59, 59, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000980)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 59, `deck_id` = 1, `cardface_id` = 59, `faceup_position` = NULL WHERE `id` = 59[0m
+  [4;36;1mCard Load (0.003739)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.001650)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(60, 60, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000959)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 60, `deck_id` = 1, `cardface_id` = 60, `faceup_position` = NULL WHERE `id` = 60[0m
+  [4;35;1mCard Load (0.003795)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000907)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(61, 61, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000938)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 61, `deck_id` = 1, `cardface_id` = 61, `faceup_position` = NULL WHERE `id` = 61[0m
+  [4;36;1mCard Load (0.003899)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000934)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(62, 62, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000986)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 62, `deck_id` = 1, `cardface_id` = 62, `faceup_position` = NULL WHERE `id` = 62[0m
+  [4;35;1mCard Load (0.003833)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000900)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(63, 63, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000955)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 63, `deck_id` = 1, `cardface_id` = 63, `faceup_position` = NULL WHERE `id` = 63[0m
+  [4;36;1mCard Load (0.003887)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.001227)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(64, 64, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000968)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 64, `deck_id` = 1, `cardface_id` = 64, `faceup_position` = NULL WHERE `id` = 64[0m
+  [4;35;1mCard Load (0.003830)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000921)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(65, 65, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000967)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 65, `deck_id` = 1, `cardface_id` = 65, `faceup_position` = NULL WHERE `id` = 65[0m
+  [4;36;1mCard Load (0.003831)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000894)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(66, 66, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000934)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 66, `deck_id` = 1, `cardface_id` = 66, `faceup_position` = NULL WHERE `id` = 66[0m
+  [4;35;1mCard Load (0.004159)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000927)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(67, 67, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000935)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 67, `deck_id` = 1, `cardface_id` = 67, `faceup_position` = NULL WHERE `id` = 67[0m
+  [4;36;1mCard Load (0.003905)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000933)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(68, 68, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000981)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 68, `deck_id` = 1, `cardface_id` = 68, `faceup_position` = NULL WHERE `id` = 68[0m
+  [4;35;1mCard Load (0.003870)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000891)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(69, 69, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000949)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 69, `deck_id` = 1, `cardface_id` = 69, `faceup_position` = NULL WHERE `id` = 69[0m
+  [4;36;1mCard Load (0.003970)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000937)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(70, 70, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000973)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 70, `deck_id` = 1, `cardface_id` = 70, `faceup_position` = NULL WHERE `id` = 70[0m
+  [4;35;1mCard Load (0.004442)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000955)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(71, 71, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001005)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 71, `deck_id` = 1, `cardface_id` = 71, `faceup_position` = NULL WHERE `id` = 71[0m
+  [4;36;1mCard Load (0.004019)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000903)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(72, 72, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000942)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 72, `deck_id` = 1, `cardface_id` = 72, `faceup_position` = NULL WHERE `id` = 72[0m
+  [4;35;1mCard Load (0.004093)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.001054)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(73, 73, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001019)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 73, `deck_id` = 1, `cardface_id` = 73, `faceup_position` = NULL WHERE `id` = 73[0m
+  [4;36;1mCard Load (0.004026)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000895)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(74, 74, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000943)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 74, `deck_id` = 1, `cardface_id` = 74, `faceup_position` = NULL WHERE `id` = 74[0m
+  [4;35;1mCard Load (0.004305)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000915)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(75, 75, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000967)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 75, `deck_id` = 1, `cardface_id` = 75, `faceup_position` = NULL WHERE `id` = 75[0m
+  [4;36;1mCard Load (0.004137)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000920)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(76, 76, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000972)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 76, `deck_id` = 1, `cardface_id` = 76, `faceup_position` = NULL WHERE `id` = 76[0m
+  [4;35;1mCard Load (0.004082)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000894)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(77, 77, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000934)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 77, `deck_id` = 1, `cardface_id` = 77, `faceup_position` = NULL WHERE `id` = 77[0m
+  [4;36;1mCard Load (0.004137)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000936)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(78, 78, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000992)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 78, `deck_id` = 1, `cardface_id` = 78, `faceup_position` = NULL WHERE `id` = 78[0m
+  [4;35;1mCard Load (0.004376)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000896)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(79, 79, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.000927)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 79, `deck_id` = 1, `cardface_id` = 79, `faceup_position` = NULL WHERE `id` = 79[0m
+  [4;36;1mCard Load (0.004152)[0m   [0;1mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;35;1mCard Create (0.000916)[0m   [0mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(80, 80, 1, NULL, NULL)[0m
+  [4;36;1mCard Update (0.000955)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 80, `deck_id` = 1, `cardface_id` = 80, `faceup_position` = NULL WHERE `id` = 80[0m
+  [4;35;1mCard Load (0.004476)[0m   [0mSELECT * FROM `cards` WHERE (deck_id = 1) ORDER BY facedown_position DESC LIMIT 1[0m
+  [4;36;1mCard Create (0.000936)[0m   [0;1mINSERT INTO `cards` (`cardface_id`, `facedown_position`, `deck_id`, `claimed_by`, `faceup_position`) VALUES(81, 81, 1, NULL, NULL)[0m
+  [4;35;1mCard Update (0.001030)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 81, `deck_id` = 1, `cardface_id` = 81, `faceup_position` = NULL WHERE `id` = 81[0m
+  [4;36;1mCard Load (0.017318)[0m   [0;1mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;35;1mCard Update (0.001027)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 1, `deck_id` = 1, `cardface_id` = 23, `faceup_position` = NULL WHERE `id` = 23[0m
+  [4;36;1mCard Update (0.002011)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 2, `deck_id` = 1, `cardface_id` = 26, `faceup_position` = NULL WHERE `id` = 26[0m
+  [4;35;1mCard Update (0.001070)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 3, `deck_id` = 1, `cardface_id` = 10, `faceup_position` = NULL WHERE `id` = 10[0m
+  [4;36;1mCard Update (0.001073)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 4, `deck_id` = 1, `cardface_id` = 39, `faceup_position` = NULL WHERE `id` = 39[0m
+  [4;35;1mCard Update (0.001003)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 5, `deck_id` = 1, `cardface_id` = 12, `faceup_position` = NULL WHERE `id` = 12[0m
+  [4;36;1mCard Update (0.001002)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 6, `deck_id` = 1, `cardface_id` = 67, `faceup_position` = NULL WHERE `id` = 67[0m
+  [4;35;1mCard Update (0.001383)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 7, `deck_id` = 1, `cardface_id` = 14, `faceup_position` = NULL WHERE `id` = 14[0m
+  [4;36;1mCard Update (0.001079)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 8, `deck_id` = 1, `cardface_id` = 52, `faceup_position` = NULL WHERE `id` = 52[0m
+  [4;35;1mCard Update (0.001233)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 9, `deck_id` = 1, `cardface_id` = 48, `faceup_position` = NULL WHERE `id` = 48[0m
+  [4;36;1mCard Update (0.001014)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 10, `deck_id` = 1, `cardface_id` = 30, `faceup_position` = NULL WHERE `id` = 30[0m
+  [4;35;1mCard Update (0.001008)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 11, `deck_id` = 1, `cardface_id` = 3, `faceup_position` = NULL WHERE `id` = 3[0m
+  [4;36;1mCard Update (0.001007)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 12, `deck_id` = 1, `cardface_id` = 77, `faceup_position` = NULL WHERE `id` = 77[0m
+  [4;35;1mCard Update (0.001001)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 13, `deck_id` = 1, `cardface_id` = 63, `faceup_position` = NULL WHERE `id` = 63[0m
+  [4;36;1mCard Update (0.001220)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 14, `deck_id` = 1, `cardface_id` = 4, `faceup_position` = NULL WHERE `id` = 4[0m
+  [4;35;1mCard Update (0.001005)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 15, `deck_id` = 1, `cardface_id` = 16, `faceup_position` = NULL WHERE `id` = 16[0m
+  [4;36;1mCard Update (0.001011)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 16, `deck_id` = 1, `cardface_id` = 59, `faceup_position` = NULL WHERE `id` = 59[0m
+  [4;35;1mCard Update (0.001000)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 17, `deck_id` = 1, `cardface_id` = 35, `faceup_position` = NULL WHERE `id` = 35[0m
+  [4;36;1mCard Update (0.001011)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 18, `deck_id` = 1, `cardface_id` = 71, `faceup_position` = NULL WHERE `id` = 71[0m
+  [4;35;1mCard Update (0.001029)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 19, `deck_id` = 1, `cardface_id` = 2, `faceup_position` = NULL WHERE `id` = 2[0m
+  [4;36;1mCard Update (0.001071)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 20, `deck_id` = 1, `cardface_id` = 57, `faceup_position` = NULL WHERE `id` = 57[0m
+  [4;35;1mCard Update (0.001040)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 21, `deck_id` = 1, `cardface_id` = 70, `faceup_position` = NULL WHERE `id` = 70[0m
+  [4;36;1mCard Update (0.001030)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 22, `deck_id` = 1, `cardface_id` = 5, `faceup_position` = NULL WHERE `id` = 5[0m
+  [4;35;1mCard Update (0.001024)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 23, `deck_id` = 1, `cardface_id` = 60, `faceup_position` = NULL WHERE `id` = 60[0m
+  [4;36;1mCard Update (0.001032)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 24, `deck_id` = 1, `cardface_id` = 62, `faceup_position` = NULL WHERE `id` = 62[0m
+  [4;35;1mCard Update (0.002048)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 25, `deck_id` = 1, `cardface_id` = 7, `faceup_position` = NULL WHERE `id` = 7[0m
+  [4;36;1mCard Update (0.001013)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 26, `deck_id` = 1, `cardface_id` = 65, `faceup_position` = NULL WHERE `id` = 65[0m
+  [4;35;1mCard Update (0.001012)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 27, `deck_id` = 1, `cardface_id` = 79, `faceup_position` = NULL WHERE `id` = 79[0m
+  [4;36;1mCard Update (0.001032)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 28, `deck_id` = 1, `cardface_id` = 9, `faceup_position` = NULL WHERE `id` = 9[0m
+  [4;35;1mCard Update (0.001047)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 29, `deck_id` = 1, `cardface_id` = 6, `faceup_position` = NULL WHERE `id` = 6[0m
+  [4;36;1mCard Update (0.001045)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 30, `deck_id` = 1, `cardface_id` = 51, `faceup_position` = NULL WHERE `id` = 51[0m
+  [4;35;1mCard Update (0.001129)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 31, `deck_id` = 1, `cardface_id` = 66, `faceup_position` = NULL WHERE `id` = 66[0m
+  [4;36;1mCard Update (0.001073)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 32, `deck_id` = 1, `cardface_id` = 76, `faceup_position` = NULL WHERE `id` = 76[0m
+  [4;35;1mCard Update (0.001082)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 33, `deck_id` = 1, `cardface_id` = 18, `faceup_position` = NULL WHERE `id` = 18[0m
+  [4;36;1mCard Update (0.001035)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 34, `deck_id` = 1, `cardface_id` = 8, `faceup_position` = NULL WHERE `id` = 8[0m
+  [4;35;1mCard Update (0.001039)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 35, `deck_id` = 1, `cardface_id` = 31, `faceup_position` = NULL WHERE `id` = 31[0m
+  [4;36;1mCard Update (0.001006)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 36, `deck_id` = 1, `cardface_id` = 69, `faceup_position` = NULL WHERE `id` = 69[0m
+  [4;35;1mCard Update (0.001002)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 37, `deck_id` = 1, `cardface_id` = 54, `faceup_position` = NULL WHERE `id` = 54[0m
+  [4;36;1mCard Update (0.001209)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 38, `deck_id` = 1, `cardface_id` = 58, `faceup_position` = NULL WHERE `id` = 58[0m
+  [4;35;1mCard Update (0.001008)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 39, `deck_id` = 1, `cardface_id` = 56, `faceup_position` = NULL WHERE `id` = 56[0m
+  [4;36;1mCard Update (0.001006)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 40, `deck_id` = 1, `cardface_id` = 27, `faceup_position` = NULL WHERE `id` = 27[0m
+  [4;35;1mCard Update (0.001003)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 41, `deck_id` = 1, `cardface_id` = 25, `faceup_position` = NULL WHERE `id` = 25[0m
+  [4;36;1mCard Update (0.001005)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 42, `deck_id` = 1, `cardface_id` = 72, `faceup_position` = NULL WHERE `id` = 72[0m
+  [4;35;1mCard Update (0.001310)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 43, `deck_id` = 1, `cardface_id` = 13, `faceup_position` = NULL WHERE `id` = 13[0m
+  [4;36;1mCard Update (0.001415)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 44, `deck_id` = 1, `cardface_id` = 1, `faceup_position` = NULL WHERE `id` = 1[0m
+  [4;35;1mCard Update (0.001078)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 45, `deck_id` = 1, `cardface_id` = 68, `faceup_position` = NULL WHERE `id` = 68[0m
+  [4;36;1mCard Update (0.001041)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 46, `deck_id` = 1, `cardface_id` = 53, `faceup_position` = NULL WHERE `id` = 53[0m
+  [4;35;1mCard Update (0.001049)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 47, `deck_id` = 1, `cardface_id` = 15, `faceup_position` = NULL WHERE `id` = 15[0m
+  [4;36;1mCard Update (0.002048)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 48, `deck_id` = 1, `cardface_id` = 38, `faceup_position` = NULL WHERE `id` = 38[0m
+  [4;35;1mCard Update (0.001082)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 49, `deck_id` = 1, `cardface_id` = 55, `faceup_position` = NULL WHERE `id` = 55[0m
+  [4;36;1mCard Update (0.001178)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 50, `deck_id` = 1, `cardface_id` = 11, `faceup_position` = NULL WHERE `id` = 11[0m
+  [4;35;1mCard Update (0.001097)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 51, `deck_id` = 1, `cardface_id` = 73, `faceup_position` = NULL WHERE `id` = 73[0m
+  [4;36;1mCard Update (0.001016)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 52, `deck_id` = 1, `cardface_id` = 44, `faceup_position` = NULL WHERE `id` = 44[0m
+  [4;35;1mCard Update (0.001035)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 53, `deck_id` = 1, `cardface_id` = 21, `faceup_position` = NULL WHERE `id` = 21[0m
+  [4;36;1mCard Update (0.001025)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 54, `deck_id` = 1, `cardface_id` = 19, `faceup_position` = NULL WHERE `id` = 19[0m
+  [4;35;1mCard Update (0.001036)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 55, `deck_id` = 1, `cardface_id` = 24, `faceup_position` = NULL WHERE `id` = 24[0m
+  [4;36;1mCard Update (0.001085)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 56, `deck_id` = 1, `cardface_id` = 33, `faceup_position` = NULL WHERE `id` = 33[0m
+  [4;35;1mCard Update (0.001049)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 57, `deck_id` = 1, `cardface_id` = 47, `faceup_position` = NULL WHERE `id` = 47[0m
+  [4;36;1mCard Update (0.001054)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 58, `deck_id` = 1, `cardface_id` = 34, `faceup_position` = NULL WHERE `id` = 34[0m
+  [4;35;1mCard Update (0.001040)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 59, `deck_id` = 1, `cardface_id` = 42, `faceup_position` = NULL WHERE `id` = 42[0m
+  [4;36;1mCard Update (0.001036)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 60, `deck_id` = 1, `cardface_id` = 37, `faceup_position` = NULL WHERE `id` = 37[0m
+  [4;35;1mCard Update (0.001030)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 61, `deck_id` = 1, `cardface_id` = 45, `faceup_position` = NULL WHERE `id` = 45[0m
+  [4;36;1mCard Update (0.001053)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 62, `deck_id` = 1, `cardface_id` = 81, `faceup_position` = NULL WHERE `id` = 81[0m
+  [4;35;1mCard Update (0.001263)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 63, `deck_id` = 1, `cardface_id` = 41, `faceup_position` = NULL WHERE `id` = 41[0m
+  [4;36;1mCard Update (0.001032)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 64, `deck_id` = 1, `cardface_id` = 40, `faceup_position` = NULL WHERE `id` = 40[0m
+  [4;35;1mCard Update (0.001028)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 65, `deck_id` = 1, `cardface_id` = 50, `faceup_position` = NULL WHERE `id` = 50[0m
+  [4;36;1mCard Update (0.000985)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 66, `deck_id` = 1, `cardface_id` = 17, `faceup_position` = NULL WHERE `id` = 17[0m
+  [4;35;1mCard Update (0.001072)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 67, `deck_id` = 1, `cardface_id` = 78, `faceup_position` = NULL WHERE `id` = 78[0m
+  [4;36;1mCard Update (0.000993)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 68, `deck_id` = 1, `cardface_id` = 28, `faceup_position` = NULL WHERE `id` = 28[0m
+  [4;35;1mCard Update (0.000994)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 69, `deck_id` = 1, `cardface_id` = 22, `faceup_position` = NULL WHERE `id` = 22[0m
+  [4;36;1mCard Update (0.000988)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 70, `deck_id` = 1, `cardface_id` = 36, `faceup_position` = NULL WHERE `id` = 36[0m
+  [4;35;1mCard Update (0.001990)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 71, `deck_id` = 1, `cardface_id` = 80, `faceup_position` = NULL WHERE `id` = 80[0m
+  [4;36;1mCard Update (0.001015)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 72, `deck_id` = 1, `cardface_id` = 46, `faceup_position` = NULL WHERE `id` = 46[0m
+  [4;35;1mCard Update (0.001001)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 73, `deck_id` = 1, `cardface_id` = 20, `faceup_position` = NULL WHERE `id` = 20[0m
+  [4;36;1mCard Update (0.001000)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 74, `deck_id` = 1, `cardface_id` = 32, `faceup_position` = NULL WHERE `id` = 32[0m
+  [4;35;1mCard Update (0.001005)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 75, `deck_id` = 1, `cardface_id` = 74, `faceup_position` = NULL WHERE `id` = 74[0m
+  [4;36;1mCard Update (0.001081)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 76, `deck_id` = 1, `cardface_id` = 43, `faceup_position` = NULL WHERE `id` = 43[0m
+  [4;35;1mCard Update (0.001119)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 77, `deck_id` = 1, `cardface_id` = 29, `faceup_position` = NULL WHERE `id` = 29[0m
+  [4;36;1mCard Update (0.001075)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 78, `deck_id` = 1, `cardface_id` = 61, `faceup_position` = NULL WHERE `id` = 61[0m
+  [4;35;1mCard Update (0.001083)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 79, `deck_id` = 1, `cardface_id` = 64, `faceup_position` = NULL WHERE `id` = 64[0m
+  [4;36;1mCard Update (0.001078)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 80, `deck_id` = 1, `cardface_id` = 75, `faceup_position` = NULL WHERE `id` = 75[0m
+  [4;35;1mCard Update (0.001072)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = 81, `deck_id` = 1, `cardface_id` = 49, `faceup_position` = NULL WHERE `id` = 49[0m
+  [4;36;1mDeck Update (0.001061)[0m   [0;1mUPDATE `decks` SET `updated_at` = '2009-07-23 22:38:08', `created_at` = '2009-07-23 22:38:06', `autoshuffle` = 'Y', `game_id` = 1 WHERE `id` = 1[0m
+  [4;35;1mSQL (0.003655)[0m   [0mCOMMIT[0m
+  [4;36;1mDeck Load (0.006101)[0m   [0;1mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;35;1mCard Load (0.049910)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Load (0.004132)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 23) [0m
+  [4;35;1mCard Update (0.272526)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000948)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001723)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 23, `faceup_position` = NULL WHERE `id` = 23[0m
+  [4;36;1mSQL (0.003631)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000955)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.004609)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 23, `faceup_position` = 1 WHERE `id` = 23[0m
+  [4;35;1mSQL (0.003797)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005123)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 26) [0m
+  [4;35;1mCard Update (0.017422)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000833)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.002388)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 26, `faceup_position` = NULL WHERE `id` = 26[0m
+  [4;36;1mSQL (0.006767)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000817)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001711)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 26, `faceup_position` = 2 WHERE `id` = 26[0m
+  [4;35;1mSQL (0.004876)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005391)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 10) [0m
+  [4;35;1mCard Update (0.019986)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000831)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001916)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 10, `faceup_position` = NULL WHERE `id` = 10[0m
+  [4;36;1mSQL (0.006907)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000881)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.003979)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 10, `faceup_position` = 3 WHERE `id` = 10[0m
+  [4;35;1mSQL (0.003565)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005076)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 39) [0m
+  [4;35;1mCard Update (0.018318)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000877)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001704)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 39, `faceup_position` = NULL WHERE `id` = 39[0m
+  [4;36;1mSQL (0.006039)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000847)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001866)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 39, `faceup_position` = 4 WHERE `id` = 39[0m
+  [4;35;1mSQL (0.004614)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005402)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 12) [0m
+  [4;35;1mCard Update (0.016682)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000842)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001689)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 12, `faceup_position` = NULL WHERE `id` = 12[0m
+  [4;36;1mSQL (0.004388)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000831)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001808)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 12, `faceup_position` = 5 WHERE `id` = 12[0m
+  [4;35;1mSQL (0.008518)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005136)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 67) [0m
+  [4;35;1mCard Update (0.021903)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000886)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001699)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 67, `faceup_position` = NULL WHERE `id` = 67[0m
+  [4;36;1mSQL (0.002660)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000892)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001720)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 67, `faceup_position` = 6 WHERE `id` = 67[0m
+  [4;35;1mSQL (0.003234)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.006060)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 14) [0m
+  [4;35;1mCard Update (0.016619)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000848)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001686)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 14, `faceup_position` = NULL WHERE `id` = 14[0m
+  [4;36;1mSQL (0.004138)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.001099)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001859)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 14, `faceup_position` = 7 WHERE `id` = 14[0m
+  [4;35;1mSQL (0.005340)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005607)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 52) [0m
+  [4;35;1mCard Update (0.019738)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000834)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001927)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 52, `faceup_position` = NULL WHERE `id` = 52[0m
+  [4;36;1mSQL (0.004314)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000829)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001727)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 52, `faceup_position` = 8 WHERE `id` = 52[0m
+  [4;35;1mSQL (0.005450)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005054)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 48) [0m
+  [4;35;1mCard Update (0.018649)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000906)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001865)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 48, `faceup_position` = NULL WHERE `id` = 48[0m
+  [4;36;1mSQL (0.005697)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000839)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001806)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 48, `faceup_position` = 9 WHERE `id` = 48[0m
+  [4;35;1mSQL (0.003336)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005954)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 30) [0m
+  [4;35;1mCard Update (0.019655)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000980)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001691)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 30, `faceup_position` = NULL WHERE `id` = 30[0m
+  [4;36;1mSQL (0.007260)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000872)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001713)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 30, `faceup_position` = 10 WHERE `id` = 30[0m
+  [4;35;1mSQL (0.005970)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005098)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 3) [0m
+  [4;35;1mCard Update (0.019908)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.001065)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001750)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 3, `faceup_position` = NULL WHERE `id` = 3[0m
+  [4;36;1mSQL (0.003847)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000813)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.002775)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 3, `faceup_position` = 11 WHERE `id` = 3[0m
+  [4;35;1mSQL (0.003976)[0m   [0mCOMMIT[0m
+  [4;36;1mCard Load (0.005084)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 77) [0m
+  [4;35;1mCard Update (0.035463)[0m   [0mUPDATE cards SET facedown_position = (facedown_position - 1) WHERE (deck_id = 1 AND facedown_position > 1) [0m
+  [4;36;1mSQL (0.000915)[0m   [0;1mBEGIN[0m
+  [4;35;1mCard Update (0.001727)[0m   [0mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 77, `faceup_position` = NULL WHERE `id` = 77[0m
+  [4;36;1mSQL (0.005647)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000870)[0m   [0mBEGIN[0m
+  [4;36;1mCard Update (0.001867)[0m   [0;1mUPDATE `cards` SET `claimed_by` = NULL, `facedown_position` = NULL, `deck_id` = 1, `cardface_id` = 77, `faceup_position` = 12 WHERE `id` = 77[0m
+  [4;35;1mSQL (0.003598)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.001256)[0m   [0;1mBEGIN[0m
+  [4;35;1mDeck Update (0.001751)[0m   [0mUPDATE `decks` SET `updated_at` = '2009-07-23 22:39:03', `created_at` = '2009-07-23 22:38:06', `autoshuffle` = 'Y', `game_id` = 1 WHERE `id` = 1[0m
+  [4;36;1mSQL (0.003929)[0m   [0;1mCOMMIT[0m
+  [4;35;1mCard Load (0.000000)[0m   [0mMysql::Error: #42S22Unknown column 'cards.game_id' in 'where clause': SELECT * FROM `cards` WHERE (cards.game_id = 1) ORDER BY active_position[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000518)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.005127)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.002299)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.002815)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.005595)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.017708)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Columns (0.005320)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000523)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004777)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.001801)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.002384)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.005558)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.015306)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Columns (0.005410)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+  [4;35;1mSQL (0.002462)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCard Load (0.006746)[0m   [0;1mSELECT * FROM `cards` WHERE (`cards`.`id` = 44) [0m
+  [4;35;1mCardface Columns (1.185343)[0m   [0mSHOW FIELDS FROM `cardfaces`[0m
+  [4;36;1mCardface Load (0.005976)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 44) [0m
+  [4;35;1mNumber Columns (0.008386)[0m   [0mSHOW FIELDS FROM `numbers`[0m
+  [4;36;1mNumber Load (0.003318)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;35;1mShading Columns (0.012532)[0m   [0mSHOW FIELDS FROM `shadings`[0m
+  [4;36;1mShading Load (0.004446)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mColor Columns (0.012801)[0m   [0mSHOW FIELDS FROM `colors`[0m
+  [4;36;1mColor Load (0.004331)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mShape Columns (0.004555)[0m   [0mSHOW FIELDS FROM `shapes`[0m
+  [4;36;1mShape Load (0.001553)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000510)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mGame Columns (0.004809)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (0.001770)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 1) [0m
+  [4;35;1mDeck Load (0.005828)[0m   [0mSELECT * FROM `decks` WHERE (decks.game_id = 1) LIMIT 1[0m
+  [4;36;1mDeck Columns (0.014181)[0m   [0;1mSHOW FIELDS FROM `decks`[0m
+  [4;35;1mCard Load (0.026663)[0m   [0mSELECT * FROM `cards` WHERE (cards.deck_id = 1) ORDER BY facedown_position[0m
+  [4;36;1mCard Columns (0.005331)[0m   [0;1mSHOW FIELDS FROM `cards`[0m
+  [4;35;1mSQL (0.002443)[0m   [0mSHOW TABLES[0m
+  [4;36;1mCardface Columns (0.005401)[0m   [0;1mSHOW FIELDS FROM `cardfaces`[0m
+  [4;35;1mCardface Load (0.002761)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 23) [0m
+  [4;36;1mCardface Load (0.002823)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 26) [0m
+  [4;35;1mCardface Load (0.002581)[0m   [0mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 10) [0m
+  [4;36;1mNumber Columns (0.004746)[0m   [0;1mSHOW FIELDS FROM `numbers`[0m
+  [4;35;1mNumber Load (0.001521)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mNumber Load (0.001563)[0m   [0;1mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;35;1mNumber Load (0.001545)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002579)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 39) [0m
+  [4;35;1mNumber Load (0.001559)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002594)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 12) [0m
+  [4;35;1mNumber Load (0.001576)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002601)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 67) [0m
+  [4;35;1mNumber Load (0.001574)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mCardface Load (0.002886)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 14) [0m
+  [4;35;1mNumber Load (0.001606)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002634)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 52) [0m
+  [4;35;1mNumber Load (0.001566)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002584)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 48) [0m
+  [4;35;1mNumber Load (0.001561)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002679)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 30) [0m
+  [4;35;1mNumber Load (0.001638)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 2) [0m
+  [4;36;1mCardface Load (0.002646)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 3) [0m
+  [4;35;1mNumber Load (0.001556)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 1) [0m
+  [4;36;1mCardface Load (0.002551)[0m   [0;1mSELECT * FROM `cardfaces` WHERE (`cardfaces`.`id` = 77) [0m
+  [4;35;1mNumber Load (0.001623)[0m   [0mSELECT * FROM `numbers` WHERE (`numbers`.`id` = 3) [0m
+  [4;36;1mShading Columns (0.004545)[0m   [0;1mSHOW FIELDS FROM `shadings`[0m
+  [4;35;1mShading Load (0.001548)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001774)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001588)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001559)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001506)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001512)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mShading Load (0.001870)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001569)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;35;1mShading Load (0.001508)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 2) [0m
+  [4;36;1mShading Load (0.001544)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 3) [0m
+  [4;35;1mShading Load (0.001494)[0m   [0mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;36;1mShading Load (0.001524)[0m   [0;1mSELECT * FROM `shadings` WHERE (`shadings`.`id` = 1) [0m
+  [4;35;1mColor Columns (0.004566)[0m   [0mSHOW FIELDS FROM `colors`[0m
+  [4;36;1mColor Load (0.001553)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001510)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001528)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001885)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001546)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001560)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001526)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;35;1mColor Load (0.001525)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 2) [0m
+  [4;36;1mColor Load (0.001538)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;35;1mColor Load (0.001538)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mColor Load (0.001523)[0m   [0;1mSELECT * FROM `colors` WHERE (`colors`.`id` = 1) [0m
+  [4;35;1mColor Load (0.001577)[0m   [0mSELECT * FROM `colors` WHERE (`colors`.`id` = 3) [0m
+  [4;36;1mShape Columns (0.004447)[0m   [0;1mSHOW FIELDS FROM `shapes`[0m
+  [4;35;1mShape Load (0.001526)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001536)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
+  [4;35;1mShape Load (0.001533)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001545)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;35;1mShape Load (0.002336)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;36;1mShape Load (0.001599)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001496)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 2) [0m
+  [4;36;1mShape Load (0.001863)[0m   [0;1mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 3) [0m
+  [4;35;1mShape Load (0.001501)[0m   [0mSELECT * FROM `shapes` WHERE (`shapes`.`id` = 1) [0m
