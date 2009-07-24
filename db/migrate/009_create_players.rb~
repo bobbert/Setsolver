@@ -20,10 +20,10 @@ class CreatePlayers < ActiveRecord::Migration
   end
 
   def self.down
-   # removing database indexes for referential integrity
+   # removing database indexes
     remove_index "games_players", :name => "game_games_players_id_fkey"
     remove_index "games_players", :name => "player_games_players_id_fkey"
-    # dropping association table,  then data-record table
+    # dropping association table, then data-record table
     drop_table :games_players
     drop_table :players
   end

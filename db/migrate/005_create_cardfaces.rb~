@@ -14,7 +14,7 @@ class CreateCardfaces < ActiveRecord::Migration
     add_index "cardfaces", ["shape_id"], :name => "shape_cardface_id_fkey"
 
     # assigning default values for all cardfaces:
-    # every ID combination with tables
+    # every ID combination with tables.
     # Number, Color, Shading, and Shape is added to table Cardface.
     Number.find(:all).each do |num|
       Color.find(:all).each do |col|
@@ -29,16 +29,15 @@ class CreateCardfaces < ActiveRecord::Migration
           end
         end
       end
-    end
-    # end inserting cardface data rows
+    end # finished inserting cardface data rows
   end
 
   def self.down
     # removing database indexes for referential integrity
-#    remove_index "cardfaces", :name => "number_cardface_id_fkey"
-#    remove_index "cardfaces", :name => "shading_cardface_id_fkey"
-#    remove_index "cardfaces", :name => "color_cardface_id_fkey"
-#    remove_index "cardfaces", :name => "shape_cardface_id_fkey"
+    remove_index "cardfaces", :name => "number_cardface_id_fkey"
+    remove_index "cardfaces", :name => "shading_cardface_id_fkey"
+    remove_index "cardfaces", :name => "color_cardface_id_fkey"
+    remove_index "cardfaces", :name => "shape_cardface_id_fkey"
     # dropping table after removing indexes
     drop_table :cardfaces
   end
