@@ -7,15 +7,24 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :losses, :default => 0
       t.timestamps
     end
+
     # creating players <-> games many to many association table
     create_table("games_players", :id => false) do |t|
-      t.column "game_id", :integer
-      t.column "player_id", :integer
+      t.integer "game_id"
+      t.integer "player_id"
     end
+
+    # adding database indexes for referential integrity
+    add_index "games_players", ["game_id"], :name => "game_games_players_id_fkey"
+    add_index "games_players", ["player_id"], :name => "player_games_players_id_fkey"
   end
 
   def self.down
-    drop_table :players
+   # removing database indexes for referential integrity
+    remove_index "games_players", :name => "game_games_players_id_fkey"
+    remove_index "games_players", :name => "player_games_players_id_fkey"
+    # dropping association table, then data-record table
     drop_table :games_players
+    drop_table :players
   end
 end

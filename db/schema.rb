@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number_id"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(:version => 10) do
 
   create_table "games", :force => true do |t|
     t.integer  "deck_count", :default => 0
-    t.integer  "deck_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

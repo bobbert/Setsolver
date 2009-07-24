@@ -3,6 +3,8 @@ class Game < ActiveRecord::Base
   has_many :cards, :order => "active_position"
   has_and_belongs_to_many :players
 
+  after_create :new_deck
+
   FIELD_SIZE = 12
   VIEW_COLS = 6
 
@@ -13,19 +15,22 @@ class Game < ActiveRecord::Base
   BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
   BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
 
-  # create new deck and shuffle if auto-shuffle parameter is set
-  def new_deck(autoshuffle = true)
-    ashuf = ('Y' if autoshuffle)
-    deck = Deck.new autoshuffle => ashuf
-    deck.reset
+  # create new deck with full set of cards, and shuffle cards
+  # if auto-shuffle parameter is set
+  def new_deck(autoshuf = true)
+    autoshuf = ('Y' if autoshuf)
+    d = Deck.new
+    d.game = self
+    d.autoshuffle = autoshuf
+    d.reset if d.save
   end
 
   # fills in-play game field with passed in number of cards
   # Returns True if field is playable.
-  def fill_game_field(number = FIELD_SIZE)
-    num_in_play = deck.in_play.length
-    return false unless deal (number - num_in_play)
-    until valid_game_field?
+  def fill_game_field( number = FIELD_SIZE )
+    num_to_fill = number - deck.in_play.length
+    return false unless deck.deal num_to_fill
+    until valid_game_field? do
       return false if deck.all_dealt?
       deck.deal 3
     end
@@ -55,7 +60,7 @@ class Game < ActiveRecord::Base
   # removes all instances where only a match of 2 exists.
   def set_indices
     cmb3_arr = each_cmb3
-    Card::ATTR.each do |asp|
+    Cardface::ATTR.each do |asp|
       cmb3_arr.delete_if do |arr3|
         num_different_attr( asp, arr3.map {|num| cards[num] } ) == 2
       end
@@ -67,6 +72,21 @@ class Game < ActiveRecord::Base
     cards_in_play = deck.in_play
     set_indices.map{|s_arr| s_arr.map {|s_idx| cards_in_play[s_idx] } }
   end
+
+  def claim_set( set_i, plyr_id )
+    return false unless is_set?( set_i )
+    get_cards_in_play_from_index( *set_i ).each do |c|
+      c.claimed_by = plyr_id
+    end
+  end
+
+  # converts in-play indices (such as those passed in as HTML form params)
+  # into card objects based on position in list
+  def get_cards_in_play_from_index( *indices )
+    active_field = deck.in_play
+    indices.map {|i| active_field[i.to_i] }
+  end
+
 
 private
 

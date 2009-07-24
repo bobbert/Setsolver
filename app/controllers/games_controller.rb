@@ -97,32 +97,6 @@ class GamesController < ApplicationController
     @game.save
   end
 
-  # deals num_cards number of cards from deck to game field, or deals
-  # out the rest of the deck if num_cards exceeds the number of cards
-  # in the deck
-  def deal( num_cards = 1 )
-    num_cards = @game.deck.length if (@game.deck.length < num_cards.to_i)
-    dealt = @game.deck.get_random_cards num_cards
-    dealt.each do |c|
-      @game.deck.cards.delete c
-      @game.cards << c
-    end
-  end
-
-  # creates a new full deck of cards
-  def new_deck
-    @game.cards.clear
-    d = Deck.new
-    @game.deck = d
-    if d.save
-      @game.deck_count += 1
-      Card.find(:all).each {|c| @game.deck.cards << c }
-      @game.save
-    else
-      return false
-    end
-  end
-
   # get HTML table with all active set cards in the table cells
   def refresh
     @game = Game.find(params[:id])

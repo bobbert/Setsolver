@@ -4,7 +4,9 @@ class Cardface < ActiveRecord::Base
   belongs_to :shading
   belongs_to :shape
   has_many :cards
-  validates_presence_of :color, :number, :shading, :shape
+  validates_presence_of :number, :shading, :color, :shape
+
+  ATTR = [:number, :shading, :color, :shape]
 
   # the abbreviated name of the card
   def abbrev
