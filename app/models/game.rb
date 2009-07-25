@@ -1,6 +1,5 @@
 class Game < ActiveRecord::Base
-  has_one :deck
-  has_many :cards, :order => "active_position"
+  has_many :decks
   has_and_belongs_to_many :players
 
   after_create :new_deck
@@ -39,9 +38,14 @@ class Game < ActiveRecord::Base
   # if auto-shuffle parameter is set
   def new_deck
     d = Deck.new
-    d.game = self
-    deck_count = deck_count.to_i + 1 if d.save
+    decks << d
+    d.save
     initialize_deck d
+  end
+
+  # get current deck in play
+  def current_deck
+    decks.find_all {|c| c.finished_at.nil? }.pop
   end
 
   # fills game field, or creates new deck if game field and deck are
@@ -55,7 +59,8 @@ class Game < ActiveRecord::Base
   # is game field valid for playing? -- meaning that the game field must be
   # fully dealt out and at least 1 set exists in the active field.
   def valid_game_field?
-    num_cards_correct = (deck.number_in_play >= FIELD_SIZE) || deck.all_dealt?
+    d = current_deck
+    num_cards_correct = (d.number_in_play >= FIELD_SIZE) || d.all_dealt?
     return num_cards_correct && (set_count > 0)
   end
 
@@ -70,7 +75,7 @@ class Game < ActiveRecord::Base
   # only a match of 2 exists -- because a maatch of 2 means "not all the same,
   # and not all different."
   def set_indices
-    field = deck.in_play
+    field = current_deck.in_play
     cmb3_arr = Game.each_cmb3 field.length
     Cardface::ATTR.each do |asp|
       cmb3_arr.delete_if do |arr3|
@@ -99,10 +104,10 @@ private
   # fills in-play game field with passed in number of cards
   # Returns True if field is playable.
   def fill_game_field( number = FIELD_SIZE )
-    num_to_fill = number - deck.in_play.length
-    return false unless deck.deal num_to_fill
+    num_to_fill = number - current_deck.in_play.length
+    return false unless current_deck.deal num_to_fill
     until valid_game_field? do
-      return false unless deck.deal 3
+      return false unless current_deck.deal 3
     end
     true
   end
@@ -126,7 +131,7 @@ private
   # converts in-play indices (such as those passed in as HTML form params)
   # into card objects based on position in list
   def get_cards_in_play_from_index( *indices )
-    active_field = deck.in_play
+    active_field = current_deck.in_play
     indices.map {|i| active_field[i.to_i] }
   end
 

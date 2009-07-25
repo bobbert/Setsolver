@@ -2,20 +2,19 @@
 <!--[form:game]-->
 
 <% if @found_set %>
-  <center><div style="width:600;border:1px solid black;">Congratulations!
+  <center>
+  <div style="width:600;border:1px solid black;"> Congratulations!
   <%= render_threecard_set @found_set %>
-  is a valid three-card set.</div></center>
+  is a valid three-card set.
+  </div>
+  </center>
 <% end %>
-<h3>This is your <%= @game.deck_count.ordinalize %> deck, with
-   <%= @game.deck.number_in_play %> card<%= 's' if @game.deck.number_in_play != 1 %> remaining. </h3>
-<% if @count == 1 %>
-  <h3>There is 1 set found below:</h3>
-<% else %>
-  <h3>There are <%= @count %> sets found below:</h3>
-<% end %>
+<h3>This is your <%= @game.decks.length.ordinalize %> deck, with
+    <%= number_noun_desc( @game.deck.facedown_length, 'card' ) %> remaining. </h3>
+<h3><%= number_noun_desc( @count, 'set' ) %> can be found among the cards below: </h3>
 
 <% if @tmp %>
-  <h3># Params: <%= @tmp %></h3>
+  <h3> Params: <%= @tmp %></h3>
 <% end %>
 
 </p>

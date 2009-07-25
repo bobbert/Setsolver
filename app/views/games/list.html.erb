@@ -7,7 +7,7 @@
 <div class="setsolver" align=center width=90%>
 <table class="setsolver" border=0 width=450>
 <% for game in @games %>
-  <% play_action_word = (game.deck.nil?) ? 'Start' : 'Continue' %>
+  <% play_action_word = (game.current_deck.nil?) ? 'Start' : 'Continue' %>
   <tr>
   <td> Game #<%= game.id %>: </td>
   <td><%= link_to "[#{play_action_word} Playing]", :action => 'play', :id => game.id %></td>

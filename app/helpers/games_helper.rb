@@ -16,7 +16,7 @@ module GamesHelper
     return "<table></table>" unless gm
 
     tbl_html = "<table border=0 width=#{Game::BOARD_TABLE_WIDTH} id=\"setboard\"><tr height=#{Game::BOARD_CELL_HEIGHT}>"
-    gm.deck.in_play.each_with_index do |c,i|
+    gm.current_deck.in_play.each_with_index do |c,i|
       tbl_html += '</tr><tr>' if ((i % Game::VIEW_COLS == 0) && (i > 0))
       tbl_html += "<td align=center valign=center id=cell#{i.to_s} class=\"unselected\"
   width=#{Game::BOARD_CELL_WIDTH} height=#{Game::BOARD_CELL_HEIGHT}>" +
