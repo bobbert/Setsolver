@@ -7,11 +7,11 @@
   is a valid three-card set.</div></center>
 <% end %>
 <h3>This is your <%= @game.deck_count.ordinalize %> deck, with
-   <%= @game.deck.length %> card<%= 's' if @game.deck.length != 1 %> remaining. </h3>
-<% if @sets.length == 1 %>
+   <%= @game.deck.number_in_play %> card<%= 's' if @game.deck.number_in_play != 1 %> remaining. </h3>
+<% if @count == 1 %>
   <h3>There is 1 set found below:</h3>
 <% else %>
-  <h3>There are <%= @sets.length %> sets found below:</h3>
+  <h3>There are <%= @count %> sets found below:</h3>
 <% end %>
 
 <% if @tmp %>

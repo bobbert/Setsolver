@@ -40,20 +40,16 @@ class Game < ActiveRecord::Base
   def new_deck
     d = Deck.new
     d.game = self
-    d.save
+    deck_count = deck_count.to_i + 1 if d.save
     initialize_deck d
   end
 
-  # fills in-play game field with passed in number of cards
-  # Returns True if field is playable.
-  def fill_game_field( number = FIELD_SIZE )
-    num_to_fill = number - deck.in_play.length
-    return false unless deck.deal num_to_fill
-    until valid_game_field? do
-      return false if deck.all_dealt?
-      deck.deal 3
-    end
-    true
+  # fills game field, or creates new deck if game field and deck are
+  # unfilled and not valid.
+  def refresh_game_field
+    retval = fill_game_field
+    retval = new_deck unless retval
+    retval
   end
 
   # is game field valid for playing? -- meaning that the game field must be
@@ -99,6 +95,18 @@ class Game < ActiveRecord::Base
 
 
 private
+
+  # fills in-play game field with passed in number of cards
+  # Returns True if field is playable.
+  def fill_game_field( number = FIELD_SIZE )
+    num_to_fill = number - deck.in_play.length
+    return false unless deck.deal num_to_fill
+    until valid_game_field? do
+      return false unless deck.deal 3
+    end
+    true
+  end
+
 
   # initializing deck passed in with fresh cards, and shuffling if
   # autoshuffle is set. Returns true if successful

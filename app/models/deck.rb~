@@ -44,7 +44,6 @@ class Deck < ActiveRecord::Base
       cards << c_new
       c_new.save
     end
-    return shuffle if autoshuffle
     save
   end
 

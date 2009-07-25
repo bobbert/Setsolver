@@ -10,7 +10,7 @@ module GamesHelper
     str
   end
 
-  # renders Set board
+  # renders Set board as HTML
   def render_board( gameid )
     gm = Game.find gameid
     return "<table></table>" unless gm

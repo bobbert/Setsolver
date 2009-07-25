@@ -38,13 +38,13 @@ class GamesController < ApplicationController
       if selection.length != 3
         @caption = 'You did not select three cards.'
       else
-	@found_set = make_set_selection( 1, *selection )
+	@found_set = @game.make_set_selection( 1, *selection )
         @caption = 'The three cards you selected are not a set.' unless @found_set
       end
-      @game.fill_game_field unless @caption
+      @game.refresh_game_field unless @caption
       render :action => '_gamefield'
     else
-      @game.fill_game_field
+      @game.refresh_game_field
       render :action => 'play'
     end
   end
