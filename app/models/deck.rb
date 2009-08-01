@@ -82,7 +82,7 @@ class Deck < ActiveRecord::Base
       tbd_c.faceup_position = faceup_nums[tbd_i]
       tbd_c.save
     end
-    save
+    save && reload
     to_be_dealt
   end
 
