@@ -73,17 +73,17 @@ class Deck < ActiveRecord::Base
     to_be_dealt = cards.find_all do |c|
       c.facedown_position && c.facedown_position <= number
     end
-    correct_num_dealt = (number == to_be_dealt.length)
     num_prev_in_play = in_play.length
     faceup_nums = next_faceup_positions to_be_dealt.length
     # removing from facedown to faceup list, one card per iteration
-    to_be_dealt.sort.each_with_index do |tbd_c, tbd_i|
+    to_be_dealt.sort!.each_with_index do |tbd_c, tbd_i|
       tbd_c.reload
       tbd_c.remove_from_list
       tbd_c.faceup_position = faceup_nums[tbd_i]
       tbd_c.save
     end
-    save && correct_num_dealt
+    save
+    to_be_dealt
   end
 
 private
@@ -98,7 +98,7 @@ private
       faceup_inds.include? i
     end
     # return first <number> remaining numbers.
-    return remaining.slice 0, number
+    return remaining.slice( 0, number )
   end
 
 end

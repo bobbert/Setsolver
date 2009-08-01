@@ -75,7 +75,7 @@ class Game < ActiveRecord::Base
   # only a match of 2 exists -- because a maatch of 2 means "not all the same,
   # and not all different."
   def set_indices
-    field = deck.in_play
+    field = current_deck.in_play
     cmb3_arr = Game.each_cmb3 field.length
     Cardface::ATTR.each do |asp|
       cmb3_arr.delete_if do |arr3|

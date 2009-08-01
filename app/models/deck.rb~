@@ -17,6 +17,11 @@ class Deck < ActiveRecord::Base
     cards.find_all {|c| c.facedown? }.sort
   end
 
+  # get number of cards in facedown deck
+  def facedown_length
+    cards.find_all {|c| c.facedown? }.length
+  end
+
   # gets all cards in game field
   def in_play
     cards.find_all {|c| c.in_play? }.sort
@@ -93,7 +98,7 @@ private
       faceup_inds.include? i
     end
     # return first <number> remaining numbers.
-    return remaining.slice 0, number
+    return remaining.slice( 0, number )
   end
 
 end

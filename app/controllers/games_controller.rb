@@ -31,7 +31,6 @@ class GamesController < ApplicationController
   # (valid set, invalid set, wrong # of cards selected, etc. )
   def play
     @game = Game.find(params[:id])
-    @count = @game.set_count
     # checking if initial page loading or user-submitted load
     if params[:commit]
       selection = get_card_numbers

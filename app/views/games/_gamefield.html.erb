@@ -11,7 +11,7 @@
 <% end %>
 <h3>This is your <%= @game.decks.length.ordinalize %> deck, with
     <%= number_noun_desc( @game.current_deck.facedown_length, 'card' ) %> remaining. </h3>
-<h3><%= number_noun_desc( @count, 'set' ) %> can be found among the cards below: </h3>
+<h3><%= number_noun_desc( @game.set_count, 'set' ) %> can be found among the cards below: </h3>
 
 <% if @tmp %>
   <h3> Params: <%= @tmp %></h3>

@@ -107,7 +107,8 @@ private
     num_to_fill = number - current_deck.in_play.length
     return false unless current_deck.deal num_to_fill
     until valid_game_field? do
-      return false unless current_deck.deal 3
+      dealt = current_deck.deal 3
+      return false if (dealt == [])
     end
     true
   end
