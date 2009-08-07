@@ -1,0 +1,22 @@
+<h1>Editing game</h1>
+
+<%= error_messages_for :game %>
+
+<% form_for(@game) do |f| %>
+  <p>
+    <b>Autoshuffle</b><br />
+    <%= f.text_area :autoshuffle %>
+  </p>
+
+  <p>
+    <b>Finished at</b><br />
+    <%= f.date_select :finished_at %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @game %> |
+<%= link_to 'Back', games_path %>

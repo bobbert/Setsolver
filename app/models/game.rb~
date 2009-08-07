@@ -52,7 +52,7 @@ class Game < ActiveRecord::Base
   # unfilled and not valid.
   def refresh_game_field
     retval = fill_game_field
-    retval = new_deck unless retval
+    retval = (new_deck && fill_game_field) unless retval
     retval
   end
 

@@ -1,0 +1,32 @@
+<h1>Editing player</h1>
+
+<%= error_messages_for :player %>
+
+<% form_for(@player) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Sets</b><br />
+    <%= f.text_field :sets %>
+  </p>
+
+  <p>
+    <b>Wins</b><br />
+    <%= f.text_field :wins %>
+  </p>
+
+  <p>
+    <b>Losses</b><br />
+    <%= f.text_field :losses %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @player %> |
+<%= link_to 'Back', players_path %>

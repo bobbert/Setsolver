@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  sets: 1
+  wins: 1
+  losses: 1
+
+two:
+  name: MyString
+  sets: 1
+  wins: 1
+  losses: 1

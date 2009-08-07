@@ -1,0 +1,26 @@
+<h1>Listing players</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Sets</th>
+    <th>Wins</th>
+    <th>Losses</th>
+  </tr>
+
+<% for player in @players %>
+  <tr>
+    <td><%=h player.name %></td>
+    <td><%=h player.sets %></td>
+    <td><%=h player.wins %></td>
+    <td><%=h player.losses %></td>
+    <td><%= link_to 'Show', player %></td>
+    <td><%= link_to 'Edit', edit_player_path(player) %></td>
+    <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New player', new_player_path %>
