@@ -34,7 +34,7 @@ class Player < ActiveRecord::Base
     si = game.set_indices
     return false unless si.include? [card1_i, card2_i, card3_i].sort
     # we have a valid set - get cards and set claimed_by, then return cards
-    score += 1
+    score = score.to_i + 1
     game.get_cards_in_play_from_index( card1_i, card2_i, card3_i ).each do |c|
       c.claimed_by = self
       c.save

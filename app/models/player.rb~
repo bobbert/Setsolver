@@ -16,7 +16,7 @@ class Player < ActiveRecord::Base
 
   # is this player in the lead? (ties don't count)
   def winner?
-    higher_or_same_score_plyrs = game.players.find_all {|pl| pl.score >= self.score }
+    higher_or_same_score_plyrs = game.players.find_all {|pl| (pl != self) && pl.score >= self.score }
     higher_or_same_score_plyrs.empty?
   end
 

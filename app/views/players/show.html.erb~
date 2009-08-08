@@ -19,5 +19,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_game_player_path(@player) %> |
+<%= link_to 'Edit', edit_game_player_path(@player.game, @player) %> |
 <%= link_to 'Back', game_players_path %>

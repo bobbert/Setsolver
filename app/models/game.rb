@@ -53,6 +53,11 @@ class Game < ActiveRecord::Base
     current_deck.in_play
   end
 
+  # get names of players
+  def player_names
+    players.sort.map {|pl| pl.name }.join(', ')
+  end
+
   # fills gamefield, or creates new deck and fills gamefield with new deck 
   # if deck is empty.
   def refresh_field

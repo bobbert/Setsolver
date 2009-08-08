@@ -7,12 +7,16 @@
 <div class="setsolver" align=center width=90%>
 <table class="setsolver" border=0 width=450>
 <% for game in @games %>
-  <% play_action_word = (game.current_deck.nil?) ? 'Start' : 'Continue' %>
-  <tr>
-  <td> Game #<%= game.id %>: </td>
-  <td><%= link_to "[#{play_action_word} Playing]", :action => 'play', :id => game.id %></td>
-  <td><%= link_to '[Delete]', { :action => 'destroy', :id => game.id },
-                  :confirm => 'Are you sure?', :method => :post %></td>
+  <div class="setsolver-item">
+    <p><b>Game #<%= game.id %>:</b> <%= game.player_names %></p>
+    <ul>
+    <% for player in game.players %>
+      <li> <%=player.name %>: <%= link_to "Play as #{player.user.fname}", play_path(game,player) %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+  <td><%= link_to 'Delete Game', game_path, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
