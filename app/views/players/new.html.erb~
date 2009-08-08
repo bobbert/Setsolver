@@ -2,7 +2,7 @@
 
 <%= error_messages_for :player %>
 
-<% form_for [@game, @player] do |f| %>
+<% form_for(@player) do |f| %>
   <p>
     <b>Score</b><br />
     <%= f.text_field :score %>

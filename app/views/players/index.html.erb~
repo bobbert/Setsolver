@@ -17,7 +17,7 @@
     <td><%=h player.score %></td>
     <td><%=h format_yn(player.winner?) %></td>
     <td><%=h format_yn(player.loser?) %></td>
-    <td><%= link_to 'Show', game_player_path(player.game, player) %></td>
+    <td><%= link_to 'Show', game_player_path %></td>
     <td><%= link_to 'Edit', edit_game_player_path(player.game, player) %></td>
     <td><%= link_to 'Destroy', game_players_path, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

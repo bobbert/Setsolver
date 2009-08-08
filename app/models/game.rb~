@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :decks
-  has_and_belongs_to_many :players
+  has_many :players
 
   after_create :new_deck
 
@@ -48,12 +48,15 @@ class Game < ActiveRecord::Base
     decks.find_all {|c| c.finished_at.nil? }.pop
   end
 
-  # fills game field, or creates new deck if game field and deck are
-  # unfilled and not valid.
+  # get current gamefield
+  def field
+    current_deck.in_play
+  end
+
+  # fills gamefield, or creates new deck and fills gamefield with new deck 
+  # if deck is empty.
   def refresh_game_field
-    retval = fill_game_field
-    retval = (new_deck && fill_game_field) unless retval
-    retval
+    fill_game_field || (new_deck && fill_game_field)
   end
 
   # is game field valid for playing? -- meaning that the game field must be
@@ -75,36 +78,28 @@ class Game < ActiveRecord::Base
   # only a match of 2 exists -- because a maatch of 2 means "not all the same,
   # and not all different."
   def set_indices
-    field = current_deck.in_play
     cmb3_arr = Game.each_cmb3 field.length
-    Cardface::ATTR.each do |asp|
+    Cardface::ATTR.each do |attr|
       cmb3_arr.delete_if do |arr3|
-        num_different_attr( asp, arr3.map {|num| field[num].cardface } ) == 2
+        num_different_attr( attr, arr3.map {|num| field[num].cardface } ) == 2
       end
     end
     cmb3_arr
   end
 
-  # evaluates player submission, and if set is valid:
-  # set all three cards as claimed by player passed in, then
-  # return the three-card set.
-  def make_set_selection( plyr_id, card1_i, card2_i, card3_i )
-    si = set_indices
-    return false unless si.include? [card1_i, card2_i, card3_i].sort
-    # we have a valid set - get cards and set claimed_by, then return cards
-    get_cards_in_play_from_index( card1_i, card2_i, card3_i ).each do |c|
-      c.claimed_by = plyr_id
-      c.save
-    end
+  # converts in-play indices (such as those passed in as HTML form params)
+  # into card objects based on position in list
+  def get_cards_in_play_from_index( *indices )
+    active_field = field
+    indices.map {|i| active_field[i.to_i] }
   end
-
 
 private
 
-  # fills in-play game field with passed in number of cards
+  # fills in-play game field to size <number>.
   # Returns True if field is playable.
   def fill_game_field( number = FIELD_SIZE )
-    num_to_fill = number - current_deck.in_play.length
+    num_to_fill = number - field.length
     return false unless current_deck.deal num_to_fill
     until valid_game_field? do
       dealt = current_deck.deal 3
@@ -113,13 +108,12 @@ private
     true
   end
 
-
   # initializing deck passed in with fresh cards, and shuffling if
   # autoshuffle is set. Returns true if successful
   def initialize_deck( d )
-    retval = d.reset
-    retval = d.shuffle if (autoshuffle && retval)
-    retval
+    return false unless d.reset
+    return true unless autoshuffle
+    d.shuffle
   end
 
   # given an array of cardfaces and an attribute, finds out how many distinct
@@ -127,13 +121,6 @@ private
   def num_different_attr( attr, cardface_arr )
     res = cardface_arr.map {|c| c.send(attr) }
     res.uniq.length
-  end
-
-  # converts in-play indices (such as those passed in as HTML form params)
-  # into card objects based on position in list
-  def get_cards_in_play_from_index( *indices )
-    active_field = current_deck.in_play
-    indices.map {|i| active_field[i.to_i] }
   end
 
 end

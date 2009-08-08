@@ -1,0 +1,11 @@
+class User < ActiveRecord::Base
+  has_many :players
+
+  # full name, as string
+  def name
+    (fname.to_s + ' ' + lname.to_s).chomp ' '
+  end
+
+  
+
+end

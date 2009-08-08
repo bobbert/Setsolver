@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number_id"
@@ -55,27 +55,21 @@ ActiveRecord::Schema.define(:version => 9) do
     t.date     "finished_at"
   end
 
-  create_table "games_players", :id => false, :force => true do |t|
-    t.integer "game_id"
-    t.integer "player_id"
-  end
-
-  add_index "games_players", ["game_id"], :name => "game_games_players_id_fkey"
-  add_index "games_players", ["player_id"], :name => "player_games_players_id_fkey"
-
   create_table "numbers", :force => true do |t|
     t.text "name"
     t.text "abbrev"
   end
 
   create_table "players", :force => true do |t|
-    t.text     "name"
-    t.integer  "sets",       :default => 0
-    t.integer  "wins",       :default => 0
-    t.integer  "losses",     :default => 0
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.integer  "score",      :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "players", ["user_id"], :name => "game_player_id_fkey"
+  add_index "players", ["game_id"], :name => "user_player_id_fkey"
 
   create_table "shadings", :force => true do |t|
     t.text "name"
@@ -85,6 +79,14 @@ ActiveRecord::Schema.define(:version => 9) do
   create_table "shapes", :force => true do |t|
     t.text "name"
     t.text "abbrev"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "fname",      :limit => 60
+    t.string   "lname",      :limit => 60
+    t.integer  "rating",                   :default => 1000
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -102,10 +102,10 @@ class GamesController < ApplicationController
 	@found_set = @game.make_set_selection( 1, *selection )
         @caption = 'The three cards you selected are not a set.' unless @found_set
       end
-      @game.refresh_game_field unless @caption
+      @game.refresh_field unless @caption
       render :action => '_gamefield'
     else
-      @game.refresh_game_field
+      @game.refresh_field
       render :action => 'play'
     end
   end
@@ -115,6 +115,8 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     render :action => '_board'
   end
+
+private
 
   # get card numbers from params hash that takes the following form:
   # key = :card<number>, value = "SELECTED"

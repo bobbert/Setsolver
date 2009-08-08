@@ -2,7 +2,9 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    @players = Player.find(:all)
+    # listing all players within selected game
+    @game = Game.find(params[:game_id])
+    @players = @game.players
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,6 +26,7 @@ class PlayersController < ApplicationController
   # GET /players/new
   # GET /players/new.xml
   def new
+    @game = Game.find(params[:game_id])
     @player = Player.new
 
     respond_to do |format|
@@ -34,6 +37,7 @@ class PlayersController < ApplicationController
 
   # GET /players/1/edit
   def edit
+    @game = Game.find(params[:game_id])
     @player = Player.find(params[:id])
   end
 

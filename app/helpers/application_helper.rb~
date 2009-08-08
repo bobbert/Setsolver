@@ -8,7 +8,7 @@ module ApplicationHelper
     return "#{num} #{noun.pluralize}"
   end
 
-  # returns Yes or No based on Boolean value of object passed in
+  # returns Yes or No based on Boolean status of object passed in
   def format_yn( expr )
     return (expr) ? 'Yes' : 'No'
   end

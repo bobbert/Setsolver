@@ -13,9 +13,7 @@
     <%= f.text_field :score %>
   </p>
 
-  <p>
-    <%= f.submit "Create" %>
-  </p>
+  <%= submit_tag 'Create' %>
 
 <% end %>
 
