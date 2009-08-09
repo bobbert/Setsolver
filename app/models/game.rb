@@ -55,13 +55,14 @@ class Game < ActiveRecord::Base
 
   # get names of players
   def player_names
-    players.sort.map {|pl| pl.name }.join(', ')
+    players.sort.map {|pl| pl.name }.join(' vs. ')
   end
 
   # fills gamefield, or creates new deck and fills gamefield with new deck 
   # if deck is empty.
   def refresh_field
-    fill_game_field || (new_deck && fill_game_field)
+    return true if fill_game_field 
+    return (new_deck && fill_game_field)
   end
 
   # is game field valid for playing? -- meaning that the game field must be

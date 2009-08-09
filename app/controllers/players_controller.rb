@@ -3,7 +3,6 @@ class PlayersController < ApplicationController
   # GET /players.xml
   def index
     # listing all players within selected game
-    @game = Game.find(params[:game_id])
     @players = @game.players
 
     respond_to do |format|
@@ -26,8 +25,7 @@ class PlayersController < ApplicationController
   # GET /players/new
   # GET /players/new.xml
   def new
-    @game = Game.find(params[:game_id])
-    @player = Player.new
+     @player = Player.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,7 +35,6 @@ class PlayersController < ApplicationController
 
   # GET /players/1/edit
   def edit
-    @game = Game.find(params[:game_id])
     @player = Player.find(params[:id])
   end
 
@@ -49,7 +46,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       if @player.save
         flash[:notice] = 'Player was successfully created.'
-        format.html { redirect_to(@player) }
+        format.html { redirect_to([@player.game, @player]) }
         format.xml  { render :xml => @player, :status => :created, :location => @player }
       else
         format.html { render :action => "new" }
@@ -66,7 +63,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       if @player.update_attributes(params[:player])
         flash[:notice] = 'Player was successfully updated.'
-        format.html { redirect_to(@player) }
+        format.html { redirect_to([@player.game, @player]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,7 +1,7 @@
 <h1>Listing games</h1>
 
 <% for game in @games %>
-  <div class="setsolver-item" style="border:1px solid black">
+  <div class="setsolver-item" style="padding:5px; left-indent:15px; bottom-indent:10px; border:1px solid black;">
     <p><b>Game #<%= game.id %>:</b> <%= game.player_names %></p>
     <ul>
     <% for player in game.players %>

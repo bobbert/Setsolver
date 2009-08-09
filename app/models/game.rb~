@@ -54,8 +54,8 @@ class Game < ActiveRecord::Base
   end
 
   # get names of players
-  def players
-    players.sort.map {|pl| pl.name }.join(', ')
+  def player_names
+    players.sort.map {|pl| pl.name }.join(' vs. ')
   end
 
   # fills gamefield, or creates new deck and fills gamefield with new deck 
