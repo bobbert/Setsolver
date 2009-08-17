@@ -67,10 +67,13 @@ class Game < ActiveRecord::Base
 
   # is game field valid for playing? -- meaning that the game field must be
   # fully dealt out and at least 1 set exists in the active field.
-  def valid_game_field?
+  def valid_game_field?( has_sets = nil )
     d = current_deck
+    if has_sets.nil?
+      has_sets = (set_count > 0)
+    end
     num_cards_correct = (d.number_in_play >= FIELD_SIZE) || d.all_dealt?
-    return num_cards_correct && (set_count > 0)
+    return num_cards_correct && has_sets
   end
 
   # get number of sets in current game field
@@ -78,19 +81,25 @@ class Game < ActiveRecord::Base
     set_indices.length
   end
 
-  # the set-finding algorithm: finds every statistical combination of 3 cards
-  # (by array index), then iterates through the array once for
-  # each attribute (color, shading, etc.) and removes all instances where
-  # only a match of 2 exists -- because a maatch of 2 means "not all the same,
-  # and not all different."
+  # finds every statistical combination of 3 cards (by array index),
+  # then deletes the non-set combinations.
   def set_indices
     cmb3_arr = Game.each_cmb3 field.length
-    Cardface::ATTR.each do |attr|
-      cmb3_arr.delete_if do |arr3|
-        num_different_attr( attr, arr3.map {|num| field[num].cardface } ) == 2
-      end
+    cmb3_arr.delete_if do |arr3|
+      !(is_set? *arr3)
     end
-    cmb3_arr
+  end
+
+  # the set-finding algorithm: given three card positions (within face-up array),
+  # get the cardfaces and then iterate through each attribute (color, shading,
+  # shape, number) and removes all instances where only a match of 2 exists -- 
+  # because a match of 2 means "not all the same, and not all different."
+  def is_set?( card1_pos, card2_pos, card3_pos )
+    cardfaces = [card1_pos, card2_pos, card3_pos].map {|num| field[num].cardface }
+    Cardface::ATTR.each do |attr|
+      return false if num_different_attr( attr, cardfaces ) == 2
+    end
+    true
   end
 
   # converts in-play indices (such as those passed in as HTML form params)
