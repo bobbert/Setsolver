@@ -31,8 +31,7 @@ class Player < ActiveRecord::Base
   # set all three cards as claimed by player passed in, then
   # return the three-card set.
   def make_set_selection( card1_i, card2_i, card3_i )
-    si = game.set_indices
-    return false unless si.include? [card1_i, card2_i, card3_i].sort
+    return false unless game.is_set?( card1_i, card2_i, card3_i )
     # we have a valid set - get cards and set claimed_by, then return cards
     score = score.to_i + 1
     save
