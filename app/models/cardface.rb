@@ -1,16 +1,11 @@
 class Cardface < ActiveRecord::Base
-  belongs_to :color
-  belongs_to :number
-  belongs_to :shading
-  belongs_to :shape
   has_many :cards
-  validates_presence_of :number, :shading, :color, :shape
 
   ATTR = [:number, :shading, :color, :shape]
 
   # the abbreviated name of the card
   def abbrev
-    number.abbrev + shading.abbrev + color.abbrev + shape.abbrev
+    number.to_s + shading_abbrev + color_abbrev + shape_abbrev
   end
 
   # image name, used to show picture
@@ -25,8 +20,8 @@ class Cardface < ActiveRecord::Base
 
   # human-readable name of card
   def to_s
-    plural = 's' if (number.abbrev.to_i != 1)
-    number.abbrev + ' ' + shading.name + ' ' + color.name + ' ' + shape.name + plural.to_s
+    printable_shape = ((number != 1) ? shape.pluralize : shape.singularize)
+    number.to_s + ' ' + shading + ' ' + color + ' ' + printable_shape
   end
 
   # comparison operator - used for card array ordering, or sorting by ID

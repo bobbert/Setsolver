@@ -1,30 +1,36 @@
 class CreateCardfaces < ActiveRecord::Migration
+
+  NUMBERS = [1, 2, 3]
+  COLORS = { 'red' => 'red', 'green' => 'grn', 'purple' => 'prp' }
+  SHADINGS = { 'outlined' => 'out', 'shaded' => 'shd', 'filled' => 'fil' }
+  SHAPES = { 'oval' => 'ovl', 'diamond' => 'dia', 'squiggle' => 'sqg' }
+
   def self.up
     create_table :cardfaces do |t|
-      t.integer :number_id
-      t.integer :color_id
-      t.integer :shading_id
-      t.integer :shape_id
+      t.integer :number
+      t.text    :color,          :limit => 30
+      t.text    :color_abbrev,   :limit => 3
+      t.text    :shading,        :limit => 30
+      t.text    :shading_abbrev, :limit => 3
+      t.text    :shape,          :limit => 30
+      t.text    :shape_abbrev,   :limit => 3
     end
 
-    # adding database indexes for referential integrity
-    add_index "cardfaces", ["number_id"], :name => "number_cardface_id_fkey"
-    add_index "cardfaces", ["shading_id"], :name => "shading_cardface_id_fkey"
-    add_index "cardfaces", ["color_id"], :name => "color_cardface_id_fkey"
-    add_index "cardfaces", ["shape_id"], :name => "shape_cardface_id_fkey"
-
-    # assigning default values for all cardfaces:
-    # every ID combination with tables.
-    # Number, Color, Shading, and Shape is added to table Cardface.
-    Number.find(:all).each do |num|
-      Color.find(:all).each do |col|
-        Shading.find(:all).each do |shd|
-          Shape.find(:all).each do |shp|
+    # creating deck of cardface values:
+    # every combination within above hashes
+    # (Number, Color, Shading, and Shape) is added to table Cardface.
+    NUMBERS.each do |num|
+      COLORS.each do |col, col_abbrev|
+        SHADINGS.each do |shd, shd_abbrev|
+          SHAPES.each do |shp, shp_abbrev|
             c = Cardface.new
-            c.number_id = num.id
-            c.color_id = col.id
-            c.shading_id = shd.id
-            c.shape_id = shp.id
+            c.number = num
+            c.color = col
+            c.color_abbrev = col_abbrev
+            c.shading = shd
+            c.shading_abbrev = shd_abbrev
+            c.shape = shp
+            c.shape_abbrev = shp_abbrev
             c.save
           end
         end
@@ -34,11 +40,6 @@ class CreateCardfaces < ActiveRecord::Migration
   end
 
   def self.down
-    # removing database indexes for referential integrity
-    remove_index "cardfaces", :name => "number_cardface_id_fkey"
-    remove_index "cardfaces", :name => "shading_cardface_id_fkey"
-    remove_index "cardfaces", :name => "color_cardface_id_fkey"
-    remove_index "cardfaces", :name => "shape_cardface_id_fkey"
     # dropping table after removing indexes
     drop_table :cardfaces
   end

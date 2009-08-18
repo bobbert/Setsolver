@@ -12,16 +12,14 @@
 ActiveRecord::Schema.define(:version => 10) do
 
   create_table "cardfaces", :force => true do |t|
-    t.integer "number_id"
-    t.integer "color_id"
-    t.integer "shading_id"
-    t.integer "shape_id"
+    t.integer "number"
+    t.text    "color"
+    t.text    "color_abbrev"
+    t.text    "shading"
+    t.text    "shading_abbrev"
+    t.text    "shape"
+    t.text    "shape_abbrev"
   end
-
-  add_index "cardfaces", ["number_id"], :name => "number_cardface_id_fkey"
-  add_index "cardfaces", ["shading_id"], :name => "shading_cardface_id_fkey"
-  add_index "cardfaces", ["color_id"], :name => "color_cardface_id_fkey"
-  add_index "cardfaces", ["shape_id"], :name => "shape_cardface_id_fkey"
 
   create_table "cards", :force => true do |t|
     t.integer "cardface_id"
@@ -33,11 +31,6 @@ ActiveRecord::Schema.define(:version => 10) do
 
   add_index "cards", ["cardface_id"], :name => "cardface_card_id_fkey"
   add_index "cards", ["deck_id"], :name => "deck_card_id_fkey"
-
-  create_table "colors", :force => true do |t|
-    t.text "name"
-    t.text "abbrev"
-  end
 
   create_table "decks", :force => true do |t|
     t.integer  "game_id"
@@ -55,11 +48,6 @@ ActiveRecord::Schema.define(:version => 10) do
     t.date     "finished_at"
   end
 
-  create_table "numbers", :force => true do |t|
-    t.text "name"
-    t.text "abbrev"
-  end
-
   create_table "players", :force => true do |t|
     t.integer  "user_id"
     t.integer  "game_id"
@@ -70,16 +58,6 @@ ActiveRecord::Schema.define(:version => 10) do
 
   add_index "players", ["user_id"], :name => "game_player_id_fkey"
   add_index "players", ["game_id"], :name => "user_player_id_fkey"
-
-  create_table "shadings", :force => true do |t|
-    t.text "name"
-    t.text "abbrev"
-  end
-
-  create_table "shapes", :force => true do |t|
-    t.text "name"
-    t.text "abbrev"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "fname",      :limit => 60
