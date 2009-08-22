@@ -14,6 +14,8 @@ class Game < ActiveRecord::Base
   BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
   BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
 
+  MAX_PLAYERS = 4
+
 
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
@@ -51,6 +53,18 @@ class Game < ActiveRecord::Base
   # get current gamefield
   def field
     current_deck.in_play
+  end
+
+  # is game active?  Active games musst have at least one player.
+  def is_active?
+    players.length > 0
+  end
+
+  # adds players to new game
+  def add_players( *new_players )
+    if ((players.length + new_players.length) <= MAX_PLAYERS)
+      new_players.each {|pl| self.players << pl } 
+    end
   end
 
   # get names of players
