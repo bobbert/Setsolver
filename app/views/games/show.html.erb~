@@ -9,5 +9,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_player_game_path(@player, @game) %> |
+<%= link_to 'Edit', edit_player_game_path(@game.player, @game) %> |
 <%= link_to 'Back', player_games_path %>

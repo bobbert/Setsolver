@@ -1,14 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :users
-
-  # nested resources for /games/1 and /games/1/players/1
-  map.resources :games do |games|  
-    games.resources :players
-  end  
+  # nested resources for /players/1 and /players/1/games/1
+  map.resources :players  do |players|  
+    players.resources :games
+  end
 
   # game playing link: /games/1/players/1/play
-  map.play 'games/:game_id/players/:id/play', :controller => 'players', :action => 'play'
+  map.play 'players/:player_id/games/:id/play', :controller => 'players', :action => 'play'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

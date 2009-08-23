@@ -2,8 +2,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    # listing all players within selected game
-    @players = @game.players
+    @players = Player.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +24,7 @@ class PlayersController < ApplicationController
   # GET /players/new
   # GET /players/new.xml
   def new
-     @player = Player.new
+    @player = Player.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +45,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       if @player.save
         flash[:notice] = 'Player was successfully created.'
-        format.html { redirect_to([@player.game, @player]) }
+        format.html { redirect_to(@player) }
         format.xml  { render :xml => @player, :status => :created, :location => @player }
       else
         format.html { render :action => "new" }
@@ -63,7 +62,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       if @player.update_attributes(params[:player])
         flash[:notice] = 'Player was successfully updated.'
-        format.html { redirect_to([@player.game, @player]) }
+        format.html { redirect_to(@player) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -91,8 +90,8 @@ class PlayersController < ApplicationController
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
   def play
-    @player = Player.find(params[:id])
-    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
+    @game = Game.find(params[:id])
     # checking if initial page loading or user-submitted load
     if params[:commit]
       selection = get_card_numbers
@@ -122,10 +121,10 @@ private
   # key = :card<number>, value = "SELECTED"
   # The array of card numbers is always in numerical order.
   def get_card_numbers
-    cards = params.clone.delete_if do |k,v|
+    cardparams = params.clone.delete_if do |k,v|
       (v.to_s != 'SELECTED') || (k.to_s !~ /^card[0-9]+$/)
     end
-    nums = cards.map {|cs| cs.to_s.sub(/^card/,'').to_i }.sort
+    nums = cardparams.map {|cardparam| cardparam.to_s.sub(/^card/,'').to_i }.sort
   end
 
 

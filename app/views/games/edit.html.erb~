@@ -5,7 +5,7 @@
 <% form_for([@player,@game]) do |f| %>
   <p>
     <b>Autoshuffle</b><br />
-    <%= f.check_box :autoshuffle, :value => "Y", :class => "check" %>
+    <%= f.check_box :autoshuffle :value => "Y", :class => "check" %>
   </p>
 
   <p>

@@ -2,9 +2,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    # listing all players within selected game
-    @game = Game.find(params[:game_id])
-    @players = @game.players
+    @players = Player.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +24,6 @@ class PlayersController < ApplicationController
   # GET /players/new
   # GET /players/new.xml
   def new
-    @game = Game.find(params[:game_id])
     @player = Player.new
 
     respond_to do |format|
@@ -37,7 +34,6 @@ class PlayersController < ApplicationController
 
   # GET /players/1/edit
   def edit
-    @game = Game.find(params[:game_id])
     @player = Player.find(params[:id])
   end
 
@@ -94,8 +90,8 @@ class PlayersController < ApplicationController
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
   def play
-    @player = Player.find(params[:id])
-    @game = Game.find(params[:game_id])
+    @player = Player.find(params[:player_id])
+    @game = Game.find(params[:id])
     # checking if initial page loading or user-submitted load
     if params[:commit]
       selection = get_card_numbers
@@ -128,7 +124,7 @@ private
     cards = params.clone.delete_if do |k,v|
       (v.to_s != 'SELECTED') || (k.to_s !~ /^card[0-9]+$/)
     end
-    nums = cards.map {|cs| cs.to_s.sub(/^card/,'').to_i }.sort
+    nums = cards.map {|cardparam| cardparam.to_s.sub(/^card/,'').to_i }.sort
   end
 
 

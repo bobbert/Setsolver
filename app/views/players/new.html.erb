@@ -2,10 +2,19 @@
 
 <%= error_messages_for :player %>
 
-<% form_for [@game, @player] do |f| %>
+<% form_for(@player) do |f| %>
   <p>
-    <b>Score</b><br />
-    <%= f.text_field :score %>
+    <b>First Name:</b>
+    <%= f.text_field :fname %>
+  </p>
+
+  <p>
+    <b>Last Name:</b>
+    <%= f.text_field :lname %>
+  </p>
+
+  <p>
+    <b>Rating:</b> Starts at 1000. <br />
   </p>
 
   <p>
@@ -13,4 +22,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', game_players_path %>
+<%= link_to 'Back', players_path %>

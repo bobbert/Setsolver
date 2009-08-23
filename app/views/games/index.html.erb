@@ -1,18 +1,8 @@
-<h1>Listing games</h1>
+<h1>Listing games for <%= @player.name %></h1>
 
-<% for game in @games %>
-  <div class="setsolver-item" style="padding:5px; indent-left:15px; border:1px solid black;">
-    <p><b>Game #<%= game.id %>:</b> <%= game.player_names %></p>
-    <ul>
-    <% for player in game.players %>
-      <li> <%=player.name %>: <%= link_to "Play as #{player.user.fname}", play_path(game,player) %>
-      </li>
-    <% end %>
-    </ul>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, :confirm => 'Are you sure?', :method => :delete %></td>
-  </div>
+<% for game in @player.games %>
+    <p><b>Game <%= game.id %>:</b> (<%= game.player_names %>): <%= link_to "Play Game", play_path(@player,game) %>
+    </p>
 <% end %>
 
-<%= link_to 'New game', new_game_path %>
+<%= link_to 'New game', new_player_game_path %>

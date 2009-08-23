@@ -1,29 +1,18 @@
 <h1>Listing players</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Score</th>
-    <th>Is winning?</th>
-    <th>Is losing?</th>
-    <th />
-    <th />
-    <th />
-  </tr>
-
 <% for player in @players %>
-  <tr>
-    <td><%=h player.name %></td>
-    <td><%=h player.score %></td>
-    <td><%=h format_yn(player.winner?) %></td>
-    <td><%=h format_yn(player.loser?) %></td>
-    <td><%= link_to 'Show', game_player_path %></td>
-    <td><%= link_to 'Edit', edit_game_player_path(player.game, player) %></td>
-    <td><%= link_to 'Destroy', game_players_path, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <div class="setsolver-item" style="padding:5px; indent-left:15px; border:1px solid black;">
+    <p><b>#<%= player.id %>: <%= player.name %> (Rating=</b> <%= player.rating %>)</p>
+    <ul>
+    <% for game in player.games %>
+      <li> Game <%= game.id %> (<%= game.player_names %>): <%= link_to "Play game", play_path(player,game) %>
+      </li>
+    <% end %>
+    </ul>
+    <td><%= link_to 'Show', player_path(player) %></td>
+    <td><%= link_to 'Edit', edit_player_path(player) %></td>
+    <td><%= link_to 'Destroy', player_path(player), :confirm => 'Are you sure?', :method => :delete %></td>
+  </div>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New player', new_game_player_path %>
+<%= link_to 'New Player', new_player_path %>

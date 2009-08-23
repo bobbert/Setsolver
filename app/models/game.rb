@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :decks
-  has_many :players
+  has_many :scores
 
   after_create :new_deck
 
@@ -45,6 +45,15 @@ class Game < ActiveRecord::Base
     initialize_deck d
   end
 
+  # create new Score object to link player passed in to current game instance.
+  def new_score( plyr )
+    sc = Score.new
+    self.scores << sc
+    plyr.scores << sc
+    d.save
+    initialize_deck d
+  end
+
   # get current deck in play
   def current_deck
     decks.find_all {|c| c.finished_at.nil? }.pop
@@ -53,6 +62,11 @@ class Game < ActiveRecord::Base
   # get current gamefield
   def field
     current_deck.in_play
+  end
+
+  # get all games played by this player
+  def players
+    scores.sort.map {|sc| sc.player }
   end
 
   # is game active?  Active games musst have at least one player.
@@ -69,7 +83,7 @@ class Game < ActiveRecord::Base
 
   # get names of players
   def player_names
-    players.sort.map {|pl| pl.name }.join(' vs. ')
+    players.map {|pl| pl.name }.join(' vs. ')
   end
 
   # fills gamefield, or creates new deck and fills gamefield with new deck 

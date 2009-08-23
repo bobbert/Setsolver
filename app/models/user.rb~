@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
     (fname.to_s + ' ' + lname.to_s).chomp ' '
   end
 
-  # assigns full name, as string
+  # assigns full name, as string, and parses first and last names
+  # from full name string.
   def name=( s_fullname )
-    
     if ( (arr_name = s_fullname.split(', ')).length == 2 )
       (self.lname, self.fname) = arr_name
       return save

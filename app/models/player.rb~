@@ -1,51 +1,62 @@
 class Player < ActiveRecord::Base
-  belongs_to :game
-  belongs_to :user
+  has_many :scores
 
-  # full name of user
+
+  # gets full name, as string
   def name
-    user.name
+    (fname.to_s + ' ' + lname.to_s).chomp ' '
   end
 
-  # return player number
-  def number
-    num = 0
-    game.players.sort.each_with_index{|pl, i| num = i if (pl == self) }
-    (num + 1)
+  # assigns full name, as string, and parses first and last names
+  # from full name string.
+  def name=( s_fullname )
+    if ( (arr_name = s_fullname.split(', ')).length == 2 )
+      (self.lname, self.fname) = arr_name
+      return save
+    end
+    if ( (arr_name = s_fullname.split(' ')).length == 2 )
+      (self.fname, self.lname) = arr_name
+      return save
+    end
+    false
   end
 
-  # is this player in the lead? (ties don't count)
-  def winner?
-    higher_or_same_score_plyrs = game.players.find_all {|pl| (pl != self) && pl.score >= self.score }
-    higher_or_same_score_plyrs.empty?
+  # return player number, starting at player #1
+  def number( gm )
+    num = nil
+    gm.players.each_with_index{|pl, i| num = i if (pl == self) }
+    (num + 1) if num.is_a? Integer
   end
 
-  # does this player have someone else beating them?
-  # (NOTE: if player is tied for the lead, winner? and loser? are both false)
-  def loser?
-    higher_score_plyrs = game.players.find_all {|pl| pl.score > self.score }
-    !(higher_score_plyrs.empty?)
+  # get all games played by this player
+  def games
+    scores.sort.map {|sc| sc.game }
+  end
+
+  # get all games played by this player
+  def active_games
+    scores.map {|sc| sc.game }.delete_if {|g| !(g.finished_by.nil?) }
+  end
+
+  # get all games played by this player
+  def archived_games
+    scores.map {|sc| sc.game }.delete_if {|g| g.finished_by.nil? }
   end
 
   # evaluates player submission, and if set is valid:
   # set all three cards as claimed by player passed in, then
   # return the three-card set.
-  def make_set_selection( card1_i, card2_i, card3_i )
-    si = game.set_indices
-    return false unless si.include? [card1_i, card2_i, card3_i].sort
+  def make_set_selection( current_game, card1_i, card2_i, card3_i )
+    return false unless current_game.is_set?( card1_i, card2_i, card3_i )
     # we have a valid set - get cards and set claimed_by, then return cards
-    score = score.to_i + 1
+    score.points = score.points.to_i + 1
     save
-    game.get_cards_in_play_from_index( card1_i, card2_i, card3_i ).each do |c|
+    current_game.get_cards_in_play_from_index( card1_i, card2_i, card3_i ).each do |c|
       c.claimed_by = self.id
       c.save
     end
   end
 
-  # comparison operator - orders by time of creation
-  def <=>(other)
-    self.created_at <=> other.created_at
-  end
 
 
 end

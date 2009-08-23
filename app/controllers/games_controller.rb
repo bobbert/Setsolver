@@ -1,9 +1,10 @@
 class GamesController < ApplicationController
-
-  # GET /games
-  # GET /games.xml
+  # GET /players/1/games
+  # GET /players/1/games.xml
   def index
-    @games = Game.find(:all)
+    # listing all games within selected player
+    @player = Player.find(params[:player_id])
+    @games = @player.games
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,9 +12,10 @@ class GamesController < ApplicationController
     end
   end
 
-  # GET /games/1
-  # GET /games/1.xml
+  # GET /players/1/games/1
+  # GET /players/1/games/1.xml
   def show
+    @player = Player.find(params[:player_id])
     @game = Game.find(params[:id])
 
     respond_to do |format|
@@ -22,9 +24,10 @@ class GamesController < ApplicationController
     end
   end
 
-  # GET /games/new
-  # GET /games/new.xml
+  # GET /players/1/games/new
+  # GET /players/1/games/new.xml
   def new
+    @player = Player.find(params[:player_id])
     @game = Game.new
 
     respond_to do |format|
@@ -33,21 +36,22 @@ class GamesController < ApplicationController
     end
   end
 
-  # GET /games/1/edit
+  # GET /players/1/games/1/edit
   def edit
+    @player = Player.find(params[:player_id])
     @game = Game.find(params[:id])
   end
 
-  # POST /games
-  # POST /games.xml
+  # POST /players/1/games
+  # POST /players/1/games.xml
   def create
+    @player = Player.find(params[:player_id])
     @game = Game.new(params[:game])
-    @game.autoshuffle = 'Y' unless params[:noshuffle]
 
     respond_to do |format|
       if @game.save
         flash[:notice] = 'Game was successfully created.'
-        format.html { redirect_to(@game) }
+        format.html { redirect_to([@player, @game]) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
       else
         format.html { render :action => "new" }
@@ -56,15 +60,16 @@ class GamesController < ApplicationController
     end
   end
 
-  # PUT /games/1
-  # PUT /games/1.xml
+  # PUT /players/1/games/1
+  # PUT /players/1/games/1.xml
   def update
+    @player = Player.find(params[:player_id])
     @game = Game.find(params[:id])
 
     respond_to do |format|
       if @game.update_attributes(params[:game])
         flash[:notice] = 'Game was successfully updated.'
-        format.html { redirect_to(@game) }
+        format.html { redirect_to([@player, @game]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -73,9 +78,10 @@ class GamesController < ApplicationController
     end
   end
 
-  # DELETE /games/1
-  # DELETE /games/1.xml
+  # DELETE /players/1/games/1
+  # DELETE /players/1/games/1.xml
   def destroy
+    @player = Player.find(params[:player_id])
     @game = Game.find(params[:id])
     @game.destroy
 

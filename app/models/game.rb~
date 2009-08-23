@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :decks
-  has_many :players
+  has_many :scores
 
   after_create :new_deck
 
@@ -55,8 +55,13 @@ class Game < ActiveRecord::Base
     current_deck.in_play
   end
 
+  # get all games played by this player
+  def players
+    scores.sort.map {|sc| sc.player }
+  end
+
   # is game active?  Active games musst have at least one player.
-  def is_active?
+  def active?
     players.length > 0
   end
 
@@ -69,7 +74,7 @@ class Game < ActiveRecord::Base
 
   # get names of players
   def player_names
-    players.sort.map {|pl| pl.name }.join(' vs. ')
+    players.map {|pl| pl.name }.join(' vs. ')
   end
 
   # fills gamefield, or creates new deck and fills gamefield with new deck 

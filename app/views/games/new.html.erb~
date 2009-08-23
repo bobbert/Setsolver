@@ -1,20 +1,16 @@
-<h1>Editing game</h1>
+<h1>New game</h1>
 
 <%= error_messages_for :game %>
 
 <% form_for([@player,@game]) do |f| %>
   <p>
     <b>Autoshuffle</b><br />
-    <%= f.check_box :autoshuffle, :value => "Y", :class => "check" %>
+    <%= f.check_box :autoshuffle :value => "Y", :class => "check" %>
   </p>
 
   <p>
-    <%= f.submit "Edit" %>
+    <%= f.submit "Create" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', player_game_path %> |
 <%= link_to 'Back', player_games_path %>
-
-
-
