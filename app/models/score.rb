@@ -2,6 +2,8 @@ class Score < ActiveRecord::Base
   belongs_to :game
   belongs_to :player
 
+  validates_presence_of :game, :player
+
   # is this player in the lead? (ties don't count)
   def winner?
     higher_or_same_score_plyrs = game.scores.find_all {|sc| (sc != self) && sc.points >= self.points }

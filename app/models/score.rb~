@@ -18,9 +18,10 @@ class Score < ActiveRecord::Base
   # comparison operator - orders by game first, then players within game.
   # Finally orders by ID, but this is only a sanity check (should not happen).
   def <=>(other)
-    res = (self.game_id <=> other.game_id)
-    res = (self.player_id <=> other.player_id) if res == 0
-    (self.id <=> other.id) if res == 0
+    cmp = (self.game_id <=> other.game_id)
+    cmp = (self.player_id <=> other.player_id) if cmp == 0
+    cmp = (self.id <=> other.id) if cmp == 0
+    cmp
   end
 
 end
