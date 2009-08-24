@@ -1,7 +1,33 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# Fixtures for Cardface objects: copied directly from DB migration file.
+# (Cardfaces are created during migration and should never be created when 
+# in production).  Needs to be refactored in order to make code DRY.
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+<%  NUMBERS = [1, 2, 3]  %>
+<%  COLORS = { 'red' => 'red', 'green' => 'grn', 'purple' => 'prp' }  %>
+<%  SHADINGS = { 'outlined' => 'out', 'shaded' => 'shd', 'filled' => 'fil' }  %>
+<%  SHAPES = { 'oval' => 'ovl', 'diamond' => 'dia', 'squiggle' => 'sqg' }  %>
+<%  count = 1  %>
+
+    # creating deck of cardface values:
+    # every combination within above hashes
+    # (Number, Color, Shading, and Shape) is added to table Cardface.
+<%    NUMBERS.each do |num|  %>
+<%      COLORS.each do |col, col_abbrev|  %>
+<%        SHADINGS.each do |shd, shd_abbrev|  %>
+<%          SHAPES.each do |shp, shp_abbrev|  %>
+
+cardface<%= count %>:
+  id: <%= count %>
+  number:  <%= num %>
+  color:  <%= col %>
+  color_abbrev:  <%= col_abbrev %>
+  shading:  <%= shd %>
+  shading_abbrev:  <%= shd_abbrev %>
+  shape:  <%= shp %>
+  shape_abbrev:  <%= shp_abbrev %>
+
+<%            count += 1 %>
+<%          end  %>
+<%        end  %>
+<%      end  %>
+<%    end  %>

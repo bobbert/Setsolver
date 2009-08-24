@@ -22,8 +22,8 @@ class CardfaceTest < ActiveSupport::TestCase
     Cardface::ATTR.each do |attr|
       counters = {}
       counters.default = 0
-      vals.each {|c| counters[c.send(attr).name] += 1 }
-      assert_equal counters.values.uniq, 1,
+      vals.each {|c| counters[c.send(attr)] += 1 }
+      assert_equal counters.values.uniq.length, 1,
         "Cards contains an unequal number of attribute '#{attr}':\n#{counters.to_yaml}\n"
     end
   end
@@ -32,9 +32,9 @@ class CardfaceTest < ActiveSupport::TestCase
   def test_should_have_all_unique_cards
     val_attributes = Cardface.find(:all).map {|c| [c.number, c.shading, c.shape, c.color] }
     assert_equal val_attributes.length, 81,
-      "Numbers has #{vals.length} values, should have 81."
+      "Numbers has #{val_attributes.length} values, should have 81."
     assert_equal val_attributes.uniq.length, 81,
-      "Numbers has #{vals.length} unique values, should have 81."
+      "Numbers has #{val_attributes.length} unique values, should have 81."
   end
 
 end

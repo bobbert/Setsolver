@@ -1,19 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-<% @numbers = { 1 => '1', 2 => '2', 3 => '3' } %>
-<% @shadings = { 1 => 'out', 2 => 'shd', 3 => 'fil' } %>
-<% @colors = { 1 => 'red', 2 => 'grn', 3 => 'prp' } %>
-<% @shapes = { 1 => 'ovl', 2 => 'dia', 3 => 'sqg' } %>
-<% @count = 0 %>
+<% (1..2).each do |deckid| %>
+  <% (1..81).each do |cfid| %>
 
-<% [1,2].each do |d_id| %>
-  <% Cardface.find(:all).each do |cf| %>
+    <% currentid = cfid + ((deckid - 1)*81) %>
 
-<%= "d#{d_id}_#{cf.id}" %>:
-  id: <%= cf.id + ((d_id - 1)*81) %>
-  cardface_id: <%= cf.id %>
-  deck_id: <%= d_id %>
-  facedown_position: <%= cf.id %>
+<%= "card_#{currentid}" %>:
+  id: <%= currentid %>
+  cardface_id: <%= cfid %>
+  deck_id: <%= deckid %>
+  facedown_position: <%= cfid %>
   faceup_position: NULL
   claimed_by: NULL
 
