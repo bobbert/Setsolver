@@ -49,7 +49,7 @@ class GamesController < ApplicationController
     @game = Game.new(params[:game])
 
     respond_to do |format|
-      if @game.save
+      if @game.save && @game.new_player_score(@player)
         flash[:notice] = 'Game was successfully created.'
         format.html { redirect_to([@player, @game]) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
@@ -105,7 +105,7 @@ class GamesController < ApplicationController
       if selection.length != 3
         @caption = 'You did not select three cards.'
       else
-	@found_set = @player.make_set_selection( *selection )
+	@found_set = @player.make_set_selection( @game, *selection )
         @caption = 'The three cards you selected are not a set.' unless @found_set
       end
       @game.refresh_field unless @caption

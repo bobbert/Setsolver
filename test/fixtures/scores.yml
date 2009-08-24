@@ -1,7 +1,38 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+one_p1:
+  id: 1
+  player_id: 1
+  game_id: 1
+  points: 0
+
+one_p2:
+  id: 2
+  player_id: 2
+  game_id: 1
+  points: 0
+
+one_p3:
+  id: 3
+  player_id: 3
+  game_id: 1
+  points: 0
+
+one_p4:
+  id: 4
+  player_id: 4
+  game_id: 1
+  points: 0
+
+two_p1:
+  id: 5
+  player_id: 1
+  game_id: 2
+  points: 0
+
+two_p2:
+  id: 6
+  player_id: 2
+  game_id: 2
+  points: 0
+

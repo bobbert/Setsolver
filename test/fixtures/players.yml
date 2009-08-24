@@ -1,13 +1,30 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  sets: 1
-  wins: 1
-  losses: 1
+  fname: Robert
+  lname: Phelps
+  rating: 1000
+  wins: 0
+  losses: 0
 
 two:
-  name: MyString
-  sets: 1
-  wins: 1
-  losses: 1
+  fname: Lexi
+  lname: Melius
+  rating: 1000
+  wins: 0
+  losses: 0
+
+three:
+  fname: Rita
+  lname: Phelps
+  rating: 1000
+  wins: 0
+  losses: 0
+
+four:
+  fname: Bob
+  lname: Phelps
+  rating: 1000
+  wins: 0
+  losses: 0
+

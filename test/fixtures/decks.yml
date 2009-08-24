@@ -1,3 +1,5 @@
+# Fixtures for Deck object
+# (only used for Deck unit testing; cards should be created automatically)
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:

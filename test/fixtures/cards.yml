@@ -6,20 +6,16 @@
 <% @shapes = { 1 => 'ovl', 2 => 'dia', 3 => 'sqg' } %>
 <% @count = 0 %>
 
-<% @numbers.keys.each do |numid| %>
-  <% @shadings.keys.each do |shdid| %>
-    <% @colors.keys.each do |clrid| %>
-      <% @shapes.keys.each do |shpid| %>
-      <% @count += 1 %>
+<% [1,2].each do |d_id| %>
+  <% Cardface.find(:all).each do |cf| %>
 
-<%= @numbers[numid] + @shadings[shdid] + @colors[clrid] + @shapes[shpid] %>:
-  id: <%= @count %>
-  number_id: <%= numid %>
-  shading_id: <%= shdid %>
-  color_id: <%= clrid %>
-  shape_id: <%= shpid %>
+<%= "d#{d_id}_#{cf.id}" %>:
+  id: <%= cf.id + ((d_id - 1)*81) %>
+  cardface_id: <%= cf.id %>
+  deck_id: <%= d_id %>
+  facedown_position: <%= cf.id %>
+  faceup_position: NULL
+  claimed_by: NULL
 
-      <% end %>
-    <% end %>
   <% end %>
 <% end %>

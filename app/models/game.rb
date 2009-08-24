@@ -46,12 +46,10 @@ class Game < ActiveRecord::Base
   end
 
   # create new Score object to link player passed in to current game instance.
-  def new_score( plyr )
+  def new_player_score( plyr )
     sc = Score.new
     self.scores << sc
     plyr.scores << sc
-    d.save
-    initialize_deck d
   end
 
   # get current deck in play

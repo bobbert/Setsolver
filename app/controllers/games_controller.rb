@@ -45,11 +45,13 @@ class GamesController < ApplicationController
   # POST /players/1/games
   # POST /players/1/games.xml
   def create
+    # get player and game, but do not check for Score "connector" object.
     @player = Player.find(params[:player_id])
     @game = Game.new(params[:game])
 
     respond_to do |format|
-      if @game.save
+      # creating new game, and new association between selected player and game
+      if @game.save && @game.new_player_score(@player)
         flash[:notice] = 'Game was successfully created.'
         format.html { redirect_to([@player, @game]) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
@@ -83,6 +85,9 @@ class GamesController < ApplicationController
   def destroy
     @player = Player.find(params[:player_id])
     @game = Game.find(params[:id])
+
+    # delete Score first, then Game
+    Score.find_by_player_id_and_game_id( params[:player_id], params[:id] ).destroy
     @game.destroy
 
     respond_to do |format|
