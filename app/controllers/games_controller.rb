@@ -87,11 +87,12 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     # delete Score first, then Game
-    Score.find_by_player_id_and_game_id( params[:player_id], params[:id] ).destroy
+    @score = Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
+    @score.destroy if @score
     @game.destroy
 
     respond_to do |format|
-      format.html { redirect_to(games_url) }
+      format.html { redirect_to(player_games_url) }
       format.xml  { head :ok }
     end
   end

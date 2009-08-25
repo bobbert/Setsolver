@@ -1,5 +1,10 @@
 module GamesHelper
 
+  # renders wait text for when user submits three-card set.
+  def render_wait_text
+    str = 'Waiting for results... ' + image_tag('spinner.gif', :alt => 'spinner')
+  end
+
   # prints three card set as miniature cards
   def render_threecard_set( cards )
     str = ' '

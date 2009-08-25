@@ -37,7 +37,7 @@ class GamesControllerTest < ActionController::TestCase
 
   def test_should_destroy_game
     assert_difference('Game.count', -1) do
-      delete :destroy, :player_id => players(:one).id
+      delete :destroy, :player_id => players(:one).id, :id => games(:one).id
     end
 
     assert_redirected_to player_games_path(assigns(:player))
