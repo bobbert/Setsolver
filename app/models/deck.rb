@@ -2,6 +2,8 @@ class Deck < ActiveRecord::Base
   has_many :cards, :order => "facedown_position"
   belongs_to :game
 
+  after_create :reset
+
   # the deck length
   def all_dealt?
     facedown.empty?

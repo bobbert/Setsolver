@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 9) do
   create_table "scores", :force => true do |t|
     t.integer "player_id"
     t.integer "game_id"
-    t.integer "points"
+    t.integer "points",    :default => 0
   end
 
   add_index "scores", ["player_id"], :name => "score_player_id_fkey"

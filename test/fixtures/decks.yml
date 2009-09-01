@@ -1,5 +1,5 @@
 # Fixtures for Deck object
-# (only used for Deck unit testing; cards should be created automatically)
+# (used for set scenarios within Deck and Game testing)
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
@@ -9,3 +9,19 @@ one:
 two:
   id: 2
   game_id: 2
+
+three:
+  id: 3
+  game_id: 3
+
+four:
+  id: 4
+  game_id: 4
+
+#three_deck2:
+#  id: 5
+#  game_id: 3
+#
+#four_deck2:
+#  id: 6
+#  game_id: 4

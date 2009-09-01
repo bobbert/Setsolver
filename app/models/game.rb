@@ -41,8 +41,8 @@ class Game < ActiveRecord::Base
   def new_deck
     d = Deck.new
     decks << d
-    d.save
-    initialize_deck d
+    return d.save unless autoshuffle
+    d.shuffle
   end
 
   # create new Score object to link player passed in to current game instance.
@@ -147,14 +147,6 @@ private
       return false if (dealt == [])
     end
     true
-  end
-
-  # initializing deck passed in with fresh cards, and shuffling if
-  # autoshuffle is set. Returns true if successful
-  def initialize_deck( d )
-    return false unless d.reset
-    return true unless autoshuffle
-    d.shuffle
   end
 
   # given an array of cardfaces and an attribute, finds out how many distinct

@@ -1,3 +1,5 @@
+# Fixtures for Game object
+# (used for set scenarios within Game testing)
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
