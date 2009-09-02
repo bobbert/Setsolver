@@ -4,14 +4,11 @@ class DeckTest < ActiveSupport::TestCase
   fixtures :cardfaces, :cards, :decks
 
   # The Set game has 81 cards, representing 3x3x3x3 attributes.
-  def test_each_deck_should_have_eighty_one_cards
+  def test_fixture_decks_should_have_eighty_one_cards
     decks = Deck.find(:all)
     decks.each do |deck|
       assert_equal deck.cards.length, 81,
 	"Fixture deck ##{deck.id}'s length is #{deck.cards.length}, should have 81."
-
-      assert_equal deck.facedown_length, 81,
-	"Fixture deck ##{deck.id} has #{deck.cards.length} facedown cards, should have 81."
     end
   end
 

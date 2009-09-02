@@ -4,7 +4,7 @@ class CardTest < ActiveSupport::TestCase
   fixtures :cardfaces, :cards, :decks
 
   # The Set game has 81 cards, representing 3x3x3x3 attributes.
-  def test_should_have_two_decks_times_eighty_one_cards
+  def test_should_have_eighty_one_cards_per_deck
     vals = Card.find(:all)
     num_decks = Deck.find(:all).length
     num_cards = num_decks * 81
