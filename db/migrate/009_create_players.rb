@@ -2,9 +2,8 @@ class CreatePlayers < ActiveRecord::Migration
   def self.up
     # creating table for players
     create_table :players do |t|
-      t.integer :game_id
-      t.string  :fname,  :limit => 60
-      t.string  :lname,  :limit => 60
+      t.string  :fname,  :limit => 50
+      t.string  :lname,  :limit => 50
       t.integer :wins,   :default => 0
       t.integer :losses, :default => 0
       t.integer :rating, :default => 1000
@@ -17,6 +16,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :player_id
       t.integer :game_id
       t.integer :points, :default => 0
+      t.timestamps
     end
 
     # adding database indexes for referential integrity
@@ -26,8 +26,8 @@ class CreatePlayers < ActiveRecord::Migration
 
   def self.down
    # removing database indexes
-    remove_index "players", :name => "score_game_id_fkey"
-    remove_index "players", :name => "score_player_id_fkey"
+    remove_index "scores", :name => "score_game_id_fkey"
+    remove_index "scores", :name => "score_player_id_fkey"
     # dropping intermediary table, then data-record table.
     drop_table :scores
     drop_table :players

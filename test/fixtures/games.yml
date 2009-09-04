@@ -4,16 +4,9 @@
 
 one:
   id: 1
-  autoshuffle: NULL
 
 two:
   id: 2
-  autoshuffle: NULL
 
 three:
   id: 3
-  autoshuffle: NULL
-
-auto:
-  id: 4
-  autoshuffle: Y

@@ -1,5 +1,5 @@
 # This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of ActiveRecord to incrementally modify your database, and
+# please use the migrations feature of Active Record to incrementally modify your database, and
 # then regenerate this schema definition.
 #
 # Note that this schema.rb definition is the authoritative source for your database schema. If you need
@@ -13,12 +13,12 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number"
-    t.text    "color"
-    t.text    "color_abbrev"
-    t.text    "shading"
-    t.text    "shading_abbrev"
-    t.text    "shape"
-    t.text    "shape_abbrev"
+    t.text    "color",          :limit => 255
+    t.text    "color_abbrev",   :limit => 255
+    t.text    "shading",        :limit => 255
+    t.text    "shading_abbrev", :limit => 255
+    t.text    "shape",          :limit => 255
+    t.text    "shape_abbrev",   :limit => 255
   end
 
   create_table "cards", :force => true do |t|
@@ -42,16 +42,16 @@ ActiveRecord::Schema.define(:version => 9) do
   add_index "decks", ["game_id"], :name => "game_deck_id_fkey"
 
   create_table "games", :force => true do |t|
-    t.text     "autoshuffle"
+    t.integer  "selection_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "started_at"
     t.date     "finished_at"
   end
 
   create_table "players", :force => true do |t|
-    t.integer  "game_id"
-    t.string   "fname",      :limit => 60
-    t.string   "lname",      :limit => 60
+    t.string   "fname",      :limit => 50
+    t.string   "lname",      :limit => 50
     t.integer  "wins",                     :default => 0
     t.integer  "losses",                   :default => 0
     t.integer  "rating",                   :default => 1000
@@ -60,12 +60,14 @@ ActiveRecord::Schema.define(:version => 9) do
   end
 
   create_table "scores", :force => true do |t|
-    t.integer "player_id"
-    t.integer "game_id"
-    t.integer "points",    :default => 0
+    t.integer  "player_id"
+    t.integer  "game_id"
+    t.integer  "points",     :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "scores", ["player_id"], :name => "score_player_id_fkey"
   add_index "scores", ["game_id"], :name => "score_game_id_fkey"
+  add_index "scores", ["player_id"], :name => "score_player_id_fkey"
 
 end

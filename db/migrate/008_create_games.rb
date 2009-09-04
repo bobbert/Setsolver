@@ -1,9 +1,10 @@
 class CreateGames < ActiveRecord::Migration
   def self.up
     create_table :games do |t|
-      t.text    :autoshuffle, :limit => 1
+      t.integer    :selection_count, :default => 0
       t.timestamps
-      t.date    :finished_at
+      t.date       :started_at
+      t.date       :finished_at
     end
 
    # adding database index to Decks for referential integrity

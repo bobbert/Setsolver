@@ -41,15 +41,7 @@ class Game < ActiveRecord::Base
   def new_deck
     d = Deck.new
     decks << d
-    return d.save unless autoshuffle
-    d.shuffle
-  end
-
-  # create new Score object to link player passed in to current game instance.
-  def new_player_score( plyr )
-    sc = Score.new
-    self.scores << sc
-    plyr.scores << sc
+    d.save && d.shuffle
   end
 
   # get current deck in play
@@ -75,7 +67,13 @@ class Game < ActiveRecord::Base
   # adds players to new game
   def add_players( *new_players )
     if ((players.length + new_players.length) <= MAX_PLAYERS)
-      new_players.each {|pl| self.players << pl } 
+      new_players.each do |plyr|
+	sc = Score.new
+	self.scores << sc
+	plyr.scores << sc
+      end
+    else
+      false
     end
   end
 

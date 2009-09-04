@@ -1,9 +1,11 @@
 class GamesController < ApplicationController
+
+  before_filter :get_player_and_game
+
   # GET /players/1/games
   # GET /players/1/games.xml
   def index
     # listing all games within selected player
-    @player = Player.find(params[:player_id])
     @games = @player.games
 
     respond_to do |format|
@@ -15,9 +17,6 @@ class GamesController < ApplicationController
   # GET /players/1/games/1
   # GET /players/1/games/1.xml
   def show
-    @player = Player.find(params[:player_id])
-    @game = Game.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @game }
@@ -27,7 +26,6 @@ class GamesController < ApplicationController
   # GET /players/1/games/new
   # GET /players/1/games/new.xml
   def new
-    @player = Player.find(params[:player_id])
     @game = Game.new
 
     respond_to do |format|
@@ -38,20 +36,18 @@ class GamesController < ApplicationController
 
   # GET /players/1/games/1/edit
   def edit
-    @player = Player.find(params[:player_id])
-    @game = Game.find(params[:id])
+    true
   end
 
   # POST /players/1/games
   # POST /players/1/games.xml
   def create
-    # get player and game, but do not check for Score "connector" object.
-    @player = Player.find(params[:player_id])
+    # create game and save, then add Score connector
     @game = Game.new(params[:game])
 
     respond_to do |format|
       # creating new game, and new association between selected player and game
-      if @game.save && @game.new_player_score(@player)
+      if @game.save && @game.add_players(@player)
         flash[:notice] = 'Game was successfully created.'
         format.html { redirect_to([@player, @game]) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
@@ -65,9 +61,6 @@ class GamesController < ApplicationController
   # PUT /players/1/games/1
   # PUT /players/1/games/1.xml
   def update
-    @player = Player.find(params[:player_id])
-    @game = Game.find(params[:id])
-
     respond_to do |format|
       if @game.update_attributes(params[:game])
         flash[:notice] = 'Game was successfully updated.'
@@ -83,11 +76,7 @@ class GamesController < ApplicationController
   # DELETE /players/1/games/1
   # DELETE /players/1/games/1.xml
   def destroy
-    @player = Player.find(params[:player_id])
-    @game = Game.find(params[:id])
-
     # delete Score first, then Game
-    @score = Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
     @score.destroy if @score
     @game.destroy
 
@@ -103,8 +92,6 @@ class GamesController < ApplicationController
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
   def play
-    @player = Player.find(params[:player_id])
-    @game = Game.find(params[:id])
     # checking if initial page loading or user-submitted load
     if params[:commit]
       selection = get_card_numbers
@@ -124,20 +111,19 @@ class GamesController < ApplicationController
 
   # get HTML table with all active set cards in the table cells
   def refresh
-    @game = Game.find(params[:id])
     render :action => '_board'
   end
 
 private
 
-  # validates player and game ID, and assigns local attributes if true
-  def validate_player_and_game
-    # checking whether player is actively playing the game
-    return false unless Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
-    # assign player and game parameters if valid
+  # get Player, Game, and Score objects.  player and Game must be linked 
+  # for this routine to run successfully.
+  def get_player_and_game
+    if (params[:id])
+      @score = Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
+      @game = Game.find(params[:id])
+    end
     @player = Player.find(params[:player_id])
-    @game = Game.find(params[:id])
-    true
   end
 
   # get card numbers from params hash that takes the following form:
