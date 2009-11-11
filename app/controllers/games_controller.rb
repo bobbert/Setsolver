@@ -96,15 +96,18 @@ class GamesController < ApplicationController
     if params[:commit]
       selection = get_card_numbers
       if selection.length != 3
-        @caption = 'You did not select three cards.'
+        flash[:notice] = 'You did not select three cards.'
       else
 	@found_set = @player.make_set_selection( @game, *selection )
-        @caption = 'The three cards you selected are not a set.' unless @found_set
+        flash[:notice] = 'The three cards you selected are not a set.' unless @found_set
       end
-      @game.refresh_field unless @caption
+    end
+
+    @game.refresh_field unless (flash[:notice] && params[:commit])
+
+    if params[:commit] && !(flash[:notice])
       render :action => '_gamefield'
     else
-      @game.refresh_field
       render :action => 'play'
     end
   end
