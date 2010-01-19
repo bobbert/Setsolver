@@ -11,6 +11,12 @@ ActionController::Routing::Routes.draw do |map|
   # game playing link: /games/1/players/1/play
   map.add_player 'players/:player_id/games/:id/add_player', :controller => 'games', :action => 'add_player'
 
+  # game playing link: /games/1/players/1/play
+  map.remove_player 'players/:player_id/games/:id/remove_player', :controller => 'games', :action => 'remove_player'
+
+  # game playing link: /games/1/players/1/play
+  map.start 'players/:player_id/games/:id/start', :controller => 'games', :action => 'start'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

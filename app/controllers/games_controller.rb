@@ -88,6 +88,13 @@ class GamesController < ApplicationController
 
 #------ my controller methods ----#
 
+  # start playing a game
+  def start
+    return false unless @game.started_at.nil?
+    @game.started_at = Time.now
+    play if @game.save
+  end
+
   # the heart of the Setsolver game logic lies here.
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
@@ -119,19 +126,12 @@ class GamesController < ApplicationController
 
   # add player to current game
   def add_player
-    if !(params[:player])
-      flash[:notice] = 'You did not select a player to add.'
-    elsif @game.started?
-      flash[:notice] = 'You can only add players to a game before starting.'
-    else
-      if params[:player].include? :id
-	new_plyr = Player.find params[:player][:id]
-	@game.add_player new_plyr
-      else
-	flash[:notice] = 'You did not select a player to add.'
-      end
-    end
-    redirect_to(player_game_url)
+    add_remove_player :add
+  end
+
+  # add player to current game
+  def remove_player
+    add_remove_player :remove
   end
 
 private
@@ -156,5 +156,25 @@ private
     nums = cardparams.map {|cardparam| cardparam.to_s.sub(/^card/,'').to_i }.sort
   end
 
+  ADD_REMOVE_OPTS = { :add => 'add_player', :remove => 'remove_player' }
+
+  # internal routine for adding and removing players
+  def add_remove_player( opt )
+    return false unless ADD_REMOVE_OPTS.include? opt
+
+    if !(params[:player])
+      flash[:notice] = "You did not select a player to #{opt.to_s}."
+    elsif @game.started?
+      flash[:notice] = "'You can only #{opt.to_s} players to a game before starting."
+    else
+      if params[:player].include? :id
+	new_plyr = Player.find params[:player][:id]
+	@game.send(ADD_REMOVE_OPTS[opt], new_plyr)
+      else
+	flash[:notice] = "You did not select a player to #{opt.to_s}."
+      end
+    end
+    redirect_to(player_game_url)
+  end
 
 end

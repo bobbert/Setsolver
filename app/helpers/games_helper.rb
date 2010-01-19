@@ -20,6 +20,17 @@ module GamesHelper
     link_to("Game ##{gm.id}", player_game_path(plyr,gm))
   end
 
+  # create game number as link
+  def game_play_link( plyr, gm )
+    if gm.active?
+      link_to("Play game", play_path(plyr,gm))
+    elsif gm.finished?
+      ' Game Finished'  # temporary -- need archiving page
+    else
+      'Game not yet started.'
+    end
+  end
+
   # renders Set board as HTML
   def render_board( gm )
     return "<table></table>" unless gm

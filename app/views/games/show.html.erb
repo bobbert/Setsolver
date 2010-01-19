@@ -3,11 +3,17 @@
 </p>
 
 <% if @game.started? %>
-  <p><b>Game created on:</b>
-    <%=h @game.created_at %>
-  </p><p>
-    <b>Number of sets found:</b>
-    <%= h @game.selection_count %>
+  <p><b>Started on:</b> <%=h @game.created_at %>
+    <ol>
+    <% @game.scores.each do |sc| %>
+      <li><%= sc.player.name %>: Score = <%= sc.points %>
+      </li>
+    <% end %>
+    </ol>
+    Total number of sets found: <%= @game.selection_count %>
+  </p>
+  <p>
+     <%= link_to "Continue Playing", play_path(@player,@game) %>
   </p>
 <% else %>
   <p><b>Game not yet started.</b>
@@ -15,20 +21,34 @@
     Players added to game:
     <ol>
     <% @game.players.delete_if {|p| p == @player }.each do |plyr| %>
-      <li><%= plyr.name %></li>
+      <li><%= plyr.name %>
+      <% form_tag :action => 'remove_player', :id => @game do %>
+	<%= hidden_field_tag('player[id]', plyr.id.to_s) %>
+	<%= submit_tag 'Remove Player' %>
+      <% end %>
+      </li>
     <% end %>
     </ol>
   <p>
   </p>
   <p>
-    Add players by selecting a player below, or press the "Start Game" button to start playing.<br />
+    Add players by selecting a player below.<br />
     <% form_tag :action => 'add_player', :id => @game do %>
       <div>
 	<%= collection_select(:player, :id, @game.player_add_list, :id, :name) %>
 	<%= submit_tag 'Add Player' %>
       </div>
     <% end %>
-
+  </p>
+  <p>
+    ...or press the "Start Game" button to start playing.
+  </p>
+  <p>
+    <% form_tag :action => 'start', :id => @game do %>
+      <div>
+	<%= submit_tag 'Start Playing!' %>
+      </div>
+    <% end %>
   </p>
 <% end %>
 

@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
   after_create :new_deck
 
   FIELD_SIZE = 12
-  VIEW_COLS = 6
+  VIEW_COLS = 4
 
   CARD_WIDTH = 80
   CARD_HEIGHT = 120
@@ -95,6 +95,13 @@ class Game < ActiveRecord::Base
     sc = Score.new
     self.scores << sc
     new_player.scores << sc
+  end
+
+  # remove player from new game -- returns player if removed
+  def remove_player( plyr )
+    sc = Score.find_by_player_id_and_game_id( plyr.id, self.id )
+    return false unless sc
+    sc.player if sc.destroy
   end
 
   # get names of players

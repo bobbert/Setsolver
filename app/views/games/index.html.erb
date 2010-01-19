@@ -1,8 +1,13 @@
 <h1>Listing games for <%= @player.name %></h1>
 
 <% for game in @player.games %>
-    <p><b><%= game_number_as_link(@player,game) %>:</b> (<%= game.player_names %>): <%= link_to "Play Game", play_path(@player,game) %>
+    <p><%= game_number_as_link(@player,game) %>: (<%= game.player_names %>)  <%= game_play_link(@player,game) %>
     </p>
 <% end %>
 
-<%= link_to 'New game', new_player_game_path %>
+<p>
+  <%= link_to 'New game', new_player_game_path %>
+</p>
+<p>
+  <%= link_to '<< Back to Player Info', player_path(@player) %>
+</p>

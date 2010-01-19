@@ -2,11 +2,15 @@
 <p align=right>
 <%= link_to '[ << Back to List of Games ]', player_games_path %>
 </p>
-<% form_tag :action => 'play', :id => @game do %>
-  <div id="setgame">
-    <%= render :partial => 'gamefield' %>
-  </div>
-  <%= submit_tag 'Submit Three Card Set' %>
+<% if @game.active? %>
+  <% form_tag :action => 'play', :id => @game do %>
+    <div id="setgame">
+      <%= render :partial => 'gamefield' %>
+    </div>
+    <%= submit_tag 'Submit Three Card Set' %>
+  <% end %>
+<% else %>
+  <p>This game has not yet started.</p>
+  <p><%= link_to '[ << Back to Game ]', player_game_path %></p>
 <% end %>
-
 
