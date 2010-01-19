@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
   BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
   BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
 
-  MAX_PLAYERS = 4
+  MAX_NUMBER_OF_PLAYERS = 4
 
 
   # each_cmb3 (Class method)
@@ -59,22 +59,42 @@ class Game < ActiveRecord::Base
     scores.sort.map {|sc| sc.player }
   end
 
-  # is game active?  Active games musst have at least one player.
-  def active?
-    players.length > 0
+  # has game been started?  Games musst have at least one player and a start date to be considered started.
+  def started?
+    !(started_at.nil? || players.length == 0)
   end
 
-  # adds players to new game
-  def add_players( *new_players )
-    if ((players.length + new_players.length) <= MAX_PLAYERS)
-      new_players.each do |plyr|
-	sc = Score.new
-	self.scores << sc
-	plyr.scores << sc
-      end
-    else
-      false
-    end
+  # is game active?...i.e. started but not finished?
+  def active?
+    started? && !finished?
+  end
+
+  # has game been completed?
+  def finished?
+    !(finished_at.nil?)
+  end
+    
+  # is this a multi-player game?
+  def multiplayer?
+    players.length > 1
+  end
+
+   # can players be added to this game?
+  def can_add_player?
+    players.length < MAX_NUMBER_OF_PLAYERS
+  end
+
+  # list of players that can be added
+  def player_add_list
+    Player.find(:all).delete_if {|p| players.include? p }
+  end
+
+  # adds player to new game -- returns player added if successful
+  def add_player( new_player )
+    return false unless can_add_player?
+    sc = Score.new
+    self.scores << sc
+    new_player.scores << sc
   end
 
   # get names of players

@@ -47,7 +47,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       # creating new game, and new association between selected player and game
-      if @game.save && @game.add_players(@player)
+      if @game.save && @game.add_player(@player)
         flash[:notice] = 'Game was successfully created.'
         format.html { redirect_to([@player, @game]) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
@@ -115,6 +115,23 @@ class GamesController < ApplicationController
   # get HTML table with all active set cards in the table cells
   def refresh
     render :action => '_board'
+  end
+
+  # add player to current game
+  def add_player
+    if !(params[:player])
+      flash[:notice] = 'You did not select a player to add.'
+    elsif @game.started?
+      flash[:notice] = 'You can only add players to a game before starting.'
+    else
+      if params[:player].include? :id
+	new_plyr = Player.find params[:player][:id]
+	@game.add_player new_plyr
+      else
+	flash[:notice] = 'You did not select a player to add.'
+      end
+    end
+    redirect_to(player_game_url)
   end
 
 private

@@ -20,7 +20,7 @@ class Cardface < ActiveRecord::Base
 
   # human-readable name of card
   def to_s
-    printable_shape = ((number != 1) ? shape.pluralize : shape.singularize)
+    printable_shape = (shape.singularize if number == 1) || shape.pluralize
     number.to_s + ' ' + shading + ' ' + color + ' ' + printable_shape
   end
 

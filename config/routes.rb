@@ -8,6 +8,9 @@ ActionController::Routing::Routes.draw do |map|
   # game playing link: /games/1/players/1/play
   map.play 'players/:player_id/games/:id/play', :controller => 'games', :action => 'play'
 
+  # game playing link: /games/1/players/1/play
+  map.add_player 'players/:player_id/games/:id/add_player', :controller => 'games', :action => 'add_player'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

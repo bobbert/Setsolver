@@ -2,7 +2,7 @@
 <p><%= link_to "Create new game for #{@player.fname}", new_player_game_path(@player) %></p>
 <ul>
 <% for game in @player.games %>
-  <li> Game <%= game.id %> (<%= game.player_names %>): 
+  <li><%= game_number_as_link(@player,game) %> (<%= game.player_names %>): 
       <%= link_to "Play game", play_path(@player,game) %> |
       <%= link_to "Show game", player_game_path(@player,game) %> |
       <%= link_to "Edit game", edit_player_game_path(@player,game) %>

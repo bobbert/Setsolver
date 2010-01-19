@@ -201,3 +201,13 @@ test
 vendor
   External libraries that the application depends on. Also includes the plugins subdirectory.
   This directory is in the load path.
+
+-------
+
+My notes: 1. stuff I needed to get Rails working:
+apt-get install ruby1.8-dev
+apt-get install libopenssl-ruby 
+apt-get install libmysqlclient15-dev
+gem install mysql -- --with-mysql-config
+create 'bobbert' account on MySQL (this needs to be changed)
+

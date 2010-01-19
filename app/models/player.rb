@@ -35,12 +35,12 @@ class Player < ActiveRecord::Base
 
   # get all games played by this player
   def active_games
-    scores.map {|sc| sc.game }.delete_if {|g| !(g.finished_by.nil?) }
+    scores.map {|sc| sc.game }.select {|g| g.active? }
   end
 
-  # get all games played by this player
+  # get all games completed by this player
   def archived_games
-    scores.map {|sc| sc.game }.delete_if {|g| g.finished_by.nil? }
+    scores.map {|sc| sc.game }.select {|g| g.finished? }
   end
 
   # evaluates player submission, and if set is valid:

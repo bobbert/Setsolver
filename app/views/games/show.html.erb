@@ -1,13 +1,43 @@
 <p>
-  <b>Selection Count:</b>
-  <%= h @game.selection_count %>
+  <b>Game #<%= @game.id %>: <%= @game.player_names %></b>
 </p>
 
-<p>
-  <b>Finished at:</b>
-  <%=h @game.finished_at %>
-</p>
+<% if @game.started? %>
+  <p><b>Game created on:</b>
+    <%=h @game.created_at %>
+  </p><p>
+    <b>Number of sets found:</b>
+    <%= h @game.selection_count %>
+  </p>
+<% else %>
+  <p><b>Game not yet started.</b>
+  </p>
+    Players added to game:
+    <ol>
+    <% @game.players.delete_if {|p| p == @player }.each do |plyr| %>
+      <li><%= plyr.name %></li>
+    <% end %>
+    </ol>
+  <p>
+  </p>
+  <p>
+    Add players by selecting a player below, or press the "Start Game" button to start playing.<br />
+    <% form_tag :action => 'add_player', :id => @game do %>
+      <div>
+	<%= collection_select(:player, :id, @game.player_add_list, :id, :name) %>
+	<%= submit_tag 'Add Player' %>
+      </div>
+    <% end %>
 
+  </p>
+<% end %>
+
+<% if @game.finished? %>
+  <p>
+    <b>Game completed on:</b>
+    <%=h @game.finished_at %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_player_game_path(@player, @game) %> |
 <%= link_to 'Back', player_games_path %>

@@ -15,6 +15,11 @@ module GamesHelper
     str
   end
 
+  # create game number as link
+  def game_number_as_link( plyr, gm )
+    link_to("Game ##{gm.id}", player_game_path(plyr,gm))
+  end
+
   # renders Set board as HTML
   def render_board( gm )
     return "<table></table>" unless gm
