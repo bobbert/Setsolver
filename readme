@@ -211,3 +211,13 @@ apt-get install libmysqlclient15-dev
 gem install mysql -- --with-mysql-config
 create 'bobbert' account on MySQL (this needs to be changed)
 
+--------
+
+Other info:
+config/dbpass.yml: DB password YAML file w/ 3 lines (dev, test, prod);
+                   add this file/path to git exclude file
+config/secret.yml: Facebooker secret key as YAML file; add this file/path 
+                   to git exclude file as well.
+
+
+

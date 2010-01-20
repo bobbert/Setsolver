@@ -11,11 +11,14 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+
+<% h = YAML.load_file("#{RAILS_ROOT}/config/dbpass.yml") %>
+
 development:
   adapter: mysql
   database: setsolver_dev
   username: bobbert
-  password: drynth4s
+  password: <%= h['password_dev'] %>
   host: localhost
   port: 3331
   socket: /var/run/mysqld/mysqld.sock
@@ -27,7 +30,7 @@ test:
   adapter: mysql
   database: setsolver_test
   username: bobbert
-  password: drynth4s
+  password: <%= h['password_test'] %>
   host: localhost
   port: 3332
   socket: /var/run/mysqld/mysqld.sock
@@ -36,7 +39,7 @@ production:
   adapter: mysql
   database: setsolver_prod
   username: bobbert
-  password: drynth4s
+  password: <%= h['password_prod'] %>
   host: localhost
   port: 80
   socket: /var/run/mysqld/mysqld.sock
