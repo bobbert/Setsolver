@@ -22,12 +22,14 @@ class CreatePlayers < ActiveRecord::Migration
     # adding database indexes for referential integrity
     add_index "scores", ["player_id"], :name => "score_player_id_fkey"
     add_index "scores", ["game_id"], :name => "score_game_id_fkey"
+    add_index "cards",  ["claimed_by"], :name => "card_claimed_by_fkey"
   end
 
   def self.down
    # removing database indexes
     remove_index "scores", :name => "score_game_id_fkey"
     remove_index "scores", :name => "score_player_id_fkey"
+    remove_index "cards",  :name => "card_claimed_by_fkey"
     # dropping intermediary table, then data-record table.
     drop_table :scores
     drop_table :players

@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 9) do
   end
 
   add_index "cards", ["cardface_id"], :name => "cardface_card_id_fkey"
+  add_index "cards", ["claimed_by"], :name => "card_claimed_by_fkey"
   add_index "cards", ["deck_id"], :name => "deck_card_id_fkey"
 
   create_table "decks", :force => true do |t|
@@ -42,11 +43,13 @@ ActiveRecord::Schema.define(:version => 9) do
   add_index "decks", ["game_id"], :name => "game_deck_id_fkey"
 
   create_table "games", :force => true do |t|
-    t.integer  "selection_count", :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "selection_count",               :default => 0
+    t.string   "name",            :limit => 50
+    t.date     "last_played_at"
     t.date     "started_at"
     t.date     "finished_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "players", :force => true do |t|

@@ -160,6 +160,14 @@ class Game < ActiveRecord::Base
     indices.map {|i| active_field[i.to_i] }
   end
 
+  # start playing the game
+  def start
+    return false if started?
+    self.started_at = Time.now
+    self.last_played_at = Time.now
+    self.save
+  end
+
 private
 
   # fills in-play game field to size <number>.

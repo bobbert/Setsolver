@@ -15,9 +15,14 @@ module GamesHelper
     str
   end
 
+  # quick description of game
+  def game_desc( gm )
+    "[\##{gm.id}] \"#{gm.name}\""
+  end
+
   # create game number as link
-  def game_number_as_link( plyr, gm )
-    link_to("Game ##{gm.id}", player_game_path(plyr,gm))
+  def game_desc_as_link( plyr, gm )
+    link_to(game_desc(gm), player_game_path(plyr,gm))
   end
 
   # create game number as link

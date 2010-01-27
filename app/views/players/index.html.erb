@@ -5,7 +5,7 @@
     <p><b>#<%= player.id %>: <%= link_to player.name, player_path(player) %> (Rating=</b> <%= player.rating %>)</p>
     <ul>
     <% for game in player.games %>
-      <li><%= game_number_as_link(player, game) %>: <%= game_play_link(player,game) %>
+      <li><%= game_desc_as_link(player, game) %>: <%= game_play_link(player,game) %>
       </li>
     <% end %>
     </ul>

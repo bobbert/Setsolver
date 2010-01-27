@@ -90,9 +90,12 @@ class GamesController < ApplicationController
 
   # start playing a game
   def start
-    return false unless @game.started_at.nil?
-    @game.started_at = Time.now
-    play if @game.save
+    if @game.start
+      play
+    else
+      flash[:notice] = 'Gamme could not start.'
+      redirect_to([@player, @game])
+    end
   end
 
   # the heart of the Setsolver game logic lies here.

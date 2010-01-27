@@ -1,5 +1,5 @@
 <p>
-  <b>Game #<%= @game.id %>: <%= @game.player_names %></b>
+  <b><%= game_desc(@game) %>  (<%= @game.player_names %>)</b>
 </p>
 
 <% if @game.started? %>

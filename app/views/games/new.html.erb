@@ -4,8 +4,8 @@
 
 <% form_for([@player,@game]) do |f| %>
   <p>
-    <b>Selection Count:</b> 
-      Initialized to 0.
+    <b>Enter a name for your game:</b>
+    <%= f.text_field :name %>
   </p>
 
   <p>

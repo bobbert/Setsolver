@@ -2,9 +2,11 @@ class CreateGames < ActiveRecord::Migration
   def self.up
     create_table :games do |t|
       t.integer    :selection_count, :default => 0
-      t.timestamps
+      t.string     :name, :limit => 50
+      t.date       :last_played_at
       t.date       :started_at
       t.date       :finished_at
+      t.timestamps
     end
 
    # adding database index to Decks for referential integrity
