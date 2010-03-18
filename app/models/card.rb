@@ -1,8 +1,15 @@
 class Card < ActiveRecord::Base
   belongs_to :cardface
   belongs_to :deck
-  acts_as_list :scope => :deck, :column => :facedown_position
+  belongs_to :threecardset
 
+  validate :must_have_position_attribute
+
+  # validation conditions: must have faceup or facedown position, but not both
+  def must_have_position_attribute
+    errors.add_to_base("Card ##{self.id} has ambiguous position: facedown_pos=#{facedown_position.to_s}; " + 
+                       "faceup_pos=#{faceup_position.to_s}.!") unless (facedown_position.blank? ^ faceup_position.blank?)
+  end
 
   # the abbreviated name of the card
   def abbrev
@@ -34,14 +41,19 @@ class Card < ActiveRecord::Base
     facedown_position && true
   end
 
-  # is card in play?
-  def in_play?
-    facedown_position.nil? && faceup_position && claimed_by.nil?
-  end
-
   # is card claimed?
   def claimed?
-    facedown_position.nil? && faceup_position && claimed_by
+    facedown_position.nil? && faceup_position && !(threecardset.blank?)
+  end
+
+  # is card in the field of play?
+  def gamefield?
+    facedown_position.nil? && faceup_position && threecardset.blank?
+  end
+
+  # player who claimed card as part of a Set
+  def claimed_by
+    threecardset.player if claimed?
   end
 
   # comparison operator - evaluates in the following order of precedence:
@@ -52,7 +64,8 @@ class Card < ActiveRecord::Base
       return (self.facedown? ? 1 : -1)  # facedown sorted first
     else
       #both facedown or faceup: just compare positions
-      return (self.position <=> other.position)
+       pos = (self.position.to_i <=> other.position.to_i)
+       return pos unless pos == 0
     end
     self.id <=> other.id
   end

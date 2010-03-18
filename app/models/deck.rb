@@ -1,5 +1,5 @@
 class Deck < ActiveRecord::Base
-  has_many :cards, :order => "facedown_position"
+  has_many :cards
   belongs_to :game
 
   after_create :reset
@@ -20,26 +20,26 @@ class Deck < ActiveRecord::Base
   end
 
   # get number of cards in facedown deck
-  def facedown_length
-    cards.find_all {|c| c.facedown? }.length
+  def faceup
+    cards.find_all {|c| !(c.facedown?) }.sort
   end
 
   # gets all cards in game field
-  def in_play
-    cards.find_all {|c| c.in_play? }.sort
-  end
-
-  # gets number of cards in game field
-  def number_in_play
-    cards.find_all {|c| c.in_play? }.length
+  def gamefield
+    cards.find_all {|c| c.gamefield? }.sort
   end
 
   # get claimed deck; get only cards claimed by player_id if an integer is passed in
   def claimed(plyr_id = nil)
-    cards.find_all {|c| c.claimed? }.sort unless plyr_id
-    cards.find_all {|c| c.claimed? && (c.claimed_by == plyr_id.to_i) }.sort
+     cards.find_all {|c| c.claimed? && (plyr_id.nil? || (c.set.player == plyr_id.to_i)) }.sort
   end
 
+  # return next faceup position in deck
+  def next_faceup_position
+    return 1 if (faceup == [])
+    faceup.last.faceup_position + 1
+  end
+  
   # resets game deck with all fresh face-down cards
   def reset
     # delete all old cards, then reload deck
@@ -72,35 +72,13 @@ class Deck < ActiveRecord::Base
   # The cards are returned if saved successfuly, and number of
   # cards returned matches number requested.
   def deal(number = 1)
-    to_be_dealt = cards.find_all do |c|
-      c.facedown_position && c.facedown_position <= number
+    faceup_init_pos = next_faceup_position
+    cards_to_deal = facedown.slice(0, number)
+    cards_to_deal.each_with_index do |c, i|
+      c.facedown_position = nil
+      c.faceup_position = faceup_init_pos + i
+      return false unless c.save
     end
-    num_prev_in_play = in_play.length
-    faceup_nums = next_faceup_positions to_be_dealt.length
-    # removing from facedown to faceup list, one card per iteration
-    to_be_dealt.sort!.each_with_index do |tbd_c, tbd_i|
-      tbd_c.reload
-      tbd_c.remove_from_list
-      tbd_c.faceup_position = faceup_nums[tbd_i]
-      tbd_c.save
-    end
-    save && reload
-    to_be_dealt
-  end
-
-private
-
-  # getting next numbers for faceup position, as array, by finding
-  # unused numbers in faceup_position progression
-  def next_faceup_positions( number = 1 )
-    num_possible_ind = number_in_play + number
-    # get existing faceup position numbers
-    faceup_inds = in_play.map {|c| c.faceup_position }
-    remaining = (1..num_possible_ind).to_a.delete_if do |i|
-      faceup_inds.include? i
-    end
-    # return first <number> remaining numbers.
-    return remaining.slice( 0, number )
   end
 
 end

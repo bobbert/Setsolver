@@ -17,6 +17,11 @@ class Score < ActiveRecord::Base
     !(higher_score_plyrs.empty?)
   end
 
+  def increment
+    points = points.to_i + 1
+    save
+  end
+
   # comparison operator - orders by game first, then players within game.
   # Finally orders by ID, but this is only a sanity check (should not happen).
   def <=>(other)

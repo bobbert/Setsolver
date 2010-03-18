@@ -5,7 +5,6 @@ class CreateCards < ActiveRecord::Migration
       t.integer :deck_id
       t.integer :facedown_position
       t.integer :faceup_position
-      t.integer :claimed_by
     end
 
    # adding database index for referential integrity

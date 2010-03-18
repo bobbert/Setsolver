@@ -91,6 +91,7 @@ class GamesController < ApplicationController
   # start playing a game
   def start
     if @game.start
+      @sets = []
       play
     else
       flash[:notice] = 'Gamme could not start.'
@@ -102,18 +103,20 @@ class GamesController < ApplicationController
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
   def play
+    @sets = []
     # checking if initial page loading or user-submitted load
     if params[:commit]
       selection = get_card_numbers
       if selection.length != 3
         flash[:notice] = 'You did not select three cards.'
       else
-	@found_set = @player.make_set_selection( @game, *selection )
+	selection_cards = selection.map {|i| @game.field[i] }
+	@found_set = @game.make_set_selection( @player, *selection_cards )
         flash[:notice] = 'The three cards you selected are not a set.' unless @found_set
       end
     end
 
-    @game.refresh_field unless (flash[:notice] && params[:commit])
+    @sets = @game.fill_gamefield_with_sets unless (flash[:notice] && params[:commit])
 
     if params[:commit] && !(flash[:notice])
       render :action => '_gamefield'

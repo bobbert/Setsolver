@@ -20,7 +20,7 @@ development:
   username: bobbert
   password: <%= h['password_dev'] %>
   host: localhost
-  port: 3331
+  port: 3000
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as 'test' will be erased and
@@ -32,7 +32,7 @@ test:
   username: bobbert
   password: <%= h['password_test'] %>
   host: localhost
-  port: 3332
+  port: 3000
   socket: /var/run/mysqld/mysqld.sock
 
 production:
