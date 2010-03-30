@@ -34,6 +34,12 @@ class Player < ActiveRecord::Base
   end
 
   # get all games played by this player
+  def score( gm )
+    sc = scores.select {|sc| sc.game == gm }.first
+    sc ? sc.points : 0
+  end
+
+  # get all games played by this player
   def active_games
     scores.map {|sc| sc.game }.select {|g| g.active? }
   end

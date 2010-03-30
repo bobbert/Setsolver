@@ -21,6 +21,11 @@ class Card < ActiveRecord::Base
     cardface.img_name
   end
 
+  # image name, used to show picture
+  def img_path
+    '/images/cards/' + img_name
+  end
+
   # card name -- identical to human-readable name (to_s)
   def name
     cardface.to_s

@@ -16,6 +16,13 @@ class Game < ActiveRecord::Base
 
   MAX_NUMBER_OF_PLAYERS = 4
 
+  #MAX_LISTEN_INTERVAL_SECONDS = 10
+  #POLL_INTERVAL_SECONDS = 0.5
+
+  #def self.num_polls
+  #  (MAX_LISTEN_INTERVAL_SECONDS / POLL_INTERVAL_SECONDS).to_i
+  #end
+  
 
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
@@ -54,6 +61,12 @@ class Game < ActiveRecord::Base
   # get current gamefield
   def field
     deck.gamefield
+  end
+  
+  def status
+    return 'active' if active?
+    return 'finished' if finished?
+    return 'waiting'
   end
   
   # get all games played by this player
@@ -114,7 +127,7 @@ class Game < ActiveRecord::Base
   # fills gamefield so that it contains at least 1 set, then return array of sets.
   # Returns an empty array if no sets are found and the deck is empty (i.e. game finished)
   def fill_gamefield_with_sets
-    deck.deal (FIELD_SIZE - field.length) if field.length < FIELD_SIZE
+    deck.deal( (FIELD_SIZE - field.length) ) if field.length < FIELD_SIZE
     until ((tmp_sets = find_sets).length > 0)  # assigning to temp variable "tmp_sets"
       return [] if deck.all_dealt?
       deck.deal 3

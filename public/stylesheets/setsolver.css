@@ -81,9 +81,8 @@ BDO[DIR="rtl"]  { direction: rtl; unicode-bidi: bidi-override }
 
 /* 2. Application-specific classes and selectors */
 
-#setgame table      { margin-left: 30px; background-color: #ffc }
+#setgame table                      { margin-left: 30px; background-color: #ffc }
 #setgame table tr td.selected       { background-color:#008; padding:5px }
-#setgame table tr td img.selected   { float:none }
-#setgame table tr td.unselected     { background-color:#cc6; padding:5px }
-#setgame table tr td img.unselected { float:none }
+#setgame table tr td                { background-color:#cc6; padding:5px }
+#setgame table tr td img            { float:none }
 

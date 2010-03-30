@@ -94,41 +94,62 @@ class GamesController < ApplicationController
       @sets = []
       play
     else
-      flash[:notice] = 'Gamme could not start.'
+      flash[:error] = "An error occurred when trying to initialize game ##{@game.id}."
       redirect_to([@player, @game])
     end
+  end
+
+  # plays submitted Set cards if submit button was clicked, then refreshes board
+  def play
+    play_cards if params[:commit]
+    @sets = @game.fill_gamefield_with_sets
+    render :action => 'play'
+  end
+
+  # Ajax refresh routine for auto-selection
+  def refresh
+    render_action = (play_cards ? 'setgame.xml' : 'setgame_unchanged.xml')
+    @sets = @game.fill_gamefield_with_sets
+    render :action => render_action
   end
 
   # the heart of the Setsolver game logic lies here.
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
-  def play
-    @sets = []
-    # checking if initial page loading or user-submitted load
-    if params[:commit]
-      selection = get_card_numbers
-      if selection.length != 3
-        flash[:notice] = 'You did not select three cards.'
-      else
-	selection_cards = selection.map {|i| @game.field[i] }
-	@found_set = @game.make_set_selection( @player, *selection_cards )
-        flash[:notice] = 'The three cards you selected are not a set.' unless @found_set
-      end
+  def play_cards
+    selection = get_card_numbers
+    if (selection.length != 3)
+      flash[:error] = 'You did not select three cards.'
+      return false
     end
-
-    @sets = @game.fill_gamefield_with_sets unless (flash[:notice] && params[:commit])
-
-    if params[:commit] && !(flash[:notice])
-      render :action => '_gamefield'
-    else
-      render :action => 'play'
+    selection_cards = selection.map {|i| @game.field[i] }
+    @found_set = @game.make_set_selection( @player, *selection_cards )
+    unless @found_set
+      flash[:notice] = 'The three cards you selected are not a set.'
+      return false
     end
+    flash[:notice] = nil
+    flash[:error] = nil
+    true
   end
-
-  # get HTML table with all active set cards in the table cells
-  def refresh
-    render :action => '_board'
-  end
+  
+  #def refresh
+  #  last_count = @game.selection_count
+  #  1.upto(Game.num_polls) do |poll|
+  #    logger.warn Game.find(params[:id]).selection_count
+  #    if last_count != @game.reload.selection_count
+  #     render :action => 'setgame.xml'
+  #     return true
+  #    end
+  #    sleep Game::POLL_INTERVAL_SECONDS
+  #  end
+  #  render :action => 'setgame_unchanged.xml'
+  #end
+  
+  ## get HTML table with all active set cards in the table cells
+  #def refresh
+  #  render :action => '_board'
+  #end
 
   # add player to current game
   def add_player
@@ -145,11 +166,18 @@ private
   # get Player, Game, and Score objects.  player and Game must be linked 
   # for this routine to run successfully.
   def get_player_and_game
-    if (params[:id])
-      @score = Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
-      @game = Game.find(params[:id])
-    end
+    flash[:error] = nil
+    @sets = []
     @player = Player.find(params[:player_id])
+    if (params[:id])
+      @game = Game.find(params[:id])
+      @score = Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
+      if @score.blank?
+        flash[:error] = "Player ##{params[:player_id]} is not a member of this game."
+        return false
+      end
+    end
+    true
   end
 
   # get card numbers from params hash that takes the following form:
@@ -174,10 +202,10 @@ private
       flash[:notice] = "'You can only #{opt.to_s} players to a game before starting."
     else
       if params[:player].include? :id
-	new_plyr = Player.find params[:player][:id]
-	@game.send(ADD_REMOVE_OPTS[opt], new_plyr)
+        new_plyr = Player.find params[:player][:id]
+        @game.send(ADD_REMOVE_OPTS[opt], new_plyr)
       else
-	flash[:notice] = "You did not select a player to #{opt.to_s}."
+        flash[:notice] = "You did not select a player to #{opt.to_s}."
       end
     end
     redirect_to(player_game_url)

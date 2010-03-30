@@ -3,6 +3,7 @@
 <%= link_to '[ << Back to List of Games ]', player_games_path %>
 </p>
 <% if @game.active? %>
+  <p id="submitbar" style="display:none;">Submitting set; waiting for response <img src="/images/spinner.gif"></p>
   <% form_tag :action => 'play', :id => @game do %>
     <div id="setgame">
       <%= render :partial => 'gamefield' %>
