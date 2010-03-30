@@ -17,9 +17,16 @@ class Score < ActiveRecord::Base
     !(higher_score_plyrs.empty?)
   end
 
+  # increment score by 1 and save
   def increment
-    points = points.to_i + 1
+    self.points = points.to_i + 1
     save
+  end
+
+  # return list of all sets selected by player within this game.  THe number of sets
+  # returned is not necessarily equal to the point total.
+  def sets
+    Threecardset.find_all_by_player_id( player.id ).select {|t| t.game == game }
   end
 
   # comparison operator - orders by game first, then players within game.

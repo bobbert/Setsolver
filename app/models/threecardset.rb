@@ -29,6 +29,11 @@ class Threecardset < ActiveRecord::Base
     deck.game if deck
   end
 
+  # returns Score object (game-player asso
+  def score
+    Score.find_by_player_id_and_game_id( player.id, game.id )
+  end
+  
   # returns list of common attributes within set
   def common_attributes
     cf = cardfaces

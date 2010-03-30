@@ -33,10 +33,9 @@ class Player < ActiveRecord::Base
     scores.sort.map {|sc| sc.game }
   end
 
-  # get all games played by this player
+  # return Score corresponding to game passed in
   def score( gm )
-    sc = scores.select {|sc| sc.game == gm }.first
-    sc ? sc.points : 0
+    scores.select {|sc| sc.game == gm }.first
   end
 
   # get all games played by this player

@@ -25,9 +25,9 @@ xml.setgame do
   xml.gamestats do
     @game.players.each do |plyr|
       xml.player do
-	xml.id          plyr.id
-	xml.name        plyr.name
-	xml.score       plyr.score(@game)
+        xml.id          plyr.id
+        xml.name        plyr.name
+        xml.points      plyr.score(@game).points
       end
     end
   end

@@ -62,18 +62,31 @@ class Game < ActiveRecord::Base
   def field
     deck.gamefield
   end
-  
+
+  # return game status in human-readable form
   def status
     return 'active' if active?
     return 'finished' if finished?
     return 'waiting'
   end
-  
-  # get all games played by this player
+
+  # get all players playing in this game
   def players
     scores.sort.map {|sc| sc.player }
   end
 
+  # return Score corresponding to player passed in
+  def score( plyr )
+    scores.select {|sc| sc.player == plyr }.first
+  end
+
+  # updates score: player's score increases by 1 and set selection count increases by 1 as well
+  def increment_score( plyr )
+    score(plyr).increment
+    self.selection_count += 1
+    save
+  end
+  
   # has game been started?  Games musst have at least one player and a start date to be considered started.
   def started?
     !(started_at.nil? || players.length == 0)
@@ -165,7 +178,7 @@ class Game < ActiveRecord::Base
   def make_set_selection( plyr, *cards )
     return false unless is_set? *cards
     # increment score
-    player_score = Score.find_by_player_id_and_game_id( plyr.id, self.id ).increment
+    increment_score plyr
     # create new set
     newset = Threecardset.new :cards => cards, :player => plyr
     newset if newset.save

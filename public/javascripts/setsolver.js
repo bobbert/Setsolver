@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   $(':checkbox').hide();
+  $('input:submit').hide();
 
   $('#setgame table tr td').click(function() {
     selectSetCard($(this));
@@ -31,11 +32,11 @@ $(document).ready(function() {
       url: (checked_params ? (xml_url + '?' + checked_params): xml_url),
       success: function(xhr) { 
         parseGameXml(xhr);
-	resetBoard();
+        resetBoard();
         //$('#setgame').attr('innerHTML', xhr);
       },
       error: function(xml) { 
-	resetBoard();
+        resetBoard();
       }
     });
   }
