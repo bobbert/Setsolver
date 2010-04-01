@@ -7,6 +7,9 @@
   <% form_tag :action => 'play', :id => @game do %>
     <div id="setgame">
       <%= render :partial => 'gamefield' %>
+      <div id="score_panel" style="float:right; width:300px;">
+	
+      </div>
     </div>
     <%= submit_tag 'Submit Three Card Set' %>
   <% end %>

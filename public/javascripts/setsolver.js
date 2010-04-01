@@ -3,12 +3,8 @@ $(document).ready(function() {
   $(':checkbox').hide();
   $('input:submit').hide();
 
-  $('#setgame table tr td').click(function() {
-    selectSetCard($(this));
-  });
-
-  $('#setgame table tr td input:checkbox').change(function() {
-    is_checked = $(this).attr('checked');
+  $('#setboard ul.setboard-row li img').click(function() {
+    selectSetCard($(this).parent());
   });
 
   selectSetCard = function(cell) {
@@ -17,14 +13,14 @@ $(document).ready(function() {
       was_checked = chk.attr('checked');
       chk.attr('checked', !was_checked);
       was_checked ? cell.removeClass('selected') : cell.addClass('selected');
-      if ( $('td.selected input:checkbox:checked').length >= 3 ) {
+      if ( $('#setboard ul.setboard-row li.selected input:checkbox:checked').length >= 3 ) {
         sendSetRequest();
       }
     }
   }
 
   sendSetRequest = function() {
-    var checked_params = $.param($('td.selected input:checkbox:checked'));
+    var checked_params = $.param($('li.selected input:checkbox:checked'));
     var xml_url = $('form').attr('action').replace(/[A-Za-z_]+$/,'refresh');
     $('#submitbar').show();
     $.ajax({
@@ -53,14 +49,24 @@ $(document).ready(function() {
     var num_cards = $(xml).find("field_size").text();
     var indx = 0;
 
+    // calculate difference between number of XML cards and number of cards in browser
+    var new_field_size_diff = parseInt(num_cards) - $('#setboard ul.setboard-row li').length;
+
+    // call routine to add or remove cards, if new gamefield contains a different number of cards
+    while (new_field_size_diff > 0) {
+      addCells();
+      new_field_size_diff = new_field_size_diff - 3;
+    }
+    while (new_field_size_diff < 0) {
+      removeCells();
+      new_field_size_diff = new_field_size_diff + 3;
+    }
+
     $('#notice, #error, #remaining, #num_sets').each(function() {
       $(this).text( $(xml).find(this.id).text() );
     });
 
-    // RWP TEMP: if num_cards != number of nodes in webpage: call routine to add/remove nodes
-
-    // get list of all set card images
-    var img_list = $('#setboard tr td img');
+    var img_list = $('#setboard ul.setboard-row li img');
 
     // find picture and append contents to image viewer
     $(xml).find("card").each(function()
@@ -76,45 +82,25 @@ $(document).ready(function() {
     });
   }
 
+  // adds new column to the right of Set gamefield
+  addCells = function() {
+    var num_cards = $('#setboard ul.setboard-row li').length;
+    $('#setboard').css('width',((num_cards * 101 / 3) + 101) + 'px');
+    $('#setboard ul.setboard-row').each(function()
+    {
+      var new_item = $(this).find('li').last().clone().attr('id','c_card'+num_cards);
+      new_item.appendTo($(this));
+      new_item.click = function() { selectSetCard($(new_item).parent()) }
+      num_cards += 1;
+    });
+  }
+
+  // removes rightmost column of Set cards
+  removeCells = function() {
+    var num_cards = $('#setboard ul.setboard-row li').length;
+    $('#setboard').css('width',((num_cards * 101 / 3) - 101) + 'px');
+    $('#setboard ul.setboard-row li:last-child').remove();
+  }
+
 });
-
-// application.js: Setsolver-specific JavaScript functions and classes.
-/* This file is automatically included by javascript_include_tag :defaults
-
-  // toggle_chk( int ): toggles checked status of card at index
-  // number passed in as argument
-  function toggle_chk( indx ) {
-    cell_el  = $('cell' + indx);
-    field_el = $('card' + indx);
-
-    selectCard( cell_el, field_el, !(cell_el.hasClassName('selected')) );
-     doAjaxIfSetSelected();
-  }
-
-  // function selectCard( el, isSelected ): handles selection or unselection of a card element
-  function selectCard( cell_el, form_el, isSelected ) {
-    cell_el.removeClassName((isSelected ? 'unselected' : 'selected'));
-    cell_el.addClassName((isSelected ? 'selected' : 'unselected'));
-    form_el.value = ((isSelected ? 'SELECTED' : null))
-    }
-
-  // num_checked_cards(): returns the number of checked cards
-  function num_checked_cards() {
-    return $$('td.selected').length;
-  }
-  // doAjaxIfSetSelected(): sends Ajax request if three cards were selected
-  function doAjaxIfSetSelected() {
-    if ((num_checked_cards() == 3) && ($$('form').length == 1)) {
-      // creating new Ajax request, and setting XML response to replace old table if
-      // successful
-      var frm = $$('form')[0];
-      frm.request({
-        onComplete: function(xhr) {
-          $('setgame').innerHTML = xhr.responseText;
-        }
-      });
-    }
-  }
-
-*/
 

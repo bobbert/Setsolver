@@ -41,4 +41,5 @@ module GamesHelper
     image_tag(('cards/' + card.img_name), :alt => card.to_s)
   end
 
+  
 end

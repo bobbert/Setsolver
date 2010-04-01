@@ -13,7 +13,7 @@ xml.setgame do
     xml.num_sets       number_noun_desc(@sets.length, 'set')
   end
   xml.cards do
-    @game.field.each_with_index do |card,i|
+    @game.cards_by_node_order.each_with_index do |card,i|
       xml.card do 
         xml.id          card.id
         xml.field_id    i

@@ -5,15 +5,6 @@ class Game < ActiveRecord::Base
   after_create :new_deck
 
   FIELD_SIZE = 12
-  VIEW_COLS = 4
-
-  CARD_WIDTH = 80
-  CARD_HEIGHT = 120
-
-  BOARD_CELL_WIDTH  = (CARD_WIDTH * 1.2).floor
-  BOARD_CELL_HEIGHT = (CARD_HEIGHT * 1.2).floor
-  BOARD_TABLE_WIDTH = BOARD_CELL_WIDTH * VIEW_COLS
-
   MAX_NUMBER_OF_PLAYERS = 4
 
   #MAX_LISTEN_INTERVAL_SECONDS = 10
@@ -61,6 +52,26 @@ class Game < ActiveRecord::Base
   # get current gamefield
   def field
     deck.gamefield
+  end
+
+  FIELD_ROWS = {:top => 0, :middle => 1, :bottom => 2 }
+
+  # returns all cards in given row, if Set board is rendered using three 
+  # horizontal rows (top, middle, bottom)
+  def field_row( row )
+    return [] unless FIELD_ROWS.keys.include? row
+    cards_in_row = []
+    field.each_with_index {|c,i| cards_in_row << c if i % 3 == FIELD_ROWS[row] }
+    cards_in_row
+  end
+
+  # returns list of card, ordered by rows top-to-bottom instead of columns left-to-right
+  def cards_by_node_order
+    cards = []
+    Game::FIELD_ROWS.sort {|a,b| a[1] <=> b[1] }.each do |kv_arr|
+      cards += field_row(kv_arr[0])
+    end
+    cards
   end
 
   # return game status in human-readable form
