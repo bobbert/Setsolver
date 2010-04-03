@@ -9,18 +9,18 @@ ActionController::Routing::Routes.draw do |map|
   map.play 'players/:player_id/games/:id/play', :controller => 'games', :action => 'play'
 
   # game playing link: /games/1/players/1/play
+  map.archive 'players/:player_id/games/:id/archive', :controller => 'games', :action => 'archive'
+
+  # add player to game: /games/1/players/1/add_player
   map.add_player 'players/:player_id/games/:id/add_player', :controller => 'games', :action => 'add_player'
 
-  # game playing link: /games/1/players/1/play
+  # remove player from game: /games/1/players/1/remove_player
   map.remove_player 'players/:player_id/games/:id/remove_player', :controller => 'games', :action => 'remove_player'
 
-  # game playing link: /games/1/players/1/play
-  map.start 'players/:player_id/games/:id/start', :controller => 'games', :action => 'start'
-
-  # setgame playing link: /games/1/players/1/play
+  # setgame information link: /games/1/players/1/setgame
   map.setgame 'players/:player_id/games/:id/setgame.:format', :controller => 'games', :action => 'setgame'
 
-  # game listener: /games/1/players/1/refresh
+  # Ajax updater link: /games/1/players/1/refresh
   map.refresh 'players/:player_id/games/:id/refresh.:format', :controller => 'games', :action => 'refresh'
 
 

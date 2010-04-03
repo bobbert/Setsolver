@@ -11,6 +11,9 @@
   <%= javascript_include_tag "jquery.min.js" %>
   <%= javascript_include_tag "jquery.query.js" %>
   <%= javascript_include_tag "setsolver.js" %>
+
+<%= yield :html_head %>
+
 </head>
 
 <%= token_tag %>

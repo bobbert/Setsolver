@@ -21,6 +21,11 @@ class Player < ActiveRecord::Base
     false
   end
 
+  # returns player name as an identifier
+  def name_as_identifier
+    id.to_s + '_' + name.downcase.gsub(/\s/,'_')
+  end
+  
   # return player number, starting with player #1
   def number( gm )
     num = nil

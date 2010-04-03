@@ -6,23 +6,16 @@ module GamesHelper
   end
 
   # prints three card set as miniature cards
-  def render_threecard_set( s )
-    str = ' '
-    s.cards.each do |c|
-      str += image_tag( ('cards/' + c.img_name),
-                        :height => '90', :width => '60', :alt => c.to_s ) + ' '
+  def render_threecard_set( tcs )
+    tcs.cards.inject('') do |str,c|
+      str += ' ' unless str.length == 0
+      str += image_tag( ('smallcards/' + c.img_name), :alt => c.to_s )
     end
-    str
-  end
-
-  # quick description of game
-  def game_desc( gm )
-    "[\##{gm.id}] \"#{gm.name}\""
   end
 
   # create game number as link
   def game_desc_as_link( plyr, gm )
-    link_to(game_desc(gm), player_game_path(plyr,gm))
+    link_to(gm.listing, player_game_path(plyr,gm))
   end
 
   # create game number as link
@@ -30,7 +23,7 @@ module GamesHelper
     if gm.active?
       link_to("Play game", play_path(plyr,gm))
     elsif gm.finished?
-      ' Game Finished'  # temporary -- need archiving page
+      link_to("View game archive", archive_path(plyr,gm))
     else
       'Game not yet started.'
     end

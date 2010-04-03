@@ -1,5 +1,5 @@
 <p>
-  <b><%= game_desc(@game) %>  (<%= @game.player_names %>)</b>
+  <b><%= @game.listing %>  (<%= @game.player_names %>)</b>
 </p>
 
 <% if @game.started? %>
@@ -44,7 +44,7 @@
     ...or press the "Start Game" button to start playing.
   </p>
   <p>
-    <% form_tag :action => 'start', :id => @game do %>
+    <% form_tag :action => 'play', :id => @game do %>
       <div>
 	<%= submit_tag 'Start Playing!' %>
       </div>

@@ -34,6 +34,16 @@ class Game < ActiveRecord::Base
     retval
   end
 
+  # simple game name, in title form
+  def title
+    "\##{id}: \"#{name}\""
+  end
+
+  # game name, in quick-listing form
+  def listing
+    "[\##{id}] \"#{name}\""
+  end
+
   # create new deck with full set of cards, and shuffle cards
   # if auto-shuffle parameter is set
   def new_deck
@@ -112,7 +122,12 @@ class Game < ActiveRecord::Base
   def finished?
     !(finished_at.nil?)
   end
-    
+
+  def percent_complete
+    return 100 if finished?
+    100 - ((deck.facedown.length + field.length) * 100 / deck.cards.length)
+  end
+
   # is this a multi-player game?
   def multiplayer?
     players.length > 1
@@ -153,7 +168,11 @@ class Game < ActiveRecord::Base
   def fill_gamefield_with_sets
     deck.deal( (FIELD_SIZE - field.length) ) if field.length < FIELD_SIZE
     until ((tmp_sets = find_sets).length > 0)  # assigning to temp variable "tmp_sets"
-      return [] if deck.all_dealt?
+      if deck.all_dealt?
+        self.finished_at = Time.now
+        save
+        return []
+      end
       deck.deal 3
     end
     tmp_sets

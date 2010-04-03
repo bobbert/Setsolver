@@ -9,7 +9,5 @@ xml.setgame do
   if flash[:error]
     xml.error          flash[:error]
   end
-  if @sets.length > 0
-    xml.num_sets       number_noun_desc(@sets.length, 'set')
-  end
+  xml.num_sets         number_noun_desc(@sets.length, 'set')
 end

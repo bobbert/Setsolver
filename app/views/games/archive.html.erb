@@ -1,0 +1,22 @@
+<% content_for :html_head do %>
+  <%= javascript_include_tag "play" %>
+<% end %>
+
+<h1 class="setsolver">Game Archive: <%=@game.title %></h1>
+<p align=right>
+<%= link_to '[ << Back to List of Games ]', player_games_path %>
+</p>
+<% if @game.finished? %>
+  <% @game.scores.sort.each do |score| %>
+    <h2><%= score.player.name %>: Total score = <%= score.points %></h2>
+    <table id="archive_tbl_<%= score.player.name_as_identifier %>" border=0>
+    <% score.sets.each_with_index do |set,i| %>
+      <tr><td><%= i+1 %>:</td><td><%= render_threecard_set(set) %></td></tr>
+    <% end %>
+    </table>
+  <% end %>
+<% else %>
+  <p>No archive data exists for this game.</p>
+  <p><%= link_to '[ << Back to Game ]', player_game_path %></p>
+<% end %>
+

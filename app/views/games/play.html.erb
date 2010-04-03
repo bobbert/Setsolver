@@ -1,4 +1,8 @@
-<h1 class="setsolver">Setsolver Test Page</h1>
+<% content_for :html_head do %>
+  <%= javascript_include_tag "play" %>
+<% end %>
+
+<h1 class="setsolver">Game <%= @game.title %></h1>
 <p align=right>
 <%= link_to '[ << Back to List of Games ]', player_games_path %>
 </p>

@@ -88,22 +88,13 @@ class GamesController < ApplicationController
 
 #------ my controller methods ----#
 
-  # start playing a game
-  def start
-    if @game.start
-      @sets = []
-      play
-    else
-      flash[:error] = "An error occurred when trying to initialize game ##{@game.id}."
-      redirect_to([@player, @game])
-    end
-  end
-
   # plays submitted Set cards if submit button was clicked, then refreshes board
   def play
-    play_cards if params[:commit]
+    @game.start unless @game.started?
+    play_cards if params[:commit]  # play submitted cards, if a form submit occurred
     @sets = @game.fill_gamefield_with_sets
-    render :action => 'play'
+    render :action => 'play' if @game.active?
+    render :action => 'archive' if @game.finished?
   end
 
   # Ajax refresh routine for auto-selection
@@ -132,24 +123,6 @@ class GamesController < ApplicationController
     flash[:error] = nil
     true
   end
-  
-  #def refresh
-  #  last_count = @game.selection_count
-  #  1.upto(Game.num_polls) do |poll|
-  #    logger.warn Game.find(params[:id]).selection_count
-  #    if last_count != @game.reload.selection_count
-  #     render :action => 'setgame.xml'
-  #     return true
-  #    end
-  #    sleep Game::POLL_INTERVAL_SECONDS
-  #  end
-  #  render :action => 'setgame_unchanged.xml'
-  #end
-  
-  ## get HTML table with all active set cards in the table cells
-  #def refresh
-  #  render :action => '_board'
-  #end
 
   # add player to current game
   def add_player
