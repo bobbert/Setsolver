@@ -66,10 +66,14 @@ $(document).ready(function() {
       $(this).text( $(xml).find(this.id).text() );
     });
 
+    $('#score_listing li span').each(function() {
+      $(this).text( $(xml).find('points').text() );
+    });
+
     var img_list = $('#setboard ul.setboard-row li img');
 
     // find picture and append contents to image viewer
-    $(xml).find("card").each(function() {
+    $(xml).find('card').each(function() {
       //var field_position = $(this).find("field_id").text();
       var set_card_name = $(this).find("name").text();
       var set_card_imgpath = $(this).find("image_path").text();
@@ -79,6 +83,12 @@ $(document).ready(function() {
       indx += 1;
       
     });
+
+    // update activity log on right if new set is found
+    if ( $(xml).find('found_set') ) {
+      updateActivityLog( $(xml).find('found_set') );
+    }
+
   }
 
   // adds new column to the right of Set gamefield
@@ -99,6 +109,26 @@ $(document).ready(function() {
     $('#setboard').css('width',((num_cards * 101 / 3) - 101) + 'px');
     $('#setboard ul.setboard-row li:last-child').remove();
   }
+
+  // updates activity log: remove set at end of list, and add newly
+  updateActivityLog = function(setcard_xml) {
+    if ( $('ul#set_records li').length < 4 ) { return true; }  // RWP: temporary hack
+    $('ul#set_records li:last').remove();
+    var new_col = $('ul#set_records li:first').clone();
+    new_col.find('h5').text( $(setcard_xml).find('created_at').text() );
+    var set_images = new_col.find('p.setlisting img');
+    var indx = 0;
+
+    $(setcard_xml).find('setcard').each(function() {
+      var set_card_name = $(this).find('name').text();
+      var set_card_imgpath = $(this).find('image_path').text();
+      set_images.eq(indx).attr('title', set_card_name).attr('src', set_card_imgpath);
+      indx += 1;
+    });
+    new_col.insertBefore($('ul#set_records li:first'));  // RWP: does not account for first element
+    return true;
+  }
+
 
 });
 

@@ -13,4 +13,8 @@ module ApplicationHelper
     return (expr) ? 'Yes' : 'No'
   end
 
+  def formatted_date( dt )
+    dt.strftime("%m/%d/%Y %I:%M %p")
+  end
+
 end

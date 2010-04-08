@@ -94,7 +94,7 @@ class GamesController < ApplicationController
     play_cards if params[:commit]  # play submitted cards, if a form submit occurred
     @sets = @game.fill_gamefield_with_sets
     render :action => 'play' if @game.active?
-    render :action => 'archive' if @game.finished?
+    redirect_to :action => 'archive' if @game.finished?
   end
 
   # Ajax refresh routine for auto-selection

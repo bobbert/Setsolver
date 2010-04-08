@@ -1,5 +1,3 @@
-
-/* 1. Global selectors */
 html, address,
 blockquote,
 body, dd, div,
@@ -78,12 +76,3 @@ BDO[DIR="rtl"]  { direction: rtl; unicode-bidi: bidi-override }
   h4, h5, h6    { page-break-after: avoid }
   ul, ol, dl    { page-break-before: avoid }
 }
-
-/* 2. Application-specific classes and selectors */
-
-#setboard                           { background-color:#acf; padding-top:2px; border:3px solid #008;}
-#setboard ul.setboard-row           { padding:0px; margin:0px; list-style-type:none; }
-#setboard ul.setboard-row li        { padding:0px; margin:0px; display:inline; width:100px; }
-#setboard ul.setboard-row li img    { padding:8px; float:none;  }
-#setboard ul.setboard-row li.selected img  { padding:8px; float:none; background-color:#008;  }
-

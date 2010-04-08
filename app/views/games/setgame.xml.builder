@@ -10,13 +10,28 @@ xml.setgame do
     xml.error          flash[:error]
   end
   xml.num_sets       number_noun_desc(@sets.length, 'set')
-  xml.cards do
-    @game.cards_by_node_order.each_with_index do |card,i|
-      xml.card do 
-        xml.id          card.id
-        xml.field_id    i
-        xml.name        card.to_s
-        xml.image_path  card.img_path
+  if @game.active?
+    xml.cards do
+      @game.cards_by_node_order.each_with_index do |card,i|
+        xml.card do 
+          xml.id          card.id
+          xml.field_id    i
+          xml.name        card.to_s
+          xml.image_path  card.img_path
+        end
+      end
+    end
+  end
+  if @found_set
+    xml.found_set do 
+      xml.created_at       formatted_date(@found_set.created_at)
+      xml.setcards do
+        @found_set.cards.each do |card|
+          xml.setcard do
+            xml.name        card.to_s
+            xml.image_path  card.small_img_path
+          end
+        end
       end
     end
   end

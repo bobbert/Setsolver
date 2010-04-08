@@ -49,5 +49,11 @@ class Threecardset < ActiveRecord::Base
     return (self.cardfaces.sort == other.cardfaces.sort)
   end
 
+  # set-sorting operator - sort by time found, most recent first
+  def <=>(other)
+    cmp = (other.created_at <=> self.created_at)
+    cmp = (self.id <=> other.id) if cmp == 0
+    cmp
+  end
 
 end

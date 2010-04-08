@@ -7,13 +7,8 @@ class Game < ActiveRecord::Base
   FIELD_SIZE = 12
   MAX_NUMBER_OF_PLAYERS = 4
 
-  #MAX_LISTEN_INTERVAL_SECONDS = 10
-  #POLL_INTERVAL_SECONDS = 0.5
+  ACTIVITY_LOG_SIZE = 4
 
-  #def self.num_polls
-  #  (MAX_LISTEN_INTERVAL_SECONDS / POLL_INTERVAL_SECONDS).to_i
-  #end
-  
 
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
@@ -163,6 +158,12 @@ class Game < ActiveRecord::Base
     players.map {|pl| pl.name }.join(' vs. ')
   end
 
+  # return all sets found by all players.  If nil is passed as a parameter, return all sets.
+  def sets( num_most_recent = Game::ACTIVITY_LOG_SIZE )
+    all_sets = scores.inject([]) {|s_arr,s| s_arr += s.sets }
+    num_most_recent ? all_sets.sort.slice(0,num_most_recent) : all_sets.sort
+  end
+  
   # fills gamefield so that it contains at least 1 set, then return array of sets.
   # Returns an empty array if no sets are found and the deck is empty (i.e. game finished)
   def fill_gamefield_with_sets

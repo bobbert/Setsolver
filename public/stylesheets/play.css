@@ -1,0 +1,20 @@
+#setboard                           { background-color:#acf; padding-top:2px; border:3px solid #008; }
+#setboard ul.setboard-row           { padding:0px; margin:0px; list-style-type:none; }
+#setboard ul.setboard-row li        { padding:0px; margin:0px; display:inline; width:100px; }
+#setboard ul.setboard-row li img    { padding:8px; float:none; }
+#setboard ul.setboard-row li.selected img  { padding:8px; float:none; background-color:#008; }
+
+#right_panel                        { margin-left:30px; width:360px; float:left; }
+#right_panel #score_panel           { padding-top:0px; border:3px solid #008; }
+#right_panel #score_panel ul        { padding:2px; margin:5px; list-style-type:none; }
+#right_panel #score_panel ul li     { padding:2px; margin:2px; }
+
+#right_panel #activity_panel        { margin-top: 15px; border:3px solid #008; }
+#right_panel #activity_panel ul     { padding:2px; margin:5px; list-style-type:none; }
+#right_panel #activity_panel ul li  { padding:1px; margin-bottom:3px; border:1px solid #008; }
+#right_panel #activity_panel ul li h5 { margin:0; }
+p.setlisting                        { margin-left: 2px; margin-top:0; margin-bottom:0; }
+
+
+#right_panel div h2                 { text-align: center; margin-top:3px; margin-bottom:2px; }
+#right_panel div h3                 { text-align: center; margin-top:3px; margin-bottom:2px; }
