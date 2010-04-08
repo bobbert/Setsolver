@@ -3,19 +3,21 @@
   <%= javascript_include_tag "play" %>
 <% end %>
 
-<h1 class="setsolver">Game <%= @game.title %></h1>
-<% if @game.active? %>
-  <p id="submitbar" style="display:none;">Submitting set; waiting for response <img src="/images/spinner.gif"></p>
-  <% form_tag :action => 'play', :id => @game do %>
-    <div id="body">
-      <%= render :partial => 'gamefield' %>
-      <%= render :partial => 'rightpanel' %>
-    </div>
-    <%= submit_tag 'Submit Three Card Set' %>
+<% if @score %>
+  <h1 class="setsolver">Game <%= @game.title %></h1>
+  <% if @game.active? %>
+    <p id="submitbar" style="display:none;">Submitting set; waiting for response <img src="/images/spinner.gif"></p>
+    <% form_tag :action => 'play', :id => @game do %>
+      <div id="body">
+        <%= render :partial => 'gamefield' %>
+        <%= render :partial => 'rightpanel' %>
+      </div>
+      <%= submit_tag 'Submit Three Card Set' %>
+    <% end %>
+  <% else %>
+    <p>This game has not yet started.</p>
+    <p><%= link_to '[ << Back to Game ]', player_game_path %></p>
   <% end %>
-<% else %>
-  <p>This game has not yet started.</p>
-  <p><%= link_to '[ << Back to Game ]', player_game_path %></p>
 <% end %>
 <p>
 <%= link_to '[ << Back to List of Games ]', player_games_path %>

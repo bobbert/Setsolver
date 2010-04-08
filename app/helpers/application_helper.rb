@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def formatted_date( dt )
-    dt.strftime("%m/%d/%Y %I:%M %p")
+    dt.strftime("%m/%d/%Y %I:%M:%S %p")
   end
 
 end

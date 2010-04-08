@@ -13,6 +13,15 @@ module GamesHelper
     end
   end
 
+  def render_dummy_set
+    str = ""
+    3.times do |x|
+      str += ' ' unless str.length == 0
+      str += image_tag( 'cards/card_template.png' )
+    end
+    str
+  end
+
   # create game number as link
   def game_desc_as_link( plyr, gm )
     link_to(gm.listing, player_game_path(plyr,gm))

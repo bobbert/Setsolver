@@ -49,6 +49,10 @@ $(document).ready(function() {
     var num_cards = $(xml).find("field_size").text();
     var indx = 0;
 
+    if (parseErrorsIfFound(xml)) {
+      return false;
+    }
+
     // calculate difference between number of XML cards and number of cards in browser
     var new_field_size_diff = parseInt(num_cards) - $('#setboard ul.setboard-row li').length;
 
@@ -62,7 +66,7 @@ $(document).ready(function() {
       new_field_size_diff = new_field_size_diff + 3;
     }
 
-    $('#notice, #error, #remaining, #num_sets').each(function() {
+    $('#remaining, #num_sets').each(function() {
       $(this).text( $(xml).find(this.id).text() );
     });
 
@@ -88,7 +92,20 @@ $(document).ready(function() {
     if ( $(xml).find('found_set') ) {
       updateActivityLog( $(xml).find('found_set') );
     }
+    return true;
+  }
 
+  // parse flash messages (notices or errors) found in XML and return True if present
+  parseErrorsIfFound = function(xml) {
+    var errors_found = false;
+    $('#notice, #error').each(function() {
+      msg_txt = $(xml).find(this.id).text();
+      $(this).text( msg_txt );
+      if (msg_txt.length > 0) {
+	errors_found = true;
+      }
+    });
+    return errors_found;
   }
 
   // adds new column to the right of Set gamefield
@@ -112,12 +129,14 @@ $(document).ready(function() {
 
   // updates activity log: remove set at end of list, and add newly
   updateActivityLog = function(setcard_xml) {
-    if ( $('ul#set_records li').length < 4 ) { return true; }  // RWP: temporary hack
-    $('ul#set_records li:last').remove();
-    var new_col = $('ul#set_records li:first').clone();
+    if ( $('ul#set_records li').length == 4 ) { 
+      $('ul#set_records li:last').remove();
+    }
+    var new_col = cloneNewActivityNode();
     new_col.find('h5').text( $(setcard_xml).find('created_at').text() );
+    new_col.find('span.setlisting-name').text( $(setcard_xml).find('found_by').text() );
     var set_images = new_col.find('p.setlisting img');
-    var indx = 0;
+    var indx = 0;  // used to mimic Ruby each_with_index behavior
 
     $(setcard_xml).find('setcard').each(function() {
       var set_card_name = $(this).find('name').text();
@@ -125,8 +144,13 @@ $(document).ready(function() {
       set_images.eq(indx).attr('title', set_card_name).attr('src', set_card_imgpath);
       indx += 1;
     });
-    new_col.insertBefore($('ul#set_records li:first'));  // RWP: does not account for first element
+    new_col.insertBefore($('ul#set_records li:first')).show();  // RWP: does not account for first element
+    $('ul#set_records li.dummy-first-node').remove();
     return true;
+  }
+
+  cloneNewActivityNode = function() {
+    return $('ul#set_records li:first').clone().removeClass('dummy-first-node').hide();
   }
 
 

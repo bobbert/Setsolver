@@ -4,10 +4,10 @@ xml.setgame do
   xml.remaining        number_noun_desc(@game.deck.facedown.length,'card')
   xml.status           @game.status
   if flash[:notice]
-    xml.notice         flash[:notice]
+    xml.notice         formatted_date(Time.now) + ': ' + flash[:notice]
   end
   if flash[:error]
-    xml.error          flash[:error]
+    xml.error          formatted_date(Time.now) + ': ' + flash[:error]
   end
   xml.num_sets       number_noun_desc(@sets.length, 'set')
   if @game.active?
@@ -25,6 +25,7 @@ xml.setgame do
   if @found_set
     xml.found_set do 
       xml.created_at       formatted_date(@found_set.created_at)
+      xml.found_by         @found_set.player.name
       xml.setcards do
         @found_set.cards.each do |card|
           xml.setcard do

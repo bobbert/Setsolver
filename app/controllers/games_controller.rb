@@ -141,6 +141,7 @@ private
   def get_player_and_game
     flash[:error] = nil
     @sets = []
+    @found_set = nil
     @player = Player.find(params[:player_id])
     if (params[:id])
       @game = Game.find(params[:id])
