@@ -5,7 +5,8 @@ class PlayersController < ApplicationController
     @players = Player.find(:all)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.fbml  # index.fbml.erb
+      format.html  # index.html.erb
       format.xml  { render :xml => @players }
     end
   end
@@ -16,7 +17,8 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.fbml  # show.fbml.erb
+      format.html  # show.html.erb
       format.xml  { render :xml => @player }
     end
   end
@@ -27,7 +29,8 @@ class PlayersController < ApplicationController
     @player = Player.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.fbml  # new.fbml.erb
+      format.html  # new.html.erb
       format.xml  { render :xml => @player }
     end
   end
@@ -45,9 +48,11 @@ class PlayersController < ApplicationController
     respond_to do |format|
       if @player.save
         flash[:notice] = 'Player was successfully created.'
+        format.fbml { redirect_to(@player) }
         format.html { redirect_to(@player) }
         format.xml  { render :xml => @player, :status => :created, :location => @player }
       else
+        format.fbml { render :action => "new" }
         format.html { render :action => "new" }
         format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
       end
@@ -62,9 +67,11 @@ class PlayersController < ApplicationController
     respond_to do |format|
       if @player.update_attributes(params[:player])
         flash[:notice] = 'Player was successfully updated.'
+        format.fbml { redirect_to(@player) }
         format.html { redirect_to(@player) }
         format.xml  { head :ok }
       else
+        format.fbml { render :action => "edit" }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
       end

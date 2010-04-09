@@ -110,8 +110,10 @@ $(document).ready(function() {
 
   // adds new column to the right of Set gamefield
   addCells = function() {
+    //var col_len = $('#setboard ul.setboard-row li:first').css('width');
+    var col_len = 82;  // RWP TEMP
     var num_cards = $('#setboard ul.setboard-row li').length;
-    $('#setboard').css('width',((num_cards * 101 / 3) + 101) + 'px');
+    $('#setboard_panel').css('width',((num_cards * col_len / 3) + col_len) + 'px');
     $('#setboard ul.setboard-row').each(function() {
       var new_item = $(this).find('li').last().clone().attr('id','c_card'+num_cards);
       new_item.appendTo($(this));
@@ -122,8 +124,10 @@ $(document).ready(function() {
 
   // removes rightmost column of Set cards
   removeCells = function() {
+    //var col_len = $('#setboard ul.setboard-row li:first').css('width');
+    var col_len = 82;  // RWP TEMP
     var num_cards = $('#setboard ul.setboard-row li').length;
-    $('#setboard').css('width',((num_cards * 101 / 3) - 101) + 'px');
+    $('#setboard_panel').css('width',((num_cards * col_len / 3) - col_len) + 'px');
     $('#setboard ul.setboard-row li:last-child').remove();
   }
 

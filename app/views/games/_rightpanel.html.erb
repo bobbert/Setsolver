@@ -1,18 +1,18 @@
 <%= error_messages_for 'game' %>
 <!--[form:game]-->
 
-<div id="right_panel" style="float:left;">
-  <div id="score_panel">
+<div id="right_panel" class="right_panel" style="float:left;">
+  <div id="score_panel" class="score_panel">
     <h2>Game Score</h2>
-    <ul id="score_listing">
+    <ul id="score_listing" class="score_listing">
     <% @game.scores.each do |score| %>
       <li><%= score.player.name %>: <span id="gamescore_<%= score.player.id %>"><%= score.points %></span></li>
     <% end %>
     </ul>
   </div>
-  <div id="activity_panel">
+  <div id="activity_panel" class="activity_panel">
     <h2>Game Activity</h2>
-    <ul id="set_records">
+    <ul id="set_records" class="set_records">
     <% @game.sets.each do |set| %>
       <li><h5><%= formatted_date(set.created_at) %></h5>
           <p class="setlisting"><span class="setlisting-name"><%= set.score.player.name %></span><%= " found " + render_threecard_set(set) %></p>

@@ -9,6 +9,7 @@ class GamesController < ApplicationController
     @games = @player.games
 
     respond_to do |format|
+      format.fbml # index.fbml.erb
       format.html # index.html.erb
       format.xml  { render :xml => @games }
     end
@@ -18,6 +19,7 @@ class GamesController < ApplicationController
   # GET /players/1/games/1.xml
   def show
     respond_to do |format|
+      format.fbml # show.fbml.erb
       format.html # show.html.erb
       format.xml  { render :xml => @game }
     end
@@ -29,6 +31,7 @@ class GamesController < ApplicationController
     @game = Game.new
 
     respond_to do |format|
+      format.fbml # new.fbml.erb
       format.html # new.html.erb
       format.xml  { render :xml => @game }
     end
@@ -49,9 +52,11 @@ class GamesController < ApplicationController
       # creating new game, and new association between selected player and game
       if @game.save && @game.add_player(@player)
         flash[:notice] = 'Game was successfully created.'
+        format.fbml { redirect_to([@player, @game]) }
         format.html { redirect_to([@player, @game]) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
       else
+        format.fbml { render :action => "new" }
         format.html { render :action => "new" }
         format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
       end
@@ -64,9 +69,11 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.update_attributes(params[:game])
         flash[:notice] = 'Game was successfully updated.'
+        format.fbml { redirect_to([@player, @game]) }
         format.html { redirect_to([@player, @game]) }
         format.xml  { head :ok }
       else
+        format.fbml { render :action => "edit" }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
       end
@@ -81,6 +88,7 @@ class GamesController < ApplicationController
     @game.destroy
 
     respond_to do |format|
+      format.fbml { redirect_to(player_games_url) }
       format.html { redirect_to(player_games_url) }
       format.xml  { head :ok }
     end

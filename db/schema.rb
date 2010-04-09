@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216032059) do
+ActiveRecord::Schema.define(:version => 20100409054216) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number"
@@ -60,7 +60,10 @@ ActiveRecord::Schema.define(:version => 20100216032059) do
     t.integer  "rating",                   :default => 1000
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "players", ["user_id"], :name => "player_user_id_fkey"
 
   create_table "scores", :force => true do |t|
     t.integer  "player_id"
@@ -78,5 +81,14 @@ ActiveRecord::Schema.define(:version => 20100216032059) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", :force => true do |t|
+    t.integer  "facebook_id"
+    t.string   "session_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id", :unique => true
 
 end

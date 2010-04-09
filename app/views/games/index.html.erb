@@ -1,4 +1,4 @@
-<h1>Listing games for <%= @player.name %></h1>
+<h1><%= fb_name @user, :possessive => true%> games</h1>
 
 <% for game in @player.games %>
     <p><%= game_desc_as_link(@player,game) %> (<%= game.player_names %>):  <%= game_play_link(@player,game) %>

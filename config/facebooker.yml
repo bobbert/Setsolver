@@ -13,8 +13,8 @@
 development:
   api_key: <%= h['api_key'] %>
   secret_key: <%= h['secret_key'] %>
-  canvas_page_name:
-  callback_url:
+  canvas_page_name: setsolver
+  callback_url: http://72.66.90.125:15000/
   pretty_errors: true
   set_asset_host_to_callback_url: true
   tunnel:

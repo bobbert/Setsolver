@@ -9,7 +9,7 @@ module GamesHelper
   def render_threecard_set( tcs )
     tcs.cards.inject('') do |str,c|
       str += ' ' unless str.length == 0
-      str += image_tag( ('smallcards/' + c.img_name), :alt => c.to_s )
+      str += image_tag( ('smallcards/' + c.img_name), :height => 45, :width => 30, :alt => c.to_s )
     end
   end
 
@@ -40,7 +40,7 @@ module GamesHelper
 
   # returns image HTML for a single card
   def card_image( card )
-    image_tag(('cards/' + card.img_name), :alt => card.to_s)
+    image_tag(('cards/' + card.img_name), :height => 90, :width => 60, :alt => card.to_s)
   end
 
   

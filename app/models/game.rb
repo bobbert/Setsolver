@@ -4,10 +4,10 @@ class Game < ActiveRecord::Base
 
   after_create :new_deck
 
-  FIELD_SIZE = 12
-  MAX_NUMBER_OF_PLAYERS = 4
-
-  ACTIVITY_LOG_SIZE = 4
+  FieldSize = 12
+  MaxPlayers = 4
+  ActivityLogSize = 4
+  SetboardColWidth = 82
 
 
   # each_cmb3 (Class method)
@@ -59,21 +59,21 @@ class Game < ActiveRecord::Base
     deck.gamefield
   end
 
-  FIELD_ROWS = {:top => 0, :middle => 1, :bottom => 2 }
+  FieldRows = {:top => 0, :middle => 1, :bottom => 2 }
 
   # returns all cards in given row, if Set board is rendered using three 
   # horizontal rows (top, middle, bottom)
   def field_row( row )
-    return [] unless FIELD_ROWS.keys.include? row
+    return [] unless FieldRows.keys.include? row
     cards_in_row = []
-    field.each_with_index {|c,i| cards_in_row << c if i % 3 == FIELD_ROWS[row] }
+    field.each_with_index {|c,i| cards_in_row << c if i % 3 == FieldRows[row] }
     cards_in_row
   end
 
   # returns list of card, ordered by rows top-to-bottom instead of columns left-to-right
   def cards_by_node_order
     cards = []
-    Game::FIELD_ROWS.sort {|a,b| a[1] <=> b[1] }.each do |kv_arr|
+    Game::FieldRows.sort {|a,b| a[1] <=> b[1] }.each do |kv_arr|
       cards += field_row(kv_arr[0])
     end
     cards
@@ -130,7 +130,7 @@ class Game < ActiveRecord::Base
 
    # can players be added to this game?
   def can_add_player?
-    players.length < MAX_NUMBER_OF_PLAYERS
+    players.length < MaxPlayers
   end
 
   # list of players that can be added
@@ -159,7 +159,7 @@ class Game < ActiveRecord::Base
   end
 
   # return all sets found by all players.  If nil is passed as a parameter, return all sets.
-  def sets( num_most_recent = Game::ACTIVITY_LOG_SIZE )
+  def sets( num_most_recent = Game::ActivityLogSize )
     all_sets = scores.inject([]) {|s_arr,s| s_arr += s.sets }
     num_most_recent ? all_sets.sort.slice(0,num_most_recent) : all_sets.sort
   end
@@ -167,7 +167,7 @@ class Game < ActiveRecord::Base
   # fills gamefield so that it contains at least 1 set, then return array of sets.
   # Returns an empty array if no sets are found and the deck is empty (i.e. game finished)
   def fill_gamefield_with_sets
-    deck.deal( (FIELD_SIZE - field.length) ) if field.length < FIELD_SIZE
+    deck.deal( (FieldSize - field.length) ) if field.length < FieldSize
     until ((tmp_sets = find_sets).length > 0)  # assigning to temp variable "tmp_sets"
       if deck.all_dealt?
         self.finished_at = Time.now

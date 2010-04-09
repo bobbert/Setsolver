@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
   has_many :scores
   has_many :threecardsets
+  belongs_to :user
 
   # gets full name, as string
   def name
