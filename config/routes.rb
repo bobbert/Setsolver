@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.remove_player 'games/:id/remove_player', :controller => 'games', :action => 'remove_player'
 
   # RWP TEST: XFBML test link: /games/1/test
-#  map.test 'games/:id/test.:format', :controller => 'games', :action => 'test'
+  map.test 'games/:id/test.:format', :controller => 'games', :action => 'test'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

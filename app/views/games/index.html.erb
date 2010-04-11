@@ -1,5 +1,5 @@
-<h1><%= @player.name %>'s games</h1>
-<h2><%= fb_name User.find(1), :possessive => true%></h2>
+<h1><%= fb_profile_pic @user %> <%= fb_name @user, :possessive => true, :capitalize => true %> games</h1>
+<h2></h2>
 
 <% for game in @player.games %>
     <p><%= game_desc_as_link(game) %> (<%= game.player_names %>):  <%= game_play_link(game) %>
