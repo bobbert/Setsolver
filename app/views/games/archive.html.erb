@@ -4,9 +4,15 @@
 
 <h1 class="setsolver">Game Archive: <%=@game.title %></h1>
 <p align=right>
-<%= link_to '[ << Back to List of Games ]', player_games_path %>
+<%= link_to '[ << Back to List of Games ]', games_path %>
 </p>
 <% if @game.finished? %>
+  <p>
+    <b>Game started:</b> <%=h @game.started_at %>
+  </p>
+  <p>
+    <b>Game completed:</b> <%=h @game.finished_at %>
+  </p>
   <% @game.scores.sort.each do |score| %>
     <h2><%= score.player.name %>: Total score = <%= score.points %></h2>
     <ol id="archive_<%= score.player.name_as_identifier %>">
@@ -17,6 +23,6 @@
   <% end %>
 <% else %>
   <p>No archive data exists for this game.</p>
-  <p><%= link_to '[ << Back to Game ]', player_game_path %></p>
+  <p><%= link_to '[ << Back to Game ]', game_path %></p>
 <% end %>
 

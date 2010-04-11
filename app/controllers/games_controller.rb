@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from Exceptions::UserNotPlayingGame, :with => :user_not_playing_game
+
   before_filter :get_player_and_game
 
   # GET /players/1/games
@@ -19,8 +22,8 @@ class GamesController < ApplicationController
   # GET /players/1/games/1.xml
   def show
     respond_to do |format|
-      format.fbml # show.fbml.erb
-      format.html # show.html.erb
+      format.fbml { redirect_to(archive_url) if @game.finished? }
+      format.html { redirect_to(archive_url) if @game.finished? }
       format.xml  { render :xml => @game }
     end
   end
@@ -50,10 +53,10 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       # creating new game, and new association between selected player and game
-      if @game.save && @game.add_player(@player)
+      if @game.save && @score && @game.add_player(@player)
         flash[:notice] = 'Game was successfully created.'
-        format.fbml { redirect_to([@player, @game]) }
-        format.html { redirect_to([@player, @game]) }
+        format.fbml { redirect_to(@game) }
+        format.html { redirect_to(@game) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
       else
         format.fbml { render :action => "new" }
@@ -69,8 +72,8 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.update_attributes(params[:game])
         flash[:notice] = 'Game was successfully updated.'
-        format.fbml { redirect_to([@player, @game]) }
-        format.html { redirect_to([@player, @game]) }
+        format.fbml { redirect_to(@game) }
+        format.html { redirect_to(@game) }
         format.xml  { head :ok }
       else
         format.fbml { render :action => "edit" }
@@ -88,8 +91,8 @@ class GamesController < ApplicationController
     @game.destroy
 
     respond_to do |format|
-      format.fbml { redirect_to(player_games_url) }
-      format.html { redirect_to(player_games_url) }
+      format.fbml { redirect_to(games_url) }
+      format.html { redirect_to(games_url) }
       format.xml  { head :ok }
     end
   end
@@ -112,6 +115,15 @@ class GamesController < ApplicationController
     render :action => render_action
   end
 
+  def test
+    respond_to do |format|
+      format.fbml
+      format.html
+      format.xml 
+    end
+  end
+  
+  
   # the heart of the Setsolver game logic lies here.
   # This method handles new games, and all types of card submissions
   # (valid set, invalid set, wrong # of cards selected, etc. )
@@ -142,22 +154,32 @@ class GamesController < ApplicationController
     add_remove_player :remove
   end
 
+protected
+
+  def not_found
+    flash[:error] = "Game ##{params[:id]} does not exist."
+    redirect_to games_url
+  end
+
+  def user_not_playing_game
+    flash[:error] = "You cannot play game ##{params[:id]}."
+    redirect_to games_url
+  end
+
 private
 
   # get Player, Game, and Score objects.  player and Game must be linked 
   # for this routine to run successfully.
   def get_player_and_game
-    flash[:error] = nil
+ #   flash[:error] = nil  # RWP TEMP - get rid of this if/when flash works correctly
     @sets = []
     @found_set = nil
-    @player = Player.find(params[:player_id])
+    @user = current_user
+    @player = @user.player
     if (params[:id])
       @game = Game.find(params[:id])
-      @score = Score.find_by_player_id_and_game_id( params[:player_id], params[:id] )
-      if @score.blank?
-        flash[:error] = "Player ##{params[:player_id]} is not a member of this game."
-        return false
-      end
+      @score = Score.find_by_player_id_and_game_id( @user.player.id, params[:id] )
+      raise Exceptions::UserNotPlayingGame if @score.blank?
     end
     true
   end
@@ -190,7 +212,7 @@ private
         flash[:notice] = "You did not select a player to #{opt.to_s}."
       end
     end
-    redirect_to(player_game_url)
+    redirect_to(game_url)
   end
 
 end

@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <link rel="stylesheet" href="http://static.ak.connect.facebook.com/css/fb_connect.css" type="text/css" /> 
+</head>
+<body>
+
+<fb:login-button></fb:login-button>
+
+<h1>My Games </h1>
+<h2>Appname: <fb:application-name></fb:application-name> </h2>
+<h2>Pic: <%= fb_profile_pic User.find(1) %> </h2>
+<h3>Status: <%= fb_user_status User.find(1) %> </h3>
+test1
+<%= fb_connect_javascript_tag %>
+<%= init_fb_connect('XFBML', 'Api', :js => :jquery) %>
+test2
+<fb:photo pid="54321" uid="6789" />
+<fb:serverFbml style="width: 755px;">  <script type="text/fbml">  <fb:fbml>  <fb:request-form action="<url for post invite action, see wiki page for fb:request-form for details>" method="POST" invite="true" type="XFBML" content="This is a test invitation from XFBML test app <fb:req-choice url='see wiki page for fb:req-choice for details' label='Ignore the Connect test app!' />  " >  <fb:multi-friend-selector showborder="false" actiontext="Invite your friends to use Connect.">  </fb:request-form>  </fb:fbml>  </script>  </fb:serverFbml>
+</body>
+</html>
+

@@ -23,16 +23,16 @@ module GamesHelper
   end
 
   # create game number as link
-  def game_desc_as_link( plyr, gm )
-    link_to(gm.listing, player_game_path(plyr,gm))
+  def game_desc_as_link( gm )
+    link_to(gm.listing, game_path(gm))
   end
 
   # create game number as link
-  def game_play_link( plyr, gm )
+  def game_play_link( gm )
     if gm.active?
-      link_to("Play game", play_path(plyr,gm))
+      link_to("Play game", play_path(gm))
     elsif gm.finished?
-      link_to("View game archive", archive_path(plyr,gm))
+      link_to("View game archive", archive_path(gm))
     else
       'Game not yet started.'
     end

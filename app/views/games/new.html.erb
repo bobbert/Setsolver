@@ -2,14 +2,14 @@
 
 <%= error_messages_for :game %>
 
-<% form_for([@player,@game]) do |f| %>
+<% form_for(@game) do |f| %>
   <p>
     <b>Enter a name for your game:</b>
     <%= f.text_field :name %>
   </p>
 
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Create New Game" %>
   </p>
 <% end %>
-<%= link_to 'Back', player_games_path %>
+<%= link_to 'Back', games_path %>

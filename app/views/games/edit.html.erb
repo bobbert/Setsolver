@@ -1,20 +1,22 @@
-<h1>Editing game</h1>
+<h1>Editing game <%= @game.title %></h1>
 
 <%= error_messages_for :game %>
 
-<% form_for([@player,@game]) do |f| %>
-  <p>
-    <b>Selection Count:</b>
-    <%= f.text_field :selection_count %>
-  </p>
+<% if @player %>
+  <% form_for(@game) do |f| %>
+    <p>
+      <b>Selection Count:</b>
+      <%= f.text_field :name %>
+    </p>
 
-  <p>
-    <%= f.submit "Edit" %>
-  </p>
+    <p>
+      <%= f.submit "Edit" %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Show', game_path %> |
 <% end %>
-
-<%= link_to 'Show', player_game_path %> |
-<%= link_to 'Back', player_games_path %>
+<%= link_to 'Back', games_path %>
 
 
 

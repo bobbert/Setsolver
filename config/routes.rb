@@ -1,27 +1,30 @@
 ActionController::Routing::Routes.draw do |map|
 
-  # nested resources for /players/1 and /players/1/games/1
-  map.resources :players  do |players|  
-    players.resources :games
-  end
+  map.root :controller => "games", :action => "index"
 
-  # game playing link: /games/1/players/1/play
-  map.play 'players/:player_id/games/:id/play', :controller => 'games', :action => 'play'
+  # mapping games resources, in standard RESTful format
+  map.resources :games
 
-  # game playing link: /games/1/players/1/play
-  map.archive 'players/:player_id/games/:id/archive', :controller => 'games', :action => 'archive'
+  # game playing link: /games/1/play
+  map.play 'games/:id/play', :controller => 'games', :action => 'play'
 
-  # add player to game: /games/1/players/1/add_player
-  map.add_player 'players/:player_id/games/:id/add_player', :controller => 'games', :action => 'add_player'
+  # game archive link for finished games: /games/1/archive
+  map.archive 'games/:id/archive', :controller => 'games', :action => 'archive'
 
-  # remove player from game: /games/1/players/1/remove_player
-  map.remove_player 'players/:player_id/games/:id/remove_player', :controller => 'games', :action => 'remove_player'
+  # Ajax updater link: /games/1/refresh
+  map.refresh 'games/:id/refresh.:format', :controller => 'games', :action => 'refresh'
 
-  # setgame information link: /games/1/players/1/setgame
-  map.setgame 'players/:player_id/games/:id/setgame.:format', :controller => 'games', :action => 'setgame'
+  # setgame information link: /games/1/setgame
+  map.setgame 'games/:id/setgame.:format', :controller => 'games', :action => 'setgame'
 
-  # Ajax updater link: /games/1/players/1/refresh
-  map.refresh 'players/:player_id/games/:id/refresh.:format', :controller => 'games', :action => 'refresh'
+  # add player to game: /games/1/add_player  (uncomment when multiplayer is added)
+#  map.add_player 'games/:id/add_player', :controller => 'games', :action => 'add_player'
+
+  # remove player from game: /games/1/remove_player  (uncomment when multiplayer is added)
+#  map.remove_player 'games/:id/remove_player', :controller => 'games', :action => 'remove_player'
+
+  # RWP TEST: XFBML test link: /games/1/test
+#  map.test 'games/:id/test.:format', :controller => 'games', :action => 'test'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

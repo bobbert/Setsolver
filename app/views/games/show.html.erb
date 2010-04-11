@@ -12,37 +12,9 @@
     </ol>
     Total number of sets found: <%= @game.selection_count %>
   </p>
-  <p>
-     <%= link_to "Continue Playing", play_path(@player,@game) %>
-  </p>
-<% else %>
-  <p><b>Game not yet started.</b>
-  </p>
-    Players added to game:
-    <ol>
-    <% @game.players.delete_if {|p| p == @player }.each do |plyr| %>
-      <li><%= plyr.name %>
-      <% form_tag :action => 'remove_player', :id => @game do %>
-	<%= hidden_field_tag('player[id]', plyr.id.to_s) %>
-	<%= submit_tag 'Remove Player' %>
-      <% end %>
-      </li>
-    <% end %>
-    </ol>
-  <p>
-  </p>
-  <p>
-    Add players by selecting a player below.<br />
-    <% form_tag :action => 'add_player', :id => @game do %>
-      <div>
-	<%= collection_select(:player, :id, @game.player_add_list, :id, :name) %>
-	<%= submit_tag 'Add Player' %>
-      </div>
-    <% end %>
-  </p>
-  <p>
-    ...or press the "Start Game" button to start playing.
-  </p>
+  <p><%= link_to "Continue Playing", play_path(@game) %></p>
+<% elsif @game.active? %>
+  <p>Game not yet started. Press the "Start Game" button to start playing:</p>
   <p>
     <% form_tag :action => 'play', :id => @game do %>
       <div>
@@ -50,14 +22,7 @@
       </div>
     <% end %>
   </p>
+  <%= link_to 'Edit', edit_game_path(@game) %> |
 <% end %>
 
-<% if @game.finished? %>
-  <p>
-    <b>Game completed on:</b>
-    <%=h @game.finished_at %>
-  </p>
-<% end %>
-
-<%= link_to 'Edit', edit_player_game_path(@player, @game) %> |
-<%= link_to 'Back', player_games_path %>
+<%= link_to 'Back', games_path %>

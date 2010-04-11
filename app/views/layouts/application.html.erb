@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <title>Games: <%= controller.action_name %></title>
-<% if nil %>
+<% if true %>
   <%= stylesheet_link_tag "setsolver" %>
 <% end %>
   <%= javascript_include_tag "jquery.min.js" %>
@@ -21,6 +21,15 @@
 <%= token_tag %>
 
 <body class="setsolver">
+
+<%= fb_connect_javascript_tag %>
+<%= init_fb_connect('XFBML', :js => :jquery) %>
+
+<link rel="stylesheet" href="http://static.ak.facebook.com/css/fb_connect.css" type="text/css" />
+<script src="http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+<script type="text/javascript">
+    FB.init("389143926591c28e4f4b50d46cce3414", "xd_receiver.htm");
+</script>
 
 <p id="notice" style="color:green"><%= flash[:notice] %></p>
 <p id="error" style="color:red"><%= flash[:error] %></p>
