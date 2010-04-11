@@ -2,7 +2,7 @@
   <b><%= @game.listing %>  (<%= @game.player_names %>)</b>
 </p>
 
-<% if @game.started? %>
+<% if @game.active? %>
   <p><b>Started on:</b> <%=h @game.created_at %>
     <ol>
     <% @game.scores.each do |sc| %>
@@ -13,7 +13,7 @@
     Total number of sets found: <%= @game.selection_count %>
   </p>
   <p><%= link_to "Continue Playing", play_path(@game) %></p>
-<% elsif @game.active? %>
+<% elsif !(@game.started?) %>
   <p>Game not yet started. Press the "Start Game" button to start playing:</p>
   <p>
     <% form_tag :action => 'play', :id => @game do %>

@@ -50,10 +50,9 @@ class GamesController < ApplicationController
   def create
     # create game and save, then add Score connector
     @game = Game.new(params[:game])
-
     respond_to do |format|
       # creating new game, and new association between selected player and game
-      if @game.save && @score && @game.add_player(@player)
+      if @game.save && @game.add_player(@player)
         flash[:notice] = 'Game was successfully created.'
         format.fbml { redirect_to(@game) }
         format.html { redirect_to(@game) }
@@ -168,8 +167,9 @@ protected
 
 private
 
-  # get Player, Game, and Score objects.  player and Game must be linked 
-  # for this routine to run successfully.
+  # get Player objects, and Game and Score objects if a game ID was passed in.
+  # This routine throws a UserNotPlayingGame error if the game ID passed in
+  # is not being played by the current user.
   def get_player_and_game
  #   flash[:error] = nil  # RWP TEMP - get rid of this if/when flash works correctly
     @sets = []
@@ -181,7 +181,6 @@ private
       @score = Score.find_by_player_id_and_game_id( @user.player.id, params[:id] )
       raise Exceptions::UserNotPlayingGame if @score.blank?
     end
-    true
   end
 
   # get card numbers from params hash that takes the following form:
