@@ -5,21 +5,7 @@ class Player < ActiveRecord::Base
 
   # gets full name, as string
   def name
-    (fname.to_s + ' ' + lname.to_s).chomp ' '
-  end
-
-  # assigns full name, as string, and parses first and last names
-  # from full name string.
-  def name=( s_fullname )
-    if ( (arr_name = s_fullname.split(', ')).length == 2 )
-      (self.lname, self.fname) = arr_name
-      return save
-    end
-    if ( (arr_name = s_fullname.split(' ')).length == 2 )
-      (self.fname, self.lname) = arr_name
-      return save
-    end
-    false
+    user.fb_user.name
   end
 
   # returns player name as an identifier

@@ -1,4 +1,4 @@
-<h1><%= fb_profile_pic @user %> <%= fb_name @user, :possessive => true, :capitalize => true %> games</h1>
+<h1><%= @player.name %>'s games</h1>
 <h2></h2>
 
 <% for game in @player.games %>
@@ -7,7 +7,7 @@
 <% end %>
 
 <p>
-  <%= link_to 'New game', new_game_path %>
+  <%= link_to 'Create new game', new_game_path %>
 </p>
 
 </fb:serverfbml>

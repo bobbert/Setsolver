@@ -1,0 +1,192 @@
+body {
+  font-family: "Tahoma", "MS Sans Serif", "Microsoft Sans Serif", "MS Serif",sans-serif;
+  font-size: 10pt;
+  margin: 0px;
+  padding: 0px;
+  text-align: left; }
+
+h2, h3, h4, h5, h6 {
+  color: #333;
+  margin: 0px;
+  padding: 0px; }
+
+h1 { 
+  font-size: 14px;
+  margin-left: 15px;
+  color: #3b5998;
+  padding: 0px; }
+h2, h3 { 
+  font-size: 13px; }
+h4, h5 { 
+  font-size: 11px; }
+h6 { 
+  font-size: 10px; }
+
+p {
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  text-align: left; }
+
+a {
+  color: #3b5998;
+  text-decoration: none; }
+
+a:hover {
+  text-decoration: underline; }
+
+.fb-button {
+  background-color:#3B5998;
+  border-color:#D8DFEA #0E1F5B #0E1F5B #D8DFEA;
+  border-style:solid;
+  border-width:1px;
+  color:#FFFFFF;
+  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+  font-size:11px;
+  margin:0 2px;
+  padding:2px 18px;
+}
+== [[Image:Headline text]][[Image:[[Media:Example.jpg]]]] ==
+
+img {
+  border: 0px; }
+
+select {
+  border:1px solid #BDC7D8;
+  font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+  font-size:11px;
+  padding:2px;
+}
+
+td,
+td.label {
+  font-size: 11px;
+  text-align: left; }
+
+.wbr { display: block; float:left; }
+
+.aural {
+  width: 0; height: 0;
+  display: block;
+  margin-left: -5000px;
+  overflow: hidden;
+}
+
+.standard_message {
+  padding:10px;
+}
+
+.standard_message.no_padding {
+  padding:0;
+}
+
+.standard_message.shorten {
+  padding-bottom:0;
+}
+
+.standard_message.has_padding {
+  padding:10px;
+}
+
+.standard_message #error,
+.standard_message .status,
+.standard_message .explanation_note {
+  margin:0;
+}
+
+#error,
+.status,
+.explanation_note {
+  margin: 0 10px 10px 10px;
+  padding: 10px;
+  border: solid 1px #dd3c10;
+  background: #ffebe8;
+}
+
+.created {
+  margin: 0 20px 20px;
+}
+
+#error p,
+.status p,
+.explanation_note p {
+  margin: 4px 0px 0px;
+  line-height:14px;
+  font-weight:normal;
+}
+
+#error a,
+.status a,
+.explanation_note a {
+  text-decoration: none;
+  color: #dd3c10;
+}
+
+.status {
+  border-color:#e2c822;
+  background: #fff9d7;
+}
+
+.status a {
+  color: #3b5998;
+  text-decoration: none;
+}
+
+.page_top_notice {
+  color: #444;
+  border-bottom: solid 1px #e2c822;
+  padding: 5px 20px 4px;
+  background: #fff9d7;
+}
+
+.explanation_note {
+  border-color:#bdc7d8;
+  background:#fff;
+}
+
+.explanation_note h1 {
+  font-size:11px;
+}
+
+.pipe {
+  color: gray;
+  padding: 0px 3px; }
+
+.column {
+  float: left; }
+
+.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+.editor_title {
+  background: #f7f7f7;
+  padding-bottom: 5px;
+}
+
+.standard_title {
+  padding-bottom: 5px;
+}
+
+.page_title {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 10px 5px;
+  margin: 0px 10px;
+}
+
+.standard_title .page_title {
+  border-bottom: none;
+}
+
+.needs_translated {  /* pgh 4ever */
+  background: #85b84d;
+}
+
+.FB_name {
+  color:#3b5998 !important;
+}
+.FB_link {
+  color:#3b5998 !important;
+}
+

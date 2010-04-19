@@ -1,9 +1,9 @@
 <%= error_messages_for 'game' %>
 <!--[form:game]-->
 
-<div id="setboard_panel" class="setboard_panel" style="float:left; width:<%= (@game.field.length / 3) * Game::SetboardColWidth %>px;">
-  <h3>The deck has <span id="remaining"><%= number_noun_desc( @game.deck.facedown.length, 'card' ) %></span> cards remaining. </h3>
-  <h3><span id="num_sets"><%= number_noun_desc( @sets.length, 'set' ) %></span> can be found among the cards below: </h3>
+<div id="setboard_panel" class="setboard-panel" style=width:<%= (@game.field.length / 3) * Game::SetboardColWidth %>px;">
+  <h3>The deck has <span id="remaining"><%= number_noun_desc( @game.deck.facedown.length, 'card' ) %></span> remaining. </h3>
+  <h3><span id="num_sets"><%= number_noun_desc( @sets.length, 'set' ) %></span> can be found below: </h3>
   <div id="setboard" class="setboard">
     <% Game::FieldRows.sort {|a,b| a[1] <=> b[1] }.each_with_index do |kv_arr, row_i| %>
       <ul id="row<%= kv_arr[1] %>" class="setboard-row">

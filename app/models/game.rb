@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
   FieldSize = 12
   MaxPlayers = 4
   ActivityLogSize = 4
-  SetboardColWidth = 82
+  SetboardColWidth = 84
 
 
   # each_cmb3 (Class method)

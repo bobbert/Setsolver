@@ -9,7 +9,8 @@
   </p>
 
   <p>
-    <%= f.submit "Create New Game" %>
+    <%= f.submit "Create New Game", :class => "fb-button" %>
   </p>
 <% end %>
-<%= link_to 'Back', games_path %>
+
+<%= link_to '<< Back to games', games_path %>

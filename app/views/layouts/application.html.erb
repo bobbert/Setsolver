@@ -8,7 +8,7 @@
   <meta name="keywords" content="" />
   <title>Games: <%= controller.action_name %></title>
 <% if true %>
-  <%= stylesheet_link_tag "setsolver" %>
+  <%= stylesheet_link_tag "setsolver-fb" %>
 <% end %>
   <%= javascript_include_tag "jquery.min.js" %>
   <%= javascript_include_tag "jquery.query.js" %>
@@ -25,11 +25,13 @@
 <%= fb_connect_javascript_tag %>
 <%= init_fb_connect('XFBML', :js => :jquery) %>
 
+<% if true %>
 <link rel="stylesheet" href="http://static.ak.facebook.com/css/fb_connect.css" type="text/css" />
 <script src="http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
 <script type="text/javascript">
-    FB.init("389143926591c28e4f4b50d46cce3414", "xd_receiver.htm");
+    FB.init("389143926591c28e4f4b50d46cce3414", "/xd_receiver.htm");
 </script>
+<% end %>
 
 <p id="notice" style="color:green"><%= flash[:notice] %></p>
 <p id="error" style="color:red"><%= flash[:error] %></p>

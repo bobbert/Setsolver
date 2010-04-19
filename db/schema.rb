@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100409054216) do
+ActiveRecord::Schema.define(:version => 20100412164018) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number"
@@ -53,11 +53,9 @@ ActiveRecord::Schema.define(:version => 20100409054216) do
   end
 
   create_table "players", :force => true do |t|
-    t.string   "fname",      :limit => 50
-    t.string   "lname",      :limit => 50
-    t.integer  "wins",                     :default => 0
-    t.integer  "losses",                   :default => 0
-    t.integer  "rating",                   :default => 1000
+    t.integer  "wins",       :default => 0
+    t.integer  "losses",     :default => 0
+    t.integer  "rating",     :default => 1000
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
