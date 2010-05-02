@@ -8,6 +8,4 @@
 log/*
 config/db_passwd.yml
 config/fb_passwd.yml
-/db/migrate/009_create_users.rb
-/db/migrate/20100409034208_add_facebook_id_to_users.rb
-/app/models/user.rb
+

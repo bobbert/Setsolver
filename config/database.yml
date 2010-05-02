@@ -17,7 +17,7 @@
 development:
   adapter: mysql
   database: setsolver_dev
-  username: bobbert
+  username: root
   password: <%= h['password_dev'] %>
   host: localhost
   port: 3000
@@ -29,7 +29,7 @@ development:
 test:
   adapter: mysql
   database: setsolver_test
-  username: bobbert
+  username: root
   password: <%= h['password_test'] %>
   host: localhost
   port: 3000
@@ -38,7 +38,7 @@ test:
 production:
   adapter: mysql
   database: setsolver_prod
-  username: bobbert
+  username: root
   password: <%= h['password_prod'] %>
   host: localhost
   port: 80
