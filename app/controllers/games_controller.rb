@@ -113,36 +113,7 @@ class GamesController < ApplicationController
     @sets = @game.fill_gamefield_with_sets
     render :action => render_action
   end
-
-  def test
-    respond_to do |format|
-      format.fbml
-      format.html
-      format.xml 
-    end
-  end
   
-  
-  # the heart of the Setsolver game logic lies here.
-  # This method handles new games, and all types of card submissions
-  # (valid set, invalid set, wrong # of cards selected, etc. )
-  def play_cards
-    selection = get_card_numbers
-    if (selection.length != 3)
-      flash[:error] = 'You did not select three cards.'
-      return false
-    end
-    selection_cards = selection.map {|i| @game.field[i] }
-    @found_set = @game.make_set_selection( @player, *selection_cards )
-    unless @found_set
-      flash[:notice] = 'The three cards you selected are not a set.'
-      return false
-    end
-    flash[:notice] = nil
-    flash[:error] = nil
-    true
-  end
-
   # add player to current game
   def add_player
     add_remove_player :add
@@ -166,6 +137,26 @@ protected
   end
 
 private
+
+  # the heart of the Setsolver game logic lies here.
+  # This method handles new games, and all types of card submissions
+  # (valid set, invalid set, wrong # of cards selected, etc. )
+  def play_cards
+    selection = get_card_numbers
+    if (selection.length != 3)
+      flash[:error] = 'You did not select three cards.'
+      return false
+    end
+    selection_cards = selection.map {|i| @game.field[i] }
+    @found_set = @game.make_set_selection( @player, *selection_cards )
+    unless @found_set
+      flash[:notice] = 'The three cards you selected are not a set.'
+      return false
+    end
+    flash[:notice] = nil
+    flash[:error] = nil
+    true
+  end
 
   # get Player objects, and Game and Score objects if a game ID was passed in.
   # This routine throws a UserNotPlayingGame error if the game ID passed in

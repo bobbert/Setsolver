@@ -3,17 +3,17 @@ $(document).ready(function() {
   $(':checkbox').hide();
   $('input:submit').hide();
 
-  $('#setboard ul.setboard-row li img').click(function() {
+  $('#setboard ul.setboard-row li img').live('click', function() {
     selectSetCard($(this).parent());
   });
 
   selectSetCard = function(cell) {
     var chk = cell.find('input:checkbox');
-    if (chk.length > 0) {
+    if ((chk.length > 0) && !(isSubmitting())) {
       was_checked = chk.attr('checked');
       chk.attr('checked', !was_checked);
       was_checked ? cell.removeClass('selected') : cell.addClass('selected');
-      if ( $('#setboard ul.setboard-row li.selected input:checkbox:checked').length >= 3 ) {
+      if ($('#setboard ul.setboard-row li.selected input:checkbox:checked').length === 3 ) {
         sendSetRequest();
       }
     }
@@ -29,7 +29,6 @@ $(document).ready(function() {
       success: function(xhr) { 
         parseGameXml(xhr);
         resetBoard();
-        //$('#setgame').attr('innerHTML', xhr);
       },
       error: function(xml) { 
         resetBoard();
@@ -116,8 +115,8 @@ $(document).ready(function() {
     $('#setboard_panel').css('width',((num_cards * col_len / 3) + col_len) + 'px');
     $('#setboard ul.setboard-row').each(function() {
       var new_item = $(this).find('li').last().clone().attr('id','c_card'+num_cards);
+      new_item.find('input').attr('id','card'+num_cards).attr('name','card'+num_cards);
       new_item.appendTo($(this));
-      new_item.click = function() { selectSetCard($(new_item).parent()) }
       num_cards += 1;
     });
   }
@@ -125,7 +124,7 @@ $(document).ready(function() {
   // removes rightmost column of Set cards
   removeCells = function() {
     //var col_len = $('#setboard ul.setboard-row li:first').css('width');
-    var col_len = 82;  // RWP TEMP
+    var col_len = 84;  // RWP TEMP
     var num_cards = $('#setboard ul.setboard-row li').length;
     $('#setboard_panel').css('width',((num_cards * col_len / 3) - col_len) + 'px');
     $('#setboard ul.setboard-row li:last-child').remove();
@@ -157,6 +156,13 @@ $(document).ready(function() {
     return $('ul#set_records li:first').clone().removeClass('dummy-first-node').hide();
   }
 
+  hideIfEmpty = function() {
+    $(this)
+  }
+
+  isSubmitting = function() {
+    return ($('#submitbar:visible').length > 0);
+  }
 
 });
 

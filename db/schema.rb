@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100412164018) do
+ActiveRecord::Schema.define(:version => 20100513184801) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number"
@@ -81,10 +81,63 @@ ActiveRecord::Schema.define(:version => 20100412164018) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "facebook_id"
+    t.integer  "facebook_id",          :limit => 8
     t.string   "session_key"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.string   "political"
+    t.string   "pic_small"
+    t.string   "name"
+    t.string   "quotes"
+    t.string   "is_app_user"
+    t.string   "tv"
+    t.string   "profile_update_time"
+    t.string   "meeting_sex"
+    t.string   "hs_info"
+    t.string   "timezone"
+    t.string   "relationship_status"
+    t.string   "hometown_location"
+    t.string   "about_me"
+    t.string   "wall_count"
+    t.string   "significant_other_id"
+    t.string   "pic_big"
+    t.string   "music"
+    t.string   "work_history"
+    t.string   "sex"
+    t.string   "religion"
+    t.string   "notes_count"
+    t.string   "activities"
+    t.string   "pic_square"
+    t.string   "movies"
+    t.string   "has_added_app"
+    t.string   "education_history"
+    t.string   "birthday"
+    t.string   "birthday_date"
+    t.string   "first_name"
+    t.string   "meeting_for"
+    t.string   "last_name"
+    t.string   "interests"
+    t.string   "current_location"
+    t.string   "pic"
+    t.string   "books"
+    t.string   "affiliations"
+    t.string   "locale"
+    t.string   "profile_url"
+    t.string   "proxied_email"
+    t.string   "email_hashes"
+    t.string   "allowed_restrictions"
+    t.string   "pic_with_logo"
+    t.string   "pic_big_with_logo"
+    t.string   "pic_small_with_logo"
+    t.string   "pic_square_with_logo"
+    t.string   "online_presence"
+    t.string   "verified"
+    t.string   "profile_blurb"
+    t.string   "username"
+    t.string   "website"
+    t.string   "is_blocked"
+    t.string   "family"
   end
 
   add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id", :unique => true

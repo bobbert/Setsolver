@@ -17,7 +17,8 @@
     <ul id="set_records" class="set-records">
     <% @game.sets.each do |set| %>
       <li><h5><%= formatted_date(set.created_at) %></h5>
-          <p class="setlisting"><span class="setlisting-name"><%= set.score.player.name %></span><%= " found " + render_threecard_set(set) %></p>
+          <span class="setlisting-name"><%= set.score.player.name %></span> found 
+          <p class="setlisting"><%= render_threecard_set(set) %></p>
       </li>
     <% end %>
     <% if @game.selection_count == 0 %>
