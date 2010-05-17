@@ -7,8 +7,7 @@ module FacebookerAuthentication
         attr_accessor :current_user
       end
     end
-    
-  
+
     def set_current_user
       #this is a facebooker method to make sure we have a session
       set_facebook_session

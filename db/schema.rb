@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100513184801) do
     t.string   "website"
     t.string   "is_blocked"
     t.string   "family"
+    t.string   "email"
   end
 
   add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id", :unique => true

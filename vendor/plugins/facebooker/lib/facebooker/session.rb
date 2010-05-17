@@ -4,7 +4,8 @@ module Facebooker
   #
   # Raised when trying to perform an operation on a user
   # other than the logged in user (if that's unallowed)
-  class NonSessionUser < StandardError;  end
+  class Error < StandardError; end
+  class NonSessionUser < Error;  end
   class Session
 
     #
@@ -13,54 +14,55 @@ module Facebooker
     # user logs out of facebook
     # can be handled with:
     # rescue_from Facebooker::Session::SessionExpired, :with => :some_method_name
-    class SessionExpired < StandardError; end
+    class SessionExpired < Error; end
 
-    class UnknownError < StandardError; end
-    class ServiceUnavailable < StandardError; end
-    class MaxRequestsDepleted < StandardError; end
-    class HostNotAllowed < StandardError; end
-    class MissingOrInvalidParameter < StandardError; end
-    class InvalidAPIKey < StandardError; end
-    class SessionExpired < StandardError; end
-    class CallOutOfOrder < StandardError; end
-    class IncorrectSignature     < StandardError; end
-    class SignatureTooOld     < StandardError; end
-    class TooManyUserCalls < StandardError; end
-    class TooManyUserActionCalls < StandardError; end
-    class InvalidFeedTitleLink < StandardError; end
-    class InvalidFeedTitleLength < StandardError; end
-    class InvalidFeedTitleName < StandardError; end
-    class BlankFeedTitle < StandardError; end
-    class FeedBodyLengthTooLong < StandardError; end
-    class InvalidFeedPhotoSource < StandardError; end
-    class InvalidFeedPhotoLink < StandardError; end    
-    class TemplateDataMissingRequiredTokens < StandardError; end
-    class FeedMarkupInvalid < StandardError; end
-    class FeedTitleDataInvalid < StandardError; end
-    class FeedTitleTemplateInvalid < StandardError; end
-    class FeedBodyDataInvalid < StandardError; end
-    class FeedBodyTemplateInvalid < StandardError; end
-    class FeedPhotosNotRetrieved < StandardError; end
-    class FeedTargetIdsInvalid < StandardError; end
-    class TemplateBundleInvalid < StandardError; end
-    class ConfigurationMissing < StandardError; end
-    class FQLParseError < StandardError; end
-    class FQLFieldDoesNotExist < StandardError; end
-    class FQLTableDoesNotExist < StandardError; end
-    class FQLStatementNotIndexable < StandardError; end
-    class FQLFunctionDoesNotExist < StandardError; end
-    class FQLWrongNumberArgumentsPassedToFunction < StandardError; end
-    class PermissionError < StandardError; end
-    class InvalidAlbumId < StandardError; end
-    class AlbumIsFull < StandardError; end
-    class MissingOrInvalidImageFile < StandardError; end
-    class TooManyUnapprovedPhotosPending < StandardError; end
-    class ExtendedPermissionRequired < StandardError; end
-    class InvalidFriendList < StandardError; end
-    class UserUnRegistrationFailed < StandardError
+    class UnknownError < Error; end
+    class ServiceUnavailable < Error; end
+    class MaxRequestsDepleted < Error; end
+    class HostNotAllowed < Error; end
+    class MissingOrInvalidParameter < Error; end
+    class InvalidAPIKey < Error; end
+    class SessionExpired < Error; end
+    class CallOutOfOrder < Error; end
+    class IncorrectSignature     < Error; end
+    class SignatureTooOld     < Error; end
+    class TooManyUserCalls < Error; end
+    class TooManyUserActionCalls < Error; end
+    class InvalidFeedTitleLink < Error; end
+    class InvalidFeedTitleLength < Error; end
+    class InvalidFeedTitleName < Error; end
+    class BlankFeedTitle < Error; end
+    class FeedBodyLengthTooLong < Error; end
+    class InvalidFeedPhotoSource < Error; end
+    class InvalidFeedPhotoLink < Error; end    
+    class TemplateDataMissingRequiredTokens < Error; end
+    class FeedMarkupInvalid < Error; end
+    class FeedTitleDataInvalid < Error; end
+    class FeedTitleTemplateInvalid < Error; end
+    class FeedBodyDataInvalid < Error; end
+    class FeedBodyTemplateInvalid < Error; end
+    class FeedPhotosNotRetrieved < Error; end
+    class FeedTargetIdsInvalid < Error; end
+    class TemplateBundleInvalid < Error; end
+    class ConfigurationMissing < Error; end
+    class FQLParseError < Error; end
+    class FQLFieldDoesNotExist < Error; end
+    class FQLTableDoesNotExist < Error; end
+    class FQLStatementNotIndexable < Error; end
+    class FQLFunctionDoesNotExist < Error; end
+    class FQLWrongNumberArgumentsPassedToFunction < Error; end
+    class PermissionError < Error; end
+    class InvalidAlbumId < Error; end
+    class AlbumIsFull < Error; end
+    class MissingOrInvalidImageFile < Error; end
+    class TooManyUnapprovedPhotosPending < Error; end
+    class ExtendedPermissionRequired < Error; end
+    class ReadMailboxExtendedPermissionRequired < Error; end
+    class InvalidFriendList < Error; end
+    class UserUnRegistrationFailed < Error
       attr_accessor :failed_users
     end
-    class UserRegistrationFailed < StandardError
+    class UserRegistrationFailed < Error
       attr_accessor :failed_users
     end
 
@@ -120,6 +122,7 @@ module Facebooker
     # * create_event
     # * rsvp_event
     # * sms
+    # * read_mailbox
     def permission_url(permission,options={})
       options = default_login_url_options.merge(options)
       options = add_next_parameters(options)
@@ -422,11 +425,36 @@ module Facebooker
       end
     end
 
+    #remove a comment from a given xid stream with comment_id
+    def remove_comment(xid,comment_id)
+      post('facebook.comments.remove', :xid=>xid, :comment_id =>comment_id)
+    end
+  
+    #pulls comment list for a given XID
+    def get_comments(xid)
+      @comments = post('facebook.comments.get', :xid => xid) do |response|
+        response.map do |hash|
+          Comment.from_hash(hash)
+        end
+      end
+    end
+
     def get_albums(aids)
       @albums = post('facebook.photos.getAlbums', :aids => aids) do |response|
         response.map do |hash|        
           Album.from_hash(hash)
         end
+      end
+    end
+
+    ###
+    # Retrieve a viewer's facebook stream
+    # See http://wiki.developers.facebook.com/index.php/Stream.get for options
+    #
+    def get_stream(viewer_id, options = {})
+
+      @stream = post('facebook.stream.get', prepare_get_stream_options(viewer_id, options), true) do |response|
+        response
       end
     end
 
@@ -506,6 +534,21 @@ module Facebooker
       post("facebook.feed.publishUserAction", parameters)
     end
 
+    ##
+    # Upload strings in native locale to facebook for translations.
+    #
+    # e.g. facebook_session.upload_native_strings([:text => "Welcome {user}", :description => "Welcome message to currently logged in user."])
+    # returns the number of strings uploaded
+    #
+    # See http://wiki.developers.facebook.com/index.php/Intl.uploadNativeStrings for method options
+    #
+    def upload_native_strings(native_strings)
+      raise ArgumentError, "You must provide strings to upload" if native_strings.nil?
+
+      post('facebook.intl.uploadNativeStrings', :native_strings => Facebooker.json_encode(native_strings)) do |response|
+        response
+      end
+    end
 
     ##
     # Send email to as many as 100 users at a time
@@ -721,6 +764,18 @@ module Facebooker
       
       def ensure_array(value)
         value.is_a?(Array) ? value : [value]
+      end
+
+      def prepare_get_stream_options(viewer_id, options)
+        opts = {}
+
+        opts[:viewer_id] = viewer_id if viewer_id.is_a?(Integer)
+        opts[:source_ids] = options[:source_ids] if options[:source_ids]
+        opts[:start_time] = options[:start_time].to_i if options[:start_time]
+        opts[:end_time] = options[:end_time].to_i if options[:end_time]
+        opts[:limit] = options[:limit] if options[:limit].is_a?(Integer)
+        opts[:metadata] = Facebooker.json_encode(options[:metadata]) if options[:metadata]
+        opts
       end
   end
 

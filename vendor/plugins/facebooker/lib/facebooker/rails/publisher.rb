@@ -108,6 +108,7 @@ module Facebooker
         @from                 = nil
         @full_story_template  = nil
         @recipients           = nil
+        @action_links         = nil
         @controller           = PublisherController.new(self)
         @action_links         = nil
       end
@@ -338,7 +339,7 @@ module Facebooker
         if links.blank?
           @action_links
         else
-          @action_links = links
+          @action_links = *links
         end
       end
       
@@ -518,6 +519,14 @@ module Facebooker
           all_template_ids = session.active_template_bundles.map {|t| t["template_bundle_id"]}
           (all_template_ids - active_template_ids).each do |template_bundle_id|
             session.deactivate_template_bundle_by_id(template_bundle_id)
+          end
+        end
+        
+        def respond_to?(method_symbol, include_private=false)
+          if match = /^(create|deliver|register)_([_a-z]\w*)/.match(method_symbol.to_s)
+            instance_methods.include?(match[2])
+          else
+            super(method_symbol, include_private)
           end
         end
         

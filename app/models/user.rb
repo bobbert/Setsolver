@@ -11,13 +11,13 @@ class User < ActiveRecord::Base
     self.player = Player.new
     update_fields
   end
-  
+
   def fb_user
     facebook_session.user
   end
 
 protected
-  
+
   # updating all user fields to internal values
   def update_fields
     Facebooker::User.user_fields.split(',').each do |field|
@@ -25,6 +25,6 @@ protected
     end
     save
   end
-  
+
 end
 

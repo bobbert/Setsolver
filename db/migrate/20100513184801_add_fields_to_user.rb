@@ -53,6 +53,7 @@ class AddFieldsToUser < ActiveRecord::Migration
     add_column :users, :website, :string
     add_column :users, :is_blocked, :string
     add_column :users, :family, :string
+    add_column :users, :email, :string
   end
 
   def self.down
@@ -109,5 +110,6 @@ class AddFieldsToUser < ActiveRecord::Migration
     remove_column :users, :website
     remove_column :users, :is_blocked
     remove_column :users, :family
+    remove_column :users, :email
   end
 end
