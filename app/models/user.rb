@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  include FacebookerAuthentication::Model
-  
+  unless RAILS_ENV == 'test'
+    include FacebookerAuthentication::Model
+  end
+
   has_one :player
 
   after_create :new_player
@@ -9,11 +11,11 @@ class User < ActiveRecord::Base
   # create new Player object immediately after creating user
   def new_player
     self.player = Player.new
-    update_fields
+    update_fields unless RAILS_ENV == 'test'
   end
 
   def fb_user
-    facebook_session.user
+    facebook_session.user if facebook_session
   end
 
 protected

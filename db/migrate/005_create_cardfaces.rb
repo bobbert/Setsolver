@@ -16,8 +16,7 @@ class CreateCardfaces < ActiveRecord::Migration
       t.text    :shape_abbrev,   :limit => 3
     end
 
-    # creating deck of cardface values:
-    # every combination within above hashes
+    # seeding Cardface with initial values for each card type:
     # (Number, Color, Shading, and Shape) is added to table Cardface.
     NUMBERS.each do |num|
       COLORS.each do |col, col_abbrev|

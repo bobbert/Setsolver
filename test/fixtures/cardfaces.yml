@@ -1,6 +1,9 @@
 # Fixtures for Cardface objects: copied directly from DB migration file.
 # (Cardfaces are created during migration and should never be created when 
-# in production).  Needs to be refactored in order to make code DRY.
+# in production).  
+#
+# This code is obviously not DRY but remains for expediency until I get
+# 'rake db:seed' to work.
 
 <%  NUMBERS = [1, 2, 3]  %>
 <%  COLORS = { 'red' => 'red', 'green' => 'grn', 'purple' => 'prp' }  %>

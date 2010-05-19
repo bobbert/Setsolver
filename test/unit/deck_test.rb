@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class DeckTest < ActiveSupport::TestCase
-  fixtures :cardfaces, :cards, :decks
+  fixtures :cardfaces
 
   # The Set game has 81 cards, representing 3x3x3x3 attributes.
   def test_fixture_decks_should_have_eighty_one_cards

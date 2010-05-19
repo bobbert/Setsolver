@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class GameTest < ActiveSupport::TestCase
+  fixtures :cardfaces
 
   # checking if existing games can find deck and cards
   def test_fixture_games_should_have_deck_and_cards
