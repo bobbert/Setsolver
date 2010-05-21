@@ -4,7 +4,21 @@ class Threecardset < ActiveRecord::Base
   has_many :cards
   belongs_to :player
 
+  attr_accessor :cardface1, :cardface2, :cardface3
+
+  before_create :add_cards_to_set_if_cardfaces_assigned
   validate :must_have_three_cards_that_belong_to_same_deck
+
+  # adding new cards to Threecardset immediately before saving
+  def add_cards_to_set_if_cardfaces_assigned
+    initial_cardcount = self.cards.length
+    [cardface1, cardface2, cardface3].compact.each_with_index do |cf, index|
+      if initial_cardcount <= index
+        c = deck.cards.find_by_cardface_id( cf.id )
+        self.cards << c unless c.threecardset
+      end
+    end
+  end
 
   # validation conditions: 3-card sets must contain three cards, and all cards 
   # must be part of the same deck.
@@ -37,8 +51,8 @@ class Threecardset < ActiveRecord::Base
   # returns list of common attributes within set
   def common_attributes
     cf = cardfaces
-    Cardface::ATTR.inject([]) do |common_arr, attr|
-      common_arr << attr if deck && game.num_different_attr( attr, cf ) == 1
+    Cardface::ATTR.inject([]) do |common_arr, attrib|
+      common_arr << attrib if deck && game.num_different_attr( attrib, cf ) == 1
       common_arr
     end
   end

@@ -23,12 +23,12 @@ class Card < ActiveRecord::Base
 
   # image name, used to show picture
   def img_path
-    '/images/cards/' + img_name
+    cardface.img_path
   end
 
   # image name, used to show picture
   def small_img_path
-    '/images/smallcards/' + img_name
+    cardface.small_img_path
   end
 
   # card name -- identical to human-readable name (to_s)
@@ -48,17 +48,22 @@ class Card < ActiveRecord::Base
 
   # is card face down in deck?
   def facedown?
-    facedown_position && true
+    facedown_position && !(faceup_position)
+  end
+
+  # is card face up in deck?
+  def faceup?
+    faceup_position && !(facedown_position)
   end
 
   # is card claimed?
   def claimed?
-    facedown_position.nil? && faceup_position && !(threecardset.blank?)
+    faceup? && !(threecardset.blank?)
   end
 
   # is card in the field of play?
   def gamefield?
-    facedown_position.nil? && faceup_position && threecardset.blank?
+    faceup? && threecardset.blank?
   end
 
   # player who claimed card as part of a Set

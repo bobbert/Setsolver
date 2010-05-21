@@ -1,0 +1,6 @@
+--exclude "spec/*,gems/*"
+--rails
+--colour
+--format progress
+--loadby mtime
+--reverse

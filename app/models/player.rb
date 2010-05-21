@@ -5,7 +5,7 @@ class Player < ActiveRecord::Base
 
   # gets full name, as string
   def name
-    user.fb_user.name
+    user.name
   end
 
   # returns player name as an identifier

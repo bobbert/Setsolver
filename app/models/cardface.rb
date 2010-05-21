@@ -13,6 +13,17 @@ class Cardface < ActiveRecord::Base
     abbrev + '.png'
   end
 
+  # image name, used to show picture
+  def img_path
+    '/images/cards/' + img_name
+  end
+
+  # image name, used to show picture
+  def small_img_path
+    '/images/smallcards/' + img_name
+  end
+
+
   # card name -- identical to human-readable name (to_s)
   def name
     to_s
