@@ -2,12 +2,10 @@ require 'spec_helper'
 
 describe Score do
   before(:each) do
-    @valid_attributes = {
-      
-    }
+    @score = Factory(:score)
   end
 
-  it "should create a new instance given valid attributes" do
-    Score.create!(@valid_attributes)
+  it "should start with zero points by default" do
+    @score.points.should == 0
   end
 end
