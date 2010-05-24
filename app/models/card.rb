@@ -3,12 +3,15 @@ class Card < ActiveRecord::Base
   belongs_to :deck
   belongs_to :threecardset
 
-  validate :must_have_position_attribute
+  validate :must_have_one_position_attribute
 
   # validation conditions: must have faceup or facedown position, but not both
-  def must_have_position_attribute
-    errors.add_to_base("Card ##{self.id} has ambiguous position: facedown_pos=#{facedown_position.to_s}; " + 
-                       "faceup_pos=#{faceup_position.to_s}.!") unless (facedown_position.blank? ^ faceup_position.blank?)
+  def must_have_one_position_attribute
+    unless (facedown_position.blank? ^ faceup_position.blank?)
+      errors.add_to_base("Card ##{self.id} has ambiguous position: " + 
+                         "facedown_pos=#{(facedown_position || '<empty>').to_s}; " + 
+                         "faceup_pos=#{(faceup_position || '<empty>').to_s}.!")
+    end
   end
 
   # the abbreviated name of the card

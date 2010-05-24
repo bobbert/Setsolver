@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # create new Player object immediately after creating user
   def new_player
     self.player = Player.new
-    update_fields unless RAILS_ENV == 'test'
+    update_fields 
   end
 
   def fb_user
@@ -20,12 +20,14 @@ class User < ActiveRecord::Base
 
 protected
 
-  # updating all user fields to internal values
+  # updating all Facebooker::User fields to internal values
   def update_fields
-    Facebooker::User.user_fields.split(',').each do |field|
-      self.send((field + '='), fb_user.send(field))
+    unless RAILS_ENV == 'test'
+      Facebooker::User.user_fields.split(',').each do |field|
+	self.send((field + '='), fb_user.send(field))
+      end
+      save
     end
-    save
   end
 
 end

@@ -115,6 +115,6 @@ describe Game do
 
     end # 'and when finding Sets' context
 
-  end  # 'when started' context
+  end  # 'when started with one player added' context
 
 end

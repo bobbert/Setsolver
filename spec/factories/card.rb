@@ -1,5 +1,6 @@
 # Card factories
 Factory.define :card do |c|
+  c.cardface { Cardface.first }
   c.facedown_position 1
   c.faceup_position nil
 end

@@ -2,12 +2,10 @@ require 'spec_helper'
 
 describe Player do
   before(:each) do
-    @valid_attributes = {
-      
-    }
+    @player1 = Factory(:player)
   end
 
-  it "should create a new instance given valid attributes" do
-    Player.create!(@valid_attributes)
+  it "should have zero games by default" do
+    @player1.games.should == []
   end
 end

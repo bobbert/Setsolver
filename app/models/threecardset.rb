@@ -4,32 +4,24 @@ class Threecardset < ActiveRecord::Base
   has_many :cards
   belongs_to :player
 
-  attr_accessor :cardface1, :cardface2, :cardface3
-
-  before_create :add_cards_to_set_if_cardfaces_assigned
   validate :must_have_three_cards_that_belong_to_same_deck
 
-  # adding new cards to Threecardset immediately before saving
-  def add_cards_to_set_if_cardfaces_assigned
-    initial_cardcount = self.cards.length
-    [cardface1, cardface2, cardface3].compact.each_with_index do |cf, index|
-      if initial_cardcount <= index
-        c = deck.cards.find_by_cardface_id( cf.id )
-        self.cards << c unless c.threecardset
-      end
-    end
-  end
 
   # validation conditions: 3-card sets must contain three cards, and all cards 
   # must be part of the same deck.
   def must_have_three_cards_that_belong_to_same_deck
     errors.add_to_base("Set ##{self.id} does not have three cards!") unless cards.length == 3
-    errors.add_to_base("Set ##{self.id} has cards from different decks!") unless cards.map {|c| c.deck }.uniq.length == 1
+    unique_decks = cards.map {|card| card.deck }.compact.uniq
+    if unique_decks.length > 1
+      errors.add_to_base("Set ##{self.id} has cards from different decks!")
+    elsif unique_decks.length == 0
+      errors.add_to_base("Set ##{self.id} has cards that don't belong to a deck!")      
+    end
   end
 
   # array of cardfaces corresponding to cards
   def cardfaces
-    cards.map {|c| c.cardface }
+    cards.map {|card| card.cardface }
   end
 
   # returns deck if cards are present, or nil otherwise.

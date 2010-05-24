@@ -66,7 +66,7 @@ class Game < ActiveRecord::Base
   def field_row( row )
     return [] unless FieldRows.keys.include? row
     cards_in_row = []
-    field.each_with_index {|c,i| cards_in_row << c if i % 3 == FieldRows[row] }
+    field.each_with_index {|card,i| cards_in_row << card if i % 3 == FieldRows[row] }
     cards_in_row
   end
 
@@ -135,7 +135,7 @@ class Game < ActiveRecord::Base
 
   # list of players that can be added
   def player_add_list
-    Player.find(:all).delete_if {|p| players.include? p }
+    Player.find(:all).delete_if {|player| players.include? player }
   end
 
   # adds player to new game -- returns player added if successful
@@ -147,15 +147,15 @@ class Game < ActiveRecord::Base
   end
 
   # remove player from new game -- returns player if removed
-  def remove_player( plyr )
-    sc = Score.find_by_player_id_and_game_id( plyr.id, self.id )
+  def remove_player( player )
+    sc = Score.find_by_player_id_and_game_id( player.id, self.id )
     return false unless sc
     sc.player if sc.destroy
   end
 
   # get names of players
   def player_names
-    players.map {|pl| pl.name }.join(' vs. ')
+    players.map {|player| player.name }.join(' vs. ')
   end
 
   # return all sets found by all players.  If nil is passed as a parameter, return all sets.
@@ -206,19 +206,19 @@ class Game < ActiveRecord::Base
   # evaluates player submission, and if set is valid:
   # set all three cards as claimed by player passed in, then
   # return the three-card set.
-  def make_set_selection( plyr, *cards )
-    return false unless is_set? *cards
+  def make_set_selection( plyr, card1, card2, card3 )
+    return false unless is_set?(card1, card2, card3)
     # increment score
     increment_score plyr
     # create new set
-    newset = Threecardset.new :cards => cards, :player => plyr
-    newset if newset.save
+    newset = Threecardset.new :cards => [card1, card2, card3], :player => plyr
+    newset if newset.save!
   end
 
   # given an array of cardfaces and an attribute, finds out how many distinct
   # attribute types exist in the array for the attribute type passed in.
   def num_different_attr( attr, cardface_arr )
-    res = cardface_arr.map {|c| c.send(attr) }
+    res = cardface_arr.map {|card| card.send(attr) }
     res.uniq.length
   end
 

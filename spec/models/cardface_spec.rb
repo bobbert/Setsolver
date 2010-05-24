@@ -36,9 +36,17 @@ describe Cardface do
     end
   end
 
-  it "should each have a set card image" do
+  it "should all have a set card image" do
     final_count_of_correct_images = @all_cardfaces.inject(0) do |correct_count, cardface| 
       correct_count += 1 if File.exist?("#{RAILS_ROOT}/public/#{cardface.img_path}")
+      correct_count
+    end
+    final_count_of_correct_images.should == @all_cardfaces.length
+  end
+
+  it "should all have a small set card image" do
+    final_count_of_correct_images = @all_cardfaces.inject(0) do |correct_count, cardface| 
+      correct_count += 1 if File.exist?("#{RAILS_ROOT}/public/#{cardface.small_img_path}")
       correct_count
     end
     final_count_of_correct_images.should == @all_cardfaces.length
