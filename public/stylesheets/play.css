@@ -5,7 +5,8 @@
 .setboard ul.setboard-row li img    { padding:8px; float:none; }
 .setboard ul.setboard-row li.selected img  { padding:8px; float:none; background-color:#008; }
 
-.right-panel                        { display:inline-block; vertical-align:top; margin-left:5px; width:300px; }
+.right-panel                        { display:inline-block; vertical-align:top; margin-left:5px; 
+                                      width:300px; }
 .right-panel .score-panel           { padding-top:0px; border:3px solid #008; }
 .right-panel .score-panel ul        { padding:2px; margin:5px; list-style-type:none; }
 .right-panel .score-panel ul li     { padding:2px; margin:2px; }
@@ -14,7 +15,8 @@
 .right-panel .activity-panel ul     { padding:2px; margin:5px; list-style-type:none; }
 .right-panel .activity-panel ul li  { padding:1px; margin-bottom:3px; border:1px solid #008; }
 .right-panel .activity-panel ul li h5 { margin:0; }
-p.setlisting                        { margin-left: 2px; margin-top:0; margin-bottom:0; }
+p.setlisting                        { display:inline-block; margin-left: 2px; margin-top:0; 
+                                      margin-bottom:0; }
 
 .right-panel div h2                 { text-align:center; margin-top:3px; margin-bottom:2px; }
 .right-panel div h3                 { text-align:center; margin-top:3px; margin-bottom:2px; }

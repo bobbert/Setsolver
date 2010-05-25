@@ -1,9 +1,9 @@
 class CreateDecks < ActiveRecord::Migration
   def self.up
     create_table :decks do |t|
-      t.integer :game_id
+      t.integer     :game_id
       t.timestamps
-      t.date    :finished_at
+      t.datetime    :finished_at
     end
 
    # adding database index to Cards for referential integrity

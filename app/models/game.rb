@@ -170,13 +170,14 @@ class Game < ActiveRecord::Base
     deck.deal( (FieldSize - field.length) ) if field.length < FieldSize
     until ((tmp_sets = find_sets).length > 0)  # assigning to temp variable "tmp_sets"
       if deck.all_dealt?
-        self.finished_at = Time.now
+        self.finished_at = self.last_played_at = Time.now
         save
         return []
       end
       deck.deal 3
     end
-    tmp_sets
+    self.last_played_at = Time.now
+    tmp_sets if save
   end
 
   # returns an array-of-arrays where the inner array are matching sets of three Card objects,
@@ -208,10 +209,12 @@ class Game < ActiveRecord::Base
   # return the three-card set.
   def make_set_selection( plyr, card1, card2, card3 )
     return false unless is_set?(card1, card2, card3)
+    seconds_to_find = (Time.now - self.last_played_at)
     # increment score
     increment_score plyr
     # create new set
-    newset = Threecardset.new :cards => [card1, card2, card3], :player => plyr
+    newset = Threecardset.new :cards => [card1, card2, card3], :player => plyr, 
+	                      :seconds_to_find => seconds_to_find
     newset if newset.save!
   end
 
@@ -221,5 +224,9 @@ class Game < ActiveRecord::Base
     res = cardface_arr.map {|card| card.send(attr) }
     res.uniq.length
   end
+
+private
+
+
 
 end

@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
   end
 
   def self.down
-    remove_index "users", :facebook_id
-    drop_table :facebook_templates
+   # remove_index "users", :facebook_id
+    drop_table :users
   end
 end

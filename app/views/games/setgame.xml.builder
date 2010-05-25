@@ -9,7 +9,7 @@ xml.setgame do
   if flash[:error]
     xml.error          formatted_date(Time.now) + ': ' + flash[:error]
   end
-  xml.num_sets       number_noun_desc(@sets.length, 'set')
+  xml.num_sets         number_noun_desc(@sets.length, 'set')
   if @game.active?
     xml.cards do
       @game.cards_by_node_order.each_with_index do |card,i|
@@ -26,6 +26,7 @@ xml.setgame do
     xml.found_set do 
       xml.created_at       formatted_date(@found_set.created_at)
       xml.found_by         @found_set.player.name
+      xml.seconds_to_find  @found_set.seconds_to_find
       xml.setcards do
         @found_set.cards.each do |card|
           xml.setcard do

@@ -13,8 +13,12 @@ module ApplicationHelper
     return (expr) ? 'Yes' : 'No'
   end
 
-  def formatted_date( dt )
-    dt.strftime("%m/%d/%Y %I:%M:%S %p")
+  def formatted_date( date )
+    date.strftime("%m/%d/%Y %I:%M:%S %p") if date
   end
 
+  # Facebooker mock helper functions
+  def 
+  
+  
 end

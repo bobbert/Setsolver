@@ -14,7 +14,7 @@
 
 <% h = YAML.load_file("#{RAILS_ROOT}/config/db_passwd.yml") %>
 
-development:
+development: &defaults
   adapter: mysql
   database: setsolver_dev
   username: root
@@ -27,19 +27,12 @@ development:
 # re-generated from your development database when you run 'rake'.
 # Do not set this db to the same as development or production.
 test:
-  adapter: mysql
+  <<: *defaults
   database: setsolver_test
-  username: root
   password: <%= h['password_test'] %>
-  host: localhost
-  port: 3000
-  socket: /var/run/mysqld/mysqld.sock
 
 production:
-  adapter: mysql
+  <<: *defaults
   database: setsolver_prod
-  username: root
   password: <%= h['password_prod'] %>
-  host: localhost
-  port: 80
-  socket: /var/run/mysqld/mysqld.sock
+

@@ -3,9 +3,9 @@ class CreateGames < ActiveRecord::Migration
     create_table :games do |t|
       t.integer    :selection_count, :default => 0
       t.string     :name, :limit => 50
-      t.date       :last_played_at
-      t.date       :started_at
-      t.date       :finished_at
+      t.datetime   :last_played_at
+      t.datetime   :started_at
+      t.datetime   :finished_at
       t.timestamps
     end
 

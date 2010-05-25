@@ -2,6 +2,9 @@ $(document).ready(function() {
 
   $(':checkbox').hide();
   $('input:submit').hide();
+  $('#error').live('change', function() {  
+    ($(this).text().length == 0) ? $(this).hide() : $(this).show();
+  });
 
   $('#setboard ul.setboard-row li img').live('click', function() {
     selectSetCard($(this).parent());
@@ -138,6 +141,7 @@ $(document).ready(function() {
     var new_col = cloneNewActivityNode();
     new_col.find('h5').text( $(setcard_xml).find('created_at').text() );
     new_col.find('span.setlisting-name').text( $(setcard_xml).find('found_by').text() );
+    new_col.find('span.setlisting-time').text( $(setcard_xml).find('seconds_to_find').text() );
     var set_images = new_col.find('p.setlisting img');
     var indx = 0;  // used to mimic Ruby each_with_index behavior
 

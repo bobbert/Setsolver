@@ -16,14 +16,10 @@
     <h1>Game Activity</h1>
     <ul id="set_records" class="set-records">
     <% @game.sets.each do |set| %>
-      <li><h5><%= formatted_date(set.created_at) %></h5>
-          <span class="setlisting-name"><%= set.score.player.name %></span> found 
-          <p class="setlisting"><%= render_threecard_set(set) %></p>
-      </li>
+      <li><%= render_set_found_text(set) %></li>
     <% end %>
     <% if @game.selection_count == 0 %>
-      <li class="dummy-first-node"><h5></h5>
-          <p class="setlisting"><span class="setlisting-name">No one</span><%= " found " + render_dummy_set %></p></li>      
+      <li class="dummy-first-node"><%= render_set_found_text(nil) %></li>
     <% end %>
     </ul>
   </div>

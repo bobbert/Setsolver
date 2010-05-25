@@ -10,7 +10,7 @@
 
 <% h = YAML.load_file("#{RAILS_ROOT}/config/fb_passwd.yml") %>
 
-development:
+development: &fb_defaults
   api_key: <%= h['api_key'] %>
   secret_key: <%= h['secret_key'] %>
   canvas_page_name: setsolver
@@ -19,18 +19,8 @@ development:
   set_asset_host_to_callback_url: true
 
 test:
-  api_key: <%= h['api_key'] %>
-  secret_key: <%= h['secret_key'] %>
-  canvas_page_name: setsolver
-  callback_url: http://173.66.113.86:15000/
-  pretty_errors: true
-  set_asset_host_to_callback_url: true
+  <<: *fb_defaults
 
 production:
-  api_key: <%= h['api_key'] %>
-  secret_key: <%= h['secret_key'] %>
-  canvas_page_name: setsolver
-  callback_url: http://173.66.113.86:15000/
-  pretty_errors: true
-  set_asset_host_to_callback_url: true
+  <<: *fb_defaults
 

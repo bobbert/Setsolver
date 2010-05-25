@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # create new Player object immediately after creating user
   def new_player
     self.player = Player.new
-    update_fields 
+#    update_fields if save
   end
 
   def fb_user

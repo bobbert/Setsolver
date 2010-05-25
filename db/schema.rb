@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20100513184801) do
     t.integer  "game_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "finished_at"
+    t.datetime "finished_at"
   end
 
   add_index "decks", ["game_id"], :name => "game_deck_id_fkey"
@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(:version => 20100513184801) do
   create_table "games", :force => true do |t|
     t.integer  "selection_count",               :default => 0
     t.string   "name",            :limit => 50
-    t.date     "last_played_at"
-    t.date     "started_at"
-    t.date     "finished_at"
+    t.datetime "last_played_at"
+    t.datetime "started_at"
+    t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,12 +76,13 @@ ActiveRecord::Schema.define(:version => 20100513184801) do
 
   create_table "threecardsets", :force => true do |t|
     t.integer  "player_id"
+    t.integer  "time_to_find"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "facebook_id",          :limit => 8
+    t.integer  "facebook_id"
     t.string   "session_key"
     t.datetime "created_at"
     t.datetime "updated_at"

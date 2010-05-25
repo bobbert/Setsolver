@@ -7,6 +7,7 @@ module GamesHelper
 
   # prints three card set as miniature cards
   def render_threecard_set( tcs )
+    return render_dummy_set if tcs.blank?
     tcs.cards.inject('') do |str,c|
       str += ' ' unless str.length == 0
       str += image_tag( ('smallcards/' + c.img_name), :height => 45, :width => 30, :alt => c.to_s )
@@ -43,5 +44,11 @@ module GamesHelper
     image_tag(('cards/' + card.img_name), :height => 90, :width => 60, :alt => card.to_s)
   end
 
-  
+  def render_set_found_text( set )
+    "<h5>#{formatted_date(set.created_at) if set}</h5> " + 
+    "<span class=\"setlisting-name\">#{set.score.player.name if set}</span> found " + 
+    "<p class=\"setlisting\">#{render_threecard_set(set) if set}</p> " + 
+    "in <span class=\"setlisting-time\">#{set.seconds_to_find if set}</span> seconds"
+  end
+
 end
