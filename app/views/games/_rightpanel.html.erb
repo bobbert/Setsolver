@@ -6,8 +6,8 @@
     <h1>Game Score</h1>
     <ul id="score_listing" class="score-listing">
     <% @game.scores.each do |score| %>
-      <li><%= fb_profile_pic @user %>
-          <%= fb_name @user, :possessive => false, :useyou => false, :capitalize => true %>: 
+      <li><%= mock_fb_profile_pic @user %>
+          <%= mock_fb_name @user, :possessive => false, :useyou => false, :capitalize => true %>: 
           <span id="gamescore_<%= score.player.id %>"><%= score.points %></span></li>
     <% end %>
     </ul>
