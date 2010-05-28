@@ -47,7 +47,7 @@ module GamesHelper
   def render_set_found_text( set )
     "<h5>#{formatted_date(set.created_at) if set}</h5> " + 
     "<span class=\"setlisting-name\">#{set.score.player.name if set}</span> found " + 
-    "<p class=\"setlisting\">#{render_threecard_set(set) if set}</p> " + 
+    "<p class=\"setlisting\">#{render_threecard_set(set)}</p> " + 
     "in <span class=\"setlisting-time\">#{set.seconds_to_find if set}</span> seconds"
   end
 

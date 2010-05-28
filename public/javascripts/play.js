@@ -105,6 +105,9 @@ $(document).ready(function() {
       $(this).text( msg_txt );
       if (msg_txt.length > 0) {
 	errors_found = true;
+        $(this).show();
+      } else {
+        $(this).hide();
       }
     });
     return errors_found;
@@ -166,6 +169,10 @@ $(document).ready(function() {
 
   isSubmitting = function() {
     return ($('#submitbar:visible').length > 0);
+  }
+
+  submitCompletedForm = function() {
+    
   }
 
 });

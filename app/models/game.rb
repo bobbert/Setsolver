@@ -158,26 +158,39 @@ class Game < ActiveRecord::Base
     players.map {|player| player.name }.join(' vs. ')
   end
 
-  # return all sets found by all players.  If nil is passed as a parameter, return all sets.
+  # returns the most recently found sets, regardless of player.  
+  # If :all is passed as a parameter, return all sets.
   def sets( num_most_recent = Game::ActivityLogSize )
-    all_sets = scores.inject([]) {|s_arr,s| s_arr += s.sets }
-    num_most_recent ? all_sets.sort.slice(0,num_most_recent) : all_sets.sort
+    return [] unless (num_most_recent.is_a?(Integer) || num_most_recent == :all)
+    all_sets = scores.inject([]) {|s_arr, score| s_arr += score.sets }
+    return (num_most_recent == :all) ? all_sets.sort : all_sets.sort.slice(0,num_most_recent)
+  end
+  
+  # return sum of all times to find individual sets
+  def total_time
+    sets(:all).inject(0) {|sum, set| sum += set.seconds_to_find }
+  end
+  
+  def average_time
+    (total_time / selection_count.to_f).round_with_precision 3
   end
   
   # fills gamefield so that it contains at least 1 set, then return array of sets.
+  # The timer gets refreshed when calling this function, if any cards changed.
   # Returns an empty array if no sets are found and the deck is empty (i.e. game finished)
   def fill_gamefield_with_sets
-    deck.deal( (FieldSize - field.length) ) if field.length < FieldSize
+    num_empty_cards = FieldSize - field.length
+    dealt = ( deck.deal num_empty_cards if num_empty_cards > 0 )
     until ((tmp_sets = find_sets).length > 0)  # assigning to temp variable "tmp_sets"
       if deck.all_dealt?
-        self.finished_at = self.last_played_at = Time.now
-        save
+        self.finished_at = Time.now
+        reset_timer
         return []
       end
-      deck.deal 3
+      dealt = deck.deal 3
     end
-    self.last_played_at = Time.now
-    tmp_sets if save
+    reset_timer unless dealt.blank?
+    tmp_sets
   end
 
   # returns an array-of-arrays where the inner array are matching sets of three Card objects,
@@ -227,6 +240,10 @@ class Game < ActiveRecord::Base
 
 private
 
-
+   # resets internal timer
+   def reset_timer
+     self.last_played_at = Time.now
+     save
+   end
 
 end

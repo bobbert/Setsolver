@@ -31,8 +31,8 @@
 </script>
 <% end %>
 
-<p id="notice" style="color:green"><%= flash[:notice] %></p>
-<p id="error" style="color:red"><%= flash[:error] %></p>
+<p id="notice" style="display:<%= flash[:notice] ? 'block' : 'none' %>"><%= flash[:notice] %></p>
+<p id="error" style="display:<%= flash[:error] ? 'block' : 'none' %>"><%= flash[:error] %></p>
 
 <%= yield %>
 

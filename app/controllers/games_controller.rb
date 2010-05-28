@@ -100,8 +100,11 @@ class GamesController < ApplicationController
 
   # plays submitted Set cards if submit button was clicked, then refreshes board
   def play
-    @game.start unless @game.started?
-    play_cards if params[:commit]  # play submitted cards, if a form submit occurred
+    if @game.started?
+      play_cards if params[:commit]  # play submitted cards, if a form submit occurred
+    else
+      @game.start
+    end
     @sets = @game.fill_gamefield_with_sets
     render :action => 'play' if @game.active?
     redirect_to :action => 'archive' if @game.finished?
