@@ -54,6 +54,9 @@ $(document).ready(function() {
     if (parseErrorsIfFound(xml)) {
       return false;
     }
+    if ($(xml).find("status").text() == 'finished') {
+      return submitCompletedForm();
+    }
 
     // calculate difference between number of XML cards and number of cards in browser
     var new_field_size_diff = parseInt(num_cards) - $('#setboard ul.setboard-row li').length;
@@ -163,16 +166,14 @@ $(document).ready(function() {
     return $('ul#set_records li:first').clone().removeClass('dummy-first-node').hide();
   }
 
-  hideIfEmpty = function() {
-    $(this)
-  }
-
   isSubmitting = function() {
     return ($('#submitbar:visible').length > 0);
   }
 
+  // Set game is complete - make call to archive
   submitCompletedForm = function() {
-    
+    $('form').attr('action', 'archive')
+    $('input[name=commit]').trigger('click');
   }
 
 });

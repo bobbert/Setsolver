@@ -9,6 +9,7 @@ class Game < ActiveRecord::Base
   ActivityLogSize = 4
   SetboardColWidth = 84
 
+  MaxSecondsToFindSet = 300
 
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
@@ -223,6 +224,7 @@ class Game < ActiveRecord::Base
   def make_set_selection( plyr, card1, card2, card3 )
     return false unless is_set?(card1, card2, card3)
     seconds_to_find = (Time.now - self.last_played_at)
+    seconds_to_find = MaxSecondsToFindSet if (seconds_to_find > MaxSecondsToFindSet)
     # increment score
     increment_score plyr
     # create new set

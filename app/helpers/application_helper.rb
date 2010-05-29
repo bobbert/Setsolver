@@ -17,6 +17,15 @@ module ApplicationHelper
     date.strftime("%m/%d/%Y %I:%M:%S %p") if date
   end
 
+  # alias of Player of current_user
+  def current_player
+    current_user.player
+  end
+  
+  def default_game_name
+    "#{current_player.name}'s #{(current_player.games.length + 1).ordinalize} game"
+  end
+  
   # --- Facebooker mock helper functions ---
 
   def mock_fb_profile_pic( user = current_user )

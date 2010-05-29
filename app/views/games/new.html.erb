@@ -5,7 +5,7 @@
 <% form_for(@game) do |f| %>
   <p>
     <b>Enter a name for your game:</b>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :value => default_game_name %>
   </p>
 
   <p>

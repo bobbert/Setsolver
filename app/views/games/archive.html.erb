@@ -17,7 +17,7 @@
     <h2><%= score.player.name %>: Total score = <%= score.points %></h2>
     <ol id="archive_<%= score.player.name_as_identifier %>">
     <% score.sets.each_with_index do |set,i| %>
-      <li><%= render_threecard_set(set) %></li>
+      <li><%= render_threecard_set(set) %> found in <%= set.seconds_to_find %> seconds</li>
     <% end %>
     </ol>
   <% end %>
