@@ -3,6 +3,11 @@ class Cardface < ActiveRecord::Base
 
   ATTR = [:number, :shading, :color, :shape]
 
+  def self.get_random_card_image
+    num = rand Cardface.find(:all).length
+    Cardface.find(num).img_path
+  end
+  
   # the abbreviated name of the card
   def abbrev
     number.to_s + shading_abbrev + color_abbrev + shape_abbrev

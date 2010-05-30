@@ -107,7 +107,10 @@ class GamesController < ApplicationController
     end
     @sets = @game.fill_gamefield_with_sets
     render :action => 'play' if @game.active?
-    redirect_to :action => 'archive' if @game.finished?
+    if @game.finished?
+      publish_if_finished
+      redirect_to :action => 'archive' 
+    end
   end
 
   # Ajax refresh routine for auto-selection
@@ -206,6 +209,15 @@ private
       end
     end
     redirect_to(game_url)
+  end
+
+  # publish to Facebook wall if game is finished
+  def publish_if_finished
+    if @game.finished? && !(@game.postgame_published)
+      flash[:user_action_to_publish] = FinishedGamePublisher.create_finished_game(@user)
+      @game.postgame_published = true
+      @game.save
+    end
   end
 
 end

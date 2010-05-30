@@ -43,8 +43,13 @@ class Game < ActiveRecord::Base
   # create new deck with full set of cards, and shuffle cards
   # if auto-shuffle parameter is set
   def new_deck
-    self.deck = Deck.new
-    save && deck.shuffle
+    self.postgame_published = false
+    if deck
+      save
+    else
+      self.deck = Deck.new
+      save && deck.shuffle
+    end
   end
 
   # start playing the game
@@ -114,7 +119,7 @@ class Game < ActiveRecord::Base
     started? && !finished?
   end
 
-  # has game been completed?
+  # has game been completed and archived?
   def finished?
     !(finished_at.nil?)
   end
@@ -174,7 +179,7 @@ class Game < ActiveRecord::Base
   
   def average_time
     (total_time / selection_count.to_f).round_with_precision 3
-  end
+  end  
   
   # fills gamefield so that it contains at least 1 set, then return array of sets.
   # The timer gets refreshed when calling this function, if any cards changed.

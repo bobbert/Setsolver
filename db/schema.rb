@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100513184801) do
+ActiveRecord::Schema.define(:version => 20100529151422) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number"
@@ -42,14 +42,23 @@ ActiveRecord::Schema.define(:version => 20100513184801) do
 
   add_index "decks", ["game_id"], :name => "game_deck_id_fkey"
 
+  create_table "facebook_templates", :force => true do |t|
+    t.string "template_name", :null => false
+    t.string "content_hash",  :null => false
+    t.string "bundle_id"
+  end
+
+  add_index "facebook_templates", ["template_name"], :name => "index_facebook_templates_on_template_name", :unique => true
+
   create_table "games", :force => true do |t|
-    t.integer  "selection_count",               :default => 0
-    t.string   "name",            :limit => 50
+    t.integer  "selection_count",                  :default => 0
+    t.string   "name",               :limit => 50
     t.datetime "last_played_at"
     t.datetime "started_at"
     t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "postgame_published"
   end
 
   create_table "players", :force => true do |t|
@@ -76,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20100513184801) do
 
   create_table "threecardsets", :force => true do |t|
     t.integer  "player_id"
-    t.integer  "time_to_find"
+    t.integer  "seconds_to_find"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
