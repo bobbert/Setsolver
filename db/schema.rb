@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100529151422) do
+ActiveRecord::Schema.define(:version => 20100601035031) do
 
   create_table "cardfaces", :force => true do |t|
     t.integer "number"
@@ -62,12 +62,13 @@ ActiveRecord::Schema.define(:version => 20100529151422) do
   end
 
   create_table "players", :force => true do |t|
-    t.integer  "wins",       :default => 0
-    t.integer  "losses",     :default => 0
-    t.integer  "rating",     :default => 1000
+    t.integer  "wins",           :default => 0
+    t.integer  "losses",         :default => 0
+    t.integer  "rating",         :default => 1000
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "skill_level_id"
   end
 
   add_index "players", ["user_id"], :name => "player_user_id_fkey"
@@ -82,6 +83,13 @@ ActiveRecord::Schema.define(:version => 20100529151422) do
 
   add_index "scores", ["game_id"], :name => "score_game_id_fkey"
   add_index "scores", ["player_id"], :name => "score_player_id_fkey"
+
+  create_table "skill_levels", :force => true do |t|
+    t.string   "name"
+    t.integer  "threshold_time_in_seconds"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "threecardsets", :force => true do |t|
     t.integer  "player_id"

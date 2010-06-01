@@ -18,20 +18,17 @@ class User < ActiveRecord::Base
     facebook_session.user if facebook_session
   end
 
-  def last_finished_game
-    player.archived_games.sort_by {|g| g.finished_at }.last
-  end
-  
   def wall_header_for_last_finished_game
-    "#{first_name} has completed #{player.archived_games.length} Setsolver games!"
+    article = ("AEIOU".include? player.skill_level.name[0]) ? 'an' : 'a'
+    "#{first_name} is now #{article} #{player.skill_level.name.downcase} Setsolver player!"
   end
 
   def wall_post_for_last_finished_game
-    "In the latest game, #{first_name} found #{last_finished_game.selection_count} sets " + 
-    "in #{last_finished_game.total_time} seconds."
+    "#{first_name} has a new best time: #{player.last_finished_game.selection_count} sets were found in " + 
+    "in #{player.last_finished_game.total_time} seconds."
   end
 
-  protected
+protected
 
   # updating all Facebooker::User fields to internal values
   def update_fields

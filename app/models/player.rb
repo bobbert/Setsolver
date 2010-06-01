@@ -2,6 +2,7 @@ class Player < ActiveRecord::Base
   has_many :scores
   has_many :threecardsets
   belongs_to :user
+  belongs_to :skill_level
 
   # gets full name, as string
   def name
@@ -55,6 +56,24 @@ class Player < ActiveRecord::Base
     newset
   end
 
+  # returns last game completely finished
+  def last_finished_game
+    archived_games.sort_by {|g| g.finished_at }.last
+  end
 
+  # will this player promote skill levels?
+  def promote?
+    return false if last_finished_game.blank?
+    avg_time = last_finished_game.average_time
+    return !(SkillLevel.highest_skill_level(avg_time).blank?) unless skill_level
+    skill_level.promote? avg_time
+  end
+
+  # promote character to next skill level, if applicable.  Returns True if successful.
+  def promote_to_next_level
+    return false unless promote?
+    self.skill_level = SkillLevel.highest_skill_level(last_finished_game.average_time)
+    save
+  end
 
 end

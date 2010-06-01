@@ -108,7 +108,7 @@ class GamesController < ApplicationController
     @sets = @game.fill_gamefield_with_sets
     render :action => 'play' if @game.active?
     if @game.finished?
-      publish_if_finished
+      publish_if_finished_and_promoted
       redirect_to :action => 'archive' 
     end
   end
@@ -212,8 +212,9 @@ private
   end
 
   # publish to Facebook wall if game is finished
-  def publish_if_finished
-    if @game.finished? && !(@game.postgame_published)
+  def publish_if_finished_and_promoted
+    if @game.finished? && !(@game.postgame_published) && @player.promote?
+      @player.promote_to_next_level && @player.save
       flash[:user_action_to_publish] = FinishedGamePublisher.create_finished_game(@user)
       @game.postgame_published = true
       @game.save
