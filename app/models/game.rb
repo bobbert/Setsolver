@@ -110,8 +110,13 @@ class Game < ActiveRecord::Base
   end
   
   # has game been started?  Games musst have at least one player and a start date to be considered started.
+  def waiting_to_start?
+    started_at.nil?
+  end
+
+  # has game been started?
   def started?
-    !(started_at.nil? || players.length == 0)
+    !(waiting_to_start?)
   end
 
   # is game active?...i.e. started but not finished?
@@ -124,6 +129,7 @@ class Game < ActiveRecord::Base
     !(finished_at.nil?)
   end
 
+  # return completion percentage
   def percent_complete
     return 100 if finished?
     100 - ((deck.facedown.length + field.length) * 100 / deck.cards.length)
@@ -171,16 +177,16 @@ class Game < ActiveRecord::Base
     all_sets = scores.inject([]) {|s_arr, score| s_arr += score.sets }
     return (num_most_recent == :all) ? all_sets.sort : all_sets.sort.slice(0,num_most_recent)
   end
-  
+
   # return sum of all times to find individual sets
   def total_time
     sets(:all).inject(0) {|sum, set| sum += set.seconds_to_find }
   end
-  
+
   def average_time
     (total_time / selection_count.to_f).round_with_precision 3
-  end  
-  
+  end
+
   # fills gamefield so that it contains at least 1 set, then return array of sets.
   # The timer gets refreshed when calling this function, if any cards changed.
   # Returns an empty array if no sets are found and the deck is empty (i.e. game finished)

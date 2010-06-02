@@ -1,0 +1,12 @@
+<% @game.scores.sort.each do |score| %>
+  <div class="sets-selected">
+  <h2><%= mock_fb_raw_name(score.user, :useyou => true, :possessive => true, :capitalize => true) + 
+          " #{('final' if @game.finished?)} score: #{score.points}" %></h2>
+  <h2>Average time = <%= @game.average_time %> seconds</h2>
+  <ol id="archive_<%= score.player.name_as_identifier %>" style="text-align:left;">
+    <% score.sets.each_with_index do |set,i| %>
+      <li><%= render_threecard_set(set) %> found in <%= set.seconds_to_find %> seconds</li>
+    <% end %>
+  </ol>
+  </div>
+<% end %>

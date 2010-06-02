@@ -172,7 +172,6 @@ $(document).ready(function() {
 
   // Set game is complete - make call to archive
   submitCompletedForm = function() {
-    $('form').attr('action', 'archive')
     $('input[name=commit]').trigger('click');
   }
 

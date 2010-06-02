@@ -31,9 +31,9 @@ module GamesHelper
   # create game number as link
   def game_play_link( gm )
     if gm.active?
-      link_to("Play game", play_path(gm))
+      link_to("Play", play_path(gm), :class => 'mock-fb-button')
     elsif gm.finished?
-      link_to("View game archive", archive_path(gm))
+      link_to("Game Archive", archive_path(gm), :class => 'mock-fb-button')
     else
       'Game not yet started.'
     end

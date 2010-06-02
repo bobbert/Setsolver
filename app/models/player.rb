@@ -9,6 +9,12 @@ class Player < ActiveRecord::Base
     user.name
   end
 
+  # skill level
+  def readable_skill_level
+    return skill_level.name if skill_level
+    'None'
+  end
+
   # returns player name as an identifier
   def name_as_identifier
     id.to_s + '_' + name.downcase.gsub(/\s/,'_')
@@ -31,14 +37,33 @@ class Player < ActiveRecord::Base
     scores.select {|sc| sc.game == gm }.first
   end
 
+  # does at least one active game exist?
+  def has_games_waiting_to_start?
+    games_waiting_to_start.length > 0
+  end
+
+  def games_waiting_to_start
+    games.select {|g| g.waiting_to_start? }
+  end
+
+  # does at least one active game exist?
+  def has_active_games?
+    active_games.length > 0
+  end
+
   # get all games played by this player
   def active_games
-    scores.map {|sc| sc.game }.select {|g| g.active? }
+    games.select {|g| g.active? }
+  end
+
+  # does at least one archived game exist?
+  def has_archived_games?
+    archived_games.length > 0
   end
 
   # get all games completed by this player
   def archived_games
-    scores.map {|sc| sc.game }.select {|g| g.finished? }
+    games.select {|g| g.finished? }
   end
 
   # evaluates player submission, and if set is valid:

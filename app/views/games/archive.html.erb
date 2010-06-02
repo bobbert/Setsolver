@@ -3,26 +3,15 @@
 <% end %>
 
 <h1 class="setsolver">Game Archive: <%=@game.title %></h1>
-<p align=right>
-<%= link_to '[ << Back to List of Games ]', games_path %>
-</p>
 <% if @game.finished? %>
-  <p>
-    <b>Game started:</b> <%=h @game.started_at %>
+  <p><b>Game started:</b> <%= h @game.started_at %> </p>
+  <p><b>Game completed:</b> <%= h @game.finished_at %> </p>
+  <p id="buttons">
+    <%= link_to 'Back to Games', games_path, :class => "mock-fb-button" %>
   </p>
-  <p>
-    <b>Game completed:</b> <%=h @game.finished_at %>
-  </p>
-  <% @game.scores.sort.each do |score| %>
-    <h2><%= score.player.name %>: Total score = <%= score.points %></h2>
-    <ol id="archive_<%= score.player.name_as_identifier %>">
-    <% score.sets.each_with_index do |set,i| %>
-      <li><%= render_threecard_set(set) %> found in <%= set.seconds_to_find %> seconds</li>
-    <% end %>
-    </ol>
-  <% end %>
+  <%= render :partial => 'sets_selected' %>
 <% else %>
   <p>No archive data exists for this game.</p>
-  <p><%= link_to '[ << Back to Game ]', game_path %></p>
+  <p><%= link_to '[ << Back to Game ]', game_path, :class => "mock-fb-button" %></p>
 <% end %>
 

@@ -4,6 +4,10 @@ class Score < ActiveRecord::Base
 
   validates_presence_of :game, :player
 
+  def user
+    player.user if player
+  end
+
   # is this player in the lead? (ties don't count)
   def winner?
     higher_or_same_score_plyrs = game.scores.find_all {|sc| (sc != self) && sc.points >= self.points }

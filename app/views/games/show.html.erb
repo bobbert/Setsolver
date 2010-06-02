@@ -3,16 +3,12 @@
 </p>
 
 <% if @game.active? %>
-  <p><b>Started on:</b> <%=h @game.created_at %>
-    <ol>
-    <% @game.scores.each do |sc| %>
-      <li><%= sc.player.name %>: Score = <%= sc.points %>
-      </li>
-    <% end %>
-    </ol>
-    Total number of sets found: <%= @game.selection_count %>
+  <p><b>Game started:</b> <%= h @game.started_at %> </p>
+  <p id="buttons">
+    <%= link_to 'Continue Playing', play_path(@game), :class => "mock-fb-button" %>
+    <%= link_to 'Back', games_path, :class => "mock-fb-button" %>
   </p>
-  <p><%= link_to "Continue Playing", play_path(@game) %></p>
+  <%= render :partial => 'sets_selected' %>
 <% elsif !(@game.started?) %>
   <p>Game not yet started. Press the "Start Game" button to start playing:</p>
   <p>
@@ -22,7 +18,10 @@
       </div>
     <% end %>
   </p>
-  <%= link_to 'Edit', edit_game_path(@game) %> |
+  <p id="buttons">
+    <%= link_to 'Change Settings', edit_game_path(@game), :class => "mock-fb-button" %>
+    <%= link_to 'Back', games_path, :class => "mock-fb-button" %>
+  </p>
 <% end %>
-<%= link_to '<< Back to games', games_path %>
+
 

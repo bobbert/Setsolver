@@ -149,11 +149,11 @@ private
   # (valid set, invalid set, wrong # of cards selected, etc. )
   def play_cards
     selection = get_card_numbers
-    if (selection.length != 3)
+    selection_cards = selection.map {|i| @game.field[i] }
+    if (selection_cards.compact.length != 3)
       flash[:error] = 'You did not select three cards.'
       return false
     end
-    selection_cards = selection.map {|i| @game.field[i] }
     @found_set = @game.make_set_selection( @player, *selection_cards )
     unless @found_set
       flash[:notice] = 'The three cards you selected are not a set.'
