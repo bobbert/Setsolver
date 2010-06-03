@@ -5,13 +5,12 @@ class User < ActiveRecord::Base
 
   has_one :player
 
+  before_create :copy_fields_from_facebook
   after_create :new_player
-  after_update :update_fields
   
   # create new Player object immediately after creating user
   def new_player
     self.player = Player.new
-#    update_fields if save
   end
 
   def fb_user
@@ -19,8 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def wall_header_for_last_finished_game
-    article = ("AEIOU".include? player.skill_level.name[0]) ? 'an' : 'a'
-    "#{first_name} is now #{article} #{player.skill_level.name.downcase} Setsolver player!"
+    "#{first_name} is now #{player.readable_skill_level(:article => true)}!"
   end
 
   def wall_post_for_last_finished_game
@@ -31,7 +29,7 @@ class User < ActiveRecord::Base
 protected
 
   # updating all Facebooker::User fields to internal values
-  def update_fields
+  def copy_fields_from_facebook
     unless RAILS_ENV == 'test'
       Facebooker::User.user_fields.split(',').each do |field|
 	self.send((field + '='), fb_user.send(field))

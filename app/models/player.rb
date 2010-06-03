@@ -10,9 +10,11 @@ class Player < ActiveRecord::Base
   end
 
   # skill level
-  def readable_skill_level
-    return skill_level.name if skill_level
-    'None'
+  def readable_skill_level(opts = {})
+    is_article = (opts && opts[:article]) || false
+    article = ((("AEIOU".include? skill_level.name[0]) ? 'an ' : 'a ') if is_article).to_s
+    return article + skill_level.name + ' Setsolver' if skill_level
+    article + 'a new player'
   end
 
   # returns player name as an identifier

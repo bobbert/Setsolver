@@ -216,6 +216,7 @@ private
     if @game.finished? && !(@game.postgame_published) && @player.promote?
       @player.promote_to_next_level && @player.save
       flash[:user_action_to_publish] = FinishedGamePublisher.create_finished_game(@user)
+      flash[:notice] = "Congratulations!  You are now a #{@player.readable_skill_level}!"
       @game.postgame_published = true
       @game.save
     end

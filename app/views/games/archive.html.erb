@@ -1,7 +1,3 @@
-<% content_for :html_head do %>
-  <%= javascript_include_tag "play" %>
-<% end %>
-
 <h1 class="setsolver">Game Archive: <%=@game.title %></h1>
 <% if @game.finished? %>
   <p><b>Game started:</b> <%= h @game.started_at %> </p>
