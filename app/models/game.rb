@@ -193,16 +193,18 @@ class Game < ActiveRecord::Base
   def fill_gamefield_with_sets
     num_empty_cards = FieldSize - field.length
     dealt = ( deck.deal num_empty_cards if num_empty_cards > 0 )
-    until ((tmp_sets = find_sets).length > 0)  # assigning to temp variable "tmp_sets"
+    sets_found = find_sets
+    until (sets_found.length > 0)  # assigning to temp variable "tmp_sets"
       if deck.all_dealt?
         self.finished_at = Time.now
         reset_timer
         return []
       end
       dealt = deck.deal 3
+      sets_found = find_sets
     end
     reset_timer unless dealt.blank?
-    tmp_sets
+    sets_found
   end
 
   # returns an array-of-arrays where the inner array are matching sets of three Card objects,
