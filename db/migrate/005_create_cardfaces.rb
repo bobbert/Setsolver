@@ -7,13 +7,13 @@ class CreateCardfaces < ActiveRecord::Migration
 
   def self.up
     create_table :cardfaces do |t|
-      t.integer :number
-      t.text    :color,          :limit => 30
-      t.text    :color_abbrev,   :limit => 3
-      t.text    :shading,        :limit => 30
-      t.text    :shading_abbrev, :limit => 3
-      t.text    :shape,          :limit => 30
-      t.text    :shape_abbrev,   :limit => 3
+      t.integer   :number
+      t.string    :color,          :limit => 30
+      t.string    :color_abbrev,   :limit => 3
+      t.string    :shading,        :limit => 30
+      t.string    :shading_abbrev, :limit => 3
+      t.string    :shape,          :limit => 30
+      t.string    :shape_abbrev,   :limit => 3
     end
 
     # seeding Cardface with initial values for each card type:
