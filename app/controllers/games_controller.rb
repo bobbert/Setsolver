@@ -8,6 +8,8 @@ class GamesController < ApplicationController
   # GET /players/1/games
   # GET /players/1/games.xml
   def index
+    @user.copy_fields_from_facebook if @user.name.blank?
+
     # listing all games within selected player
     @games = @player.games
 
