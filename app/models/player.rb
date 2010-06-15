@@ -68,6 +68,11 @@ class Player < ActiveRecord::Base
     games.select {|g| g.finished? }
   end
 
+  # does player have both active and waiting games?
+  def has_games_active_and_waiting_to_start?
+    has_games_waiting_to_start? && has_active_games?
+  end
+  
   # evaluates player submission, and if set is valid:
   # set all three cards as claimed by player passed in, then
   # return the three-card set.
@@ -86,6 +91,11 @@ class Player < ActiveRecord::Base
   # returns last game completely finished
   def last_finished_game
     archived_games.sort_by {|g| g.finished_at }.last
+  end
+
+  # print player's full profile stats
+  def full_profile
+    "#{name} (#{readable_skill_level}): #{archived_games.length} games finished."
   end
 
   # will this player promote skill levels?

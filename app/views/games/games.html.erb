@@ -11,3 +11,7 @@
     <p><%= game_desc_as_link(game) %> (<%= game.player_names %>):  <%= game_play_link(game) %>
     </p>
 <% end %>
+
+<p id="buttons">
+  <%= link_to 'New Game', new_game_path, :class => 'mock-fb-button' %>
+</p>

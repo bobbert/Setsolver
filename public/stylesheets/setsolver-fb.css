@@ -68,6 +68,74 @@ td.label {
   font-size: 11px;
   text-align: left; }
 
+/* Default Facebook CSS */ 
+.fbbody  
+{  
+    font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;  
+    font-size: 11px;  
+    color: #333333;  
+}  
+/* Default Anchor Style */  
+.fbbody a  
+{  
+    color: #3b5998;  
+    outline-style: none;  
+    text-decoration: none;  
+    font-size: 11px;  
+    font-weight: bold;  
+}  
+.fbbody a:hover  
+{  
+    text-decoration: underline;  
+}  
+/* Facebook Box Styles */  
+.fbgreybox  
+{  
+    background-color: #f7f7f7;  
+    border: 1px solid #cccccc;  
+    color: #333333;  
+    padding: 10px;  
+    font-size: 13px;  
+    font-weight: bold;  
+}  
+.fbbluebox  
+{  
+    background-color: #eceff6;  
+    border: 1px solid #d4dae8;  
+    color: #333333;  
+    padding: 10px;  
+    font-size: 13px;  
+    font-weight: bold;  
+}  
+.fbinfobox, #notice
+{  
+    background-color: #fff9d7;  
+    border: 1px solid #e2c822;  
+    color: #333333;  
+    padding: 10px;  
+    font-size: 13px;  
+    font-weight: bold;  
+}  
+.fberrorbox, #error
+{  
+    background-color: #ffebe8;  
+    border: 1px solid #dd3c10;  
+    color: #333333;  
+    padding: 10px;  
+    font-size: 13px;  
+    font-weight: bold;  
+}  
+/* Content Divider on White Background */  
+.fbcontentdivider  
+{  
+    margin-top: 15px;  
+    margin-bottom: 15px;  
+    width: 520px;  
+    height: 1px;  
+    background-color: #d8dfea;  
+}  
+
+/* RWP: My Facebook mock-up CSS */
 .fb-button {
   background-color:#3B5998;
   border-color:#D8DFEA #0E1F5B #0E1F5B #D8DFEA;
@@ -190,87 +258,72 @@ a.mock-fb-button:hover {
   color:#3b5998 !important;
 }
 
-/* Default Facebook CSS */ 
-
-.fbbody  
-{  
-    font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;  
-    font-size: 11px;  
-    color: #333333;  
-}  
-/* Default Anchor Style */  
-.fbbody a  
-{  
-    color: #3b5998;  
-    outline-style: none;  
-    text-decoration: none;  
-    font-size: 11px;  
-    font-weight: bold;  
-}  
-.fbbody a:hover  
-{  
-    text-decoration: underline;  
-}  
-/* Facebook Box Styles */  
-.fbgreybox  
-{  
-    background-color: #f7f7f7;  
-    border: 1px solid #cccccc;  
-    color: #333333;  
-    padding: 10px;  
-    font-size: 13px;  
-    font-weight: bold;  
-}  
-.fbbluebox  
-{  
-    background-color: #eceff6;  
-    border: 1px solid #d4dae8;  
-    color: #333333;  
-    padding: 10px;  
-    font-size: 13px;  
-    font-weight: bold;  
-}  
-.fbinfobox, #notice
-{  
-    background-color: #fff9d7;  
-    border: 1px solid #e2c822;  
-    color: #333333;  
-    padding: 10px;  
-    font-size: 13px;  
-    font-weight: bold;  
-}  
-.fberrorbox, #error
-{  
-    background-color: #ffebe8;  
-    border: 1px solid #dd3c10;  
-    color: #333333;  
-    padding: 10px;  
-    font-size: 13px;  
-    font-weight: bold;  
-}  
-/* Content Divider on White Background */  
-.fbcontentdivider  
-{  
-    margin-top: 15px;  
-    margin-bottom: 15px;  
-    width: 520px;  
-    height: 1px;  
-    background-color: #d8dfea;  
-}  
 /* Facebook Tab Style */  
-.fbtab  
-{  
-    padding: 8px;  
-    background-color: #d8dfea;  
-    color: #3b5998;  
-    font-weight: bold;  
-    float: left;  
-    margin-right: 4px;  
-    text-decoration: none;  
-}  
-.fbtab:hover  
-{  
-    background-color: #3b5998;  
-    color: #ffffff;  
-    cursor: hand;  
-}  
+.clearfix:after { content: "."; display: block; clear: both; visibility: hidden;
+line-height: 0; height: 0; }
+.clearfix { display: inline-block; }
+html[xmlns] .clearfix { display: block; }
+* html .clearfix { height: 1%; }
+
+.fb-tabs {
+    padding: 0px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #898989;
+}
+.fb-tabs .left_tabs { float: left; padding-left: 10px; }
+.fb-tabs .right_tabs { float: right; padding-right: 10px; }
+.fb-tabitems {
+display: inline;
+list-style: none;
+margin: 0;
+padding: 0;
+text-align: center;
+}
+.fb-tabitems li {
+    list-style:none;
+    float:left;
+    background: #f1f1f1 url(http://www.facebook.com/images/componen … _gloss.gif) top left repeat-x;
+    margin-top: 0;
+    margin-right: 1px;
+    margin-bottom: -1px;
+    margin-left: 1px;
+    padding-top: 2px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+.fb-tabitems li a {
+    border: 1px solid #898989;
+    display:block;
+    color: #333;
+    font-weight: bold;
+    padding-top: 2px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 9px;
+}
+.fb-tabitems li a small { font-size: 11px; font-weight: normal; }
+.fb-tabitems li a:focus { outline: 0px; }
+.fb-tabitems li.first a { border:1px solid #898989; }
+.fb-tabitems li a.selected {
+background: #6d84b4;
+border: 1px solid #3b5998;
+border-left: 1px solid #5973a9;
+border-right: 1px solid #5973a9;
+color: #fff;
+margin-left: -1px;
+
+}
+.fb-tabitems li.last a.selected {
+margin-left:-1px;
+border-left:1px solid #5973a9;
+border-right:1px solid #36538f;
+}
+.fb-tabitems li.first a.selected {
+margin: 0;
+border-left: 1px solid #36538f;
+border-right: 1px solid #5973a9;
+}
+.fb-tabitems li.first.last a.selected { border: 1px solid #36538f; }
+.fb-tabitems li a.selected:hover { text-decoration: none; }

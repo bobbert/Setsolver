@@ -11,6 +11,17 @@ class Game < ActiveRecord::Base
 
   MaxSecondsToFindSet = 300
 
+  # hash of (tab_name => action) pairs used to render mock Facebook tab menu
+  GameTabs = [:new_game, :active_games, :completed_games, :friends, :how_to_play]
+  GameTabMethods = {:new_game => :new_game, 
+                    :active_games => :games, 
+                    :completed_games => :archives, 
+                    :friends => :friends, 
+                    :how_to_play => :howtoplay
+                   }
+  GameTabVisibleConditions = { :active_games => 'has_active_games?',
+                               :completed_games => 'has_archived_games?' }
+  
   # each_cmb3 (Class method)
   # performs a ( len 3 ) statistical combination, where len is the length of the
   # in-play deck.  The combination is returned as an array-of-arrays, where the inner

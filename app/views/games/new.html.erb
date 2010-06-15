@@ -1,6 +1,4 @@
-<h1>Create a new game</h1>
-
-<%= error_messages_for :game %>
+<%= mock_fb_tabs(:new_game) %>
 
 <% form_for(@game) do |f| %>
   <p>
@@ -10,7 +8,6 @@
 
   <p>
     <%= f.submit 'Create New Game', :class => "fb-button" %>
-    <%= link_to 'Back', games_path, :class => "mock-fb-button" %>
   </p>
 <% end %>
 

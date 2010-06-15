@@ -17,14 +17,11 @@ ActionController::Routing::Routes.draw do |map|
   # setgame information link: /games/1/setgame
   map.setgame 'games/:id/setgame.:format', :controller => 'games', :action => 'setgame'
 
-  # add player to game: /games/1/add_player  (uncomment when multiplayer is added)
-#  map.add_player 'games/:id/add_player', :controller => 'games', :action => 'add_player'
-
-  # remove player from game: /games/1/remove_player  (uncomment when multiplayer is added)
-#  map.remove_player 'games/:id/remove_player', :controller => 'games', :action => 'remove_player'
-
-  # RWP TEST: XFBML test link: /games/1/test
-  map.test 'games/:id/test.:format', :controller => 'games', :action => 'test'
+  # links from main page: not based on game data but piggybacks off of 
+  # User-selection functions (RWP: ...for now)
+  map.friends   'friends', :controller => 'games', :action => 'friends'
+  map.archives  'archives', :controller => 'games', :action => 'archives'
+  map.howtoplay 'howtoplay', :controller => 'games', :action => 'howtoplay'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

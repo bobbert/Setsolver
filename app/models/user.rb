@@ -25,6 +25,18 @@ class User < ActiveRecord::Base
     "in #{player.last_finished_game.total_time} seconds."
   end
 
+  # return list of Setsolver User friends who are also Facebook friends
+  def find_setsolver_fb_friends
+    fb_friend_ids = fb_user.friends.map {|u| u.id }
+    app_fb_ids = User.find(:all).select {|u| fb_friend_ids.include? u.facebook_id }
+  end
+
+  # return list of Facebooker::User friends with Setsolver installed
+  def find_fb_friends
+    app_fb_ids = User.find(:all).map {|u| u.facebook_id }
+    fb_user.friends.select {|friend| app_fb_ids.include? friend.id }
+  end
+
   SpecialFields = ['status','meeting_sex','hs_info','hometown_location','work_history',
                    'education_history','meeting_for','current_location','affiliations',
                    'family']

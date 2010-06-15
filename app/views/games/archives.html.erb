@@ -1,0 +1,6 @@
+<%= mock_fb_tabs(:completed_games) %>
+<h1><%= "#{@player.name}'s Completed Games" %></h1>
+<% for game in @player.archived_games %>
+    <p><%= game_desc_as_link(game) %> (<%= game.player_names %>):  <%= game_play_link(game) %>
+    </p>
+<% end %>

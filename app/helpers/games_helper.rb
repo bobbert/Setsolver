@@ -10,10 +10,16 @@ module GamesHelper
     return render_dummy_set if tcs.blank?
     tcs.cards.inject('') do |str,c|
       str += ' ' unless str.length == 0
-      str += image_tag( ('smallcards/' + c.img_name), :height => 45, :width => 30, :alt => c.to_s )
+      str += extra_small_setcard_img(c)
     end
   end
 
+  # renders an extra-small Set card
+  def extra_small_setcard_img( card )
+    image_tag( ('smallcards/' + card.img_name), :height => 45, :width => 30, :alt => card.to_s )
+  end
+  
+  # renders an invisible dummy set
   def render_dummy_set
     str = ""
     3.times do |x|
@@ -30,12 +36,14 @@ module GamesHelper
 
   # create game number as link
   def game_play_link( gm )
-    if gm.active?
+    if gm.waiting_to_start?
+      link_to("Start playing!", play_path(gm), :class => 'mock-fb-button')
+    elsif gm.active?
       link_to("Play", play_path(gm), :class => 'mock-fb-button')
     elsif gm.finished?
       link_to("Game Archive", archive_path(gm), :class => 'mock-fb-button')
     else
-      'Game not yet started.'
+      raise Exceptions::InvalidGameState
     end
   end
 

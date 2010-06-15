@@ -2,6 +2,7 @@ class GamesController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from Exceptions::UserNotPlayingGame, :with => :user_not_playing_game
+  rescue_from Exceptions::InvalidGameState, :with => :invalid_game_state
 
   before_filter :get_player_and_game
 
@@ -14,7 +15,6 @@ class GamesController < ApplicationController
     @games = @player.games
 
     respond_to do |format|
-      format.fbml # index.fbml.erb
       format.html # index.html.erb
       format.xml  { render :xml => @games }
     end
@@ -24,7 +24,6 @@ class GamesController < ApplicationController
   # GET /players/1/games/1.xml
   def show
     respond_to do |format|
-      format.fbml { redirect_to(archive_url) if @game.finished? }
       format.html { redirect_to(archive_url) if @game.finished? }
       format.xml  { render :xml => @game }
     end
@@ -36,7 +35,6 @@ class GamesController < ApplicationController
     @game = Game.new
 
     respond_to do |format|
-      format.fbml # new.fbml.erb
       format.html # new.html.erb
       format.xml  { render :xml => @game }
     end
@@ -56,11 +54,9 @@ class GamesController < ApplicationController
       # creating new game, and new association between selected player and game
       if @game.save && @game.add_player(@player)
         flash[:notice] = 'Game was successfully created.'
-        format.fbml { redirect_to(@game) }
-        format.html { redirect_to(@game) }
+        format.html { redirect_to(games_url) }
         format.xml  { render :xml => @game, :status => :created, :location => @game }
       else
-        format.fbml { render :action => "new" }
         format.html { render :action => "new" }
         format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
       end
@@ -73,11 +69,9 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.update_attributes(params[:game])
         flash[:notice] = 'Game was successfully updated.'
-        format.fbml { redirect_to(@game) }
         format.html { redirect_to(@game) }
         format.xml  { head :ok }
       else
-        format.fbml { render :action => "edit" }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
       end
@@ -92,7 +86,6 @@ class GamesController < ApplicationController
     @game.destroy
 
     respond_to do |format|
-      format.fbml { redirect_to(games_url) }
       format.html { redirect_to(games_url) }
       format.xml  { head :ok }
     end
@@ -122,6 +115,28 @@ class GamesController < ApplicationController
     render :action => render_action
   end
   
+  def friends
+    @friends = @user.find_setsolver_fb_friends
+    respond_to do |format|
+      format.html {  }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def howtoplay
+    respond_to do |format|
+      format.html {  }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def archives
+    respond_to do |format|
+      format.html {  }
+      format.xml  { head :ok }
+    end
+  end
+
   # add player to current game
   def add_player
     add_remove_player :add
@@ -141,6 +156,12 @@ protected
 
   def user_not_playing_game
     flash[:error] = "You cannot play game ##{params[:id]}."
+    redirect_to games_url
+  end
+
+  def invalid_game_state
+    flash[:error] = "Game ##{params[:id]} must be either Waiting, Active, or Finished. " + 
+	            "Contact the Setsolver developer for further assistance."
     redirect_to games_url
   end
 
@@ -173,7 +194,7 @@ private
  #   flash[:error] = nil  # RWP TEMP - get rid of this if/when flash works correctly
     @sets = []
     @found_set = nil
-    @user = current_user
+    @user = current_user || User.find_by_facebook_id(params[:fb_sig_user])
     @player = @user.player
     if (params[:id])
       @game = Game.find(params[:id])

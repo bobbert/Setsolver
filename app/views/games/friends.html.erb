@@ -1,0 +1,8 @@
+<%= mock_fb_tabs(:friends) %>
+<h1><%= "#{@player.name}'s Friends" %></h1>
+
+<% @friends.each do |friend| %>
+<div class="fb-friend-data">
+  <%= mock_fb_profile_pic(friend) %><h2><%= "#{friend.player.full_profile}" %></h2>
+</div>
+<% end %>

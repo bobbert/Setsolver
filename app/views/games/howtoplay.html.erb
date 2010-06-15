@@ -1,0 +1,13 @@
+<%= mock_fb_tabs(:how_to_play) %>
+<h1>How To Play Setsolver</h1>
+Setsolver is a Facebook interactive version of the SET&dagger; card game, where the object of the
+game is to find "sets" of three cards with matching characteristics.  Each card has four attributes:
+<ul>
+<li><strong>number</strong>: the number of shapes on the card.  Every card will have 1, 2, or 3 shapes.</li>
+<li><strong>shape</strong>: the type of shape(s) on the card (oval, diamond, or squiggle).  Cards with
+  2 or 3 shapes will always feature identical shape types.</li>
+<li><strong>color</strong>: the color of the shapes (red, green, or purple).</li>
+<li><strong>shading</strong>: how darkly shaded are the shapes? (outlined, filled solid, or shaded with lines)</li>
+</ul>
+<p>Each SET card contains a unique combination of these four attributes. For example, <br />
+<%= print_example_cards %>.
