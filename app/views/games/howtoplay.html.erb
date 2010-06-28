@@ -1,13 +1,32 @@
 <%= mock_fb_tabs(:how_to_play) %>
 <h1>How To Play Setsolver</h1>
 Setsolver is a Facebook interactive version of the SET&dagger; card game, where the object of the
-game is to find "sets" of three cards with matching characteristics.  Each card has four attributes:
+game is to find "sets" of three cards with matching characteristics.  Each card has four characteristics:
 <ul>
-<li><strong>number</strong>: the number of shapes on the card.  Every card will have 1, 2, or 3 shapes.</li>
-<li><strong>shape</strong>: the type of shape(s) on the card (oval, diamond, or squiggle).  Cards with
-  2 or 3 shapes will always feature identical shape types.</li>
-<li><strong>color</strong>: the color of the shapes (red, green, or purple).</li>
-<li><strong>shading</strong>: how darkly shaded are the shapes? (outlined, filled solid, or shaded with lines)</li>
+<li><strong>number</strong>: the number of shapes on the card.  Every card will have 
+    <strong>1</strong>, <strong>2</strong>, or <strong>3</strong> shapes, and multiple shapes will 
+    always be identical to one another.</li>
+<li><strong>shape</strong>: the type of shape displayed on the card.  These shapes will always be
+    either <strong>oval</strong>, <strong>diamond</strong>, or <strong>squiggle</strong>.
+<li><strong>color</strong>: the color of the shapes (<strong>red</strong>, <strong>green</strong>, 
+    or <strong>purple</strong>).</li>
+<li><strong>shading</strong>: how darkly shaded are the shapes? Shapes can be either 
+    <strong>outlined</strong>, <strong>filled</strong> solid, or <strong>shaded</strong> with line patterns.</li>
 </ul>
-<p>Each SET card contains a unique combination of these four attributes. For example, <br />
-<%= print_example_cards %>.
+<p>Think about normal playing cards -- they have two characteristics (number and suit) and the cards
+themselves are made up of every combination of number and suit.  A deck of SET cards similarly has
+every combination of the four characteristics above, for a result of 3x3x3x3 (or 81) cards.  Here are a
+few examples: </p>
+
+<%= print_example_cards %>
+
+<h2>Finding a Set</h2>
+<p>Now that you are familiar with the cards, we move on to the object of the game: finding three-card
+sets. A collection of three cards is considered a set if <strong>all their characteristics are either 
+all alike or all different</strong>.  If three cards are all purple, then the colors are all alike.  
+Likewise, if one card is purple, one card red, and one card green, then the colors are all different.  
+Both of these scenarios (all colors alike, and all colors different) are good when looking for sets, 
+and any scenario where two cards are one color and the third card is a different color is bad.</p>
+
+<p>Now apply this to all four characteristics (<strong>number, shading, shape, color</strong>), and
+

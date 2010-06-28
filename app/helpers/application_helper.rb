@@ -27,10 +27,14 @@ module ApplicationHelper
   end
   
   def print_example_cards
-    card_messages = Cardface.example_cardfaces.map do |cardface|
-      "#{extra_small_setcard_img(cardface)} has <strong>#{cardface.to_s}</strong>"
+    example_txt = '<table style="width:720px">'
+    card_messages = Cardface.example_cardfaces.each_with_index do |cardface, i|
+      inner_txt = ((i%3 == 0) ? '<tr><td>' : '<td>')
+      inner_txt += "#{extra_small_setcard_img(cardface)}: <strong>#{cardface.to_s}</strong>"
+      inner_txt += ((i%3 < 2) ? '</td>' : '</td></tr>')
+      example_txt += inner_txt
     end
-    card_messages.join(', ')
+    example_txt + '</table>'
   end
 
   # --- Facebooker mock helper functions ---

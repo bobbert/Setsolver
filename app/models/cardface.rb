@@ -8,7 +8,7 @@ class Cardface < ActiveRecord::Base
     Cardface.find(num).img_path
   end
   
-  ExampleIds = [22,67,38,27]
+  ExampleIds = [22,67,38,27,14,71,7,37,56]
 
   # a method that returns "examples" for the How To Play screen
   def self.example_cardfaces
